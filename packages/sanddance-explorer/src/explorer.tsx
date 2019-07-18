@@ -31,6 +31,8 @@ import { strings } from './language';
 import { themePalettes } from './themes';
 import { toggleSearch } from './toggleSearch';
 import { Topbar } from './controls/topbar';
+import { ITelemetryLog } from './telemetry';
+
 
 export interface Props {
   hideSidebarControls?: boolean;
@@ -46,6 +48,7 @@ export interface Props {
   onSnapshotClick?: (snapshot: Snapshot) => void;
   onView?: () => void;
   onSignalChanged?: () => void;
+  telemetryLog?: ITelemetryLog;
 }
 
 export interface State extends SandDance.types.Insight {
@@ -682,6 +685,7 @@ export class Explorer extends React.Component<Props, State> {
             </div>
           )}
           <Sidebar
+            telemetryLog={this.props.telemetryLog}
             themePalette={themePalette}
             calculating={!!this.state.calculating}
             closed={this.state.sidebarClosed}

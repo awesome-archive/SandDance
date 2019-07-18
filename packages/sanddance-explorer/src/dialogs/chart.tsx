@@ -91,8 +91,26 @@ export function Chart(props: Props) {
                     return (
                         <ColumnMap
                             {...props}
+                            // {props.changeColumnMapping}
                             disabled={disabled}
                             selectedColumnName={selectedColumnName}
+                            specRole={specRole}
+                            key={i}
+                            onChangeSignal={(name, value) => props.onChangeSignal(specRole.role, selectedColumnName, name, value)}
+                        />
+                    );
+                })}
+            </Group>
+            <Group label={"Mock Column Group"}>
+                {props.specCapabilities && props.specCapabilities.roles.map((specRole, i) => {
+                    const specColumnInRole = props.columns[specRole.role];
+                    const selectedColumnName = specColumnInRole;
+                    let disabled = props.disabled || (props.view === '2d' && specRole.role === 'z');
+                    return (
+                        <ColumnMap
+                            {...props}
+                            // {props.changeColumnMapping}
+                            selectedColumnName={selectedColumnName} 
                             specRole={specRole}
                             key={i}
                             onChangeSignal={(name, value) => props.onChangeSignal(specRole.role, selectedColumnName, name, value)}

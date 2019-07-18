@@ -8,6 +8,7 @@ import { IconButton } from './iconButton';
 import { Scrollable } from './scrollable';
 import { strings } from '../language';
 import { util } from '@msrvida/sanddance-react';
+import { ITelemetryLog } from '../telemetry';
 
 export enum SideTabId {
     ChartType, Data, Search, Color, Snapshots, Settings, Pin, Collapse
@@ -24,6 +25,7 @@ export interface Props {
     closed: boolean;
     pinned: boolean;
     themePalette: Partial<FabricTypes.IPalette>;
+    telemetryLog: ITelemetryLog;
 }
 
 export function Sidebar(props: Props) {
@@ -72,6 +74,7 @@ export function Sidebar(props: Props) {
                             {...props}
                             {...sidebutton}
                             themePalette={props.themePalette}
+                            telemetryLog={props.telemetryLog}
                         />
                     ))}
                 </div>
@@ -82,12 +85,14 @@ export function Sidebar(props: Props) {
                             sideTabId={SideTabId.Pin}
                             iconName={props.pinned ? "Pinned" : "Pin"}
                             title={props.pinned ? strings.buttonToolbarFloat : strings.buttonToolbarDock}
+                            telemetryLog={props.telemetryLog}
                         />
                         <Sidebutton
                             {...props}
                             sideTabId={SideTabId.Collapse}
                             iconName={props.closed ? "DoubleChevronRight12" : "DoubleChevronLeft12"}
                             title={props.closed ? strings.buttonToolbarShow : strings.buttonToolbarHide}
+                            telemetryLog={props.telemetryLog}
                         />
                     </div>
                 )}
@@ -116,7 +121,7 @@ export interface SidebuttonProps {
     themePalette?: Partial<FabricTypes.IPalette>;
 }
 
-export function Sidebutton(props: SidebuttonProps & Props) {
+export function Sidebutton(props: SidebuttonProps & Props & { telemetryLog: ITelemetryLog; }) {
     return (
         <div className={util.classList("vbutton", !props.closed && props.selectedSideTab === props.sideTabId && "selected")}>
             {props.badgeText && <div className="count">{props.badgeText}</div>}
@@ -125,7 +130,10 @@ export function Sidebutton(props: SidebuttonProps & Props) {
                 className="vbutton"
                 iconName={props.iconName}
                 title={props.title}
-                onClick={() => { props.onSideTabClick(props.sideTabId) }}
+                onClick={() => {
+                    props.onSideTabClick(props.sideTabId);
+                    props.telemetryLog("sideButton", {title: props.title})
+                }}
             />
         </div>
     );

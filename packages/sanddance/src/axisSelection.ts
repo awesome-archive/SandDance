@@ -46,6 +46,7 @@ export function axisSelectionLayer(specCapabilities: SpecCapabilities, columns: 
         });
     });
     const onClick: LayerInputHandler = (o, e) => clickHandler(e.srcEvent, (o.object as SelectPolygon).search);
+
     const polygonLayer = new VegaDeckGl.base.layers.PolygonLayer({
         autoHighlight: true,
         coordinateSystem: VegaDeckGl.base.deck.COORDINATE_SYSTEM.IDENTITY,
@@ -62,6 +63,8 @@ export function axisSelectionLayer(specCapabilities: SpecCapabilities, columns: 
 
     return polygonLayer;
 }
+
+
 
 interface SelectPolygon extends PolygonLayerDatum {
     search: SearchExpressionGroup;

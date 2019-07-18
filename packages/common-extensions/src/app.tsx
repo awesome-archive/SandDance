@@ -46,7 +46,11 @@ interface Handlers {
     resize: (e: UIEvent) => void;
 }
 
-class App extends React.Component<{}, State> {
+interface Props {
+    telemetryLog?: SandDanceExplorer.ITelemetryLog
+}
+
+class App extends React.Component<Props, State> {
     private viewerOptions: Partial<SandDanceExplorer.SandDance.types.ViewerOptions>;
     private handlers: Handlers;
     public explorer: SandDanceExplorer.Explorer;
@@ -128,6 +132,7 @@ class App extends React.Component<{}, State> {
                 viewerOptions={this.viewerOptions}
                 initialView="2d"
                 mounted={e => this.mounted(e)}
+                telemetryLog={this.props.telemetryLog} //did this
             />
         );
     }

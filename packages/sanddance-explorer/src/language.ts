@@ -45,7 +45,7 @@ export const strings = {
     labelSearch: "Select by search",
     labelChart: "Chart",
     labelChartCanvas: "Chart canvas",
-    labelColumnMapping: "Column Mapping",
+    labelColumnMapping: "Column Mapping CHANGED THIS",
     labelChartTypeOptions: "Chart options",
     labelColorBin: "Color binning",
     labelColorBinExplanation: "For numeric columns",

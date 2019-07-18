@@ -15853,7 +15853,7 @@ var strings = {
   labelSearch: "Select by search",
   labelChart: "Chart",
   labelChartCanvas: "Chart canvas",
-  labelColumnMapping: "Column Mapping",
+  labelColumnMapping: "Column Mapping CHANGED UP",
   labelChartTypeOptions: "Chart options",
   labelColorBin: "Color binning",
   labelColorBinExplanation: "For numeric columns",
@@ -16306,7 +16306,7 @@ function ColumnMap(props) {
       });
     }
   }
-
+6
   var label = roleLabels[props.specRole.role];
   return React.createElement("div", {
     className: "sanddance-columnMap"
