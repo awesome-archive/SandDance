@@ -4,13 +4,14 @@ import * as React from 'react';
 import { util } from '@msrvida/sanddance-react';
 
 export interface Props {
-    children: JSX.Element | JSX.Element[];
+    children: React.ReactNode;
     className?: string;
+    role?: string;
 }
 
 export function Scrollable(props: Props) {
     return (
-        <div className={util.classList("scrollable-container", props.className)}>
+        <div className={util.classList('scrollable-container', props.className)} role={props.role}>
             <div className="scrollable">
                 {props.children}
             </div>

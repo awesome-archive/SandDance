@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Column } from './specs/types';
 import { facetTitleSeparator } from './specs/facet';
 import { SearchExpression, SearchExpressionGroup, SearchExpressionOperators } from './searchExpression/types';
 
-export function notNice(niceValue: string) {
+export function notNice(niceValue: string | number) {
     //convert "nice" numbers to numeric value
-    return niceValue.replace(/,/g, '');
+    return (niceValue + '').replace(/,/g, '');
 }
 
 function tickValue(axis: VegaDeckGl.types.Axis, i: number) {
@@ -28,6 +28,9 @@ export function selectNullOrEmpty(column: Column) {
 }
 
 export function selectExact(column: Column, value: string) {
+    if (value == null) {
+        return selectNullOrEmpty(column);
+    }
     const searchExpression: SearchExpression = {
         name: column.name,
         operator: '==',
@@ -50,7 +53,7 @@ export function selectNone(column: Column, values: string[]) {
     });
     const searchExpressionGroup: SearchExpressionGroup = {
         expressions
-    }
+    };
     return searchExpressionGroup;
 }
 

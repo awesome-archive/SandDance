@@ -2,7 +2,7 @@
 // Licensed under the MIT license.
 import * as React from 'react';
 import { base } from '../base';
-import { ColumnMap, ColumnMapProps } from '../controls/columnMap';
+import { ColumnMap, ColumnMapBaseProps } from '../controls/columnMap';
 import { DataContent } from '../interfaces';
 import { NewSignal } from 'vega-typings/types';
 import { Palette } from '../palettes';
@@ -11,7 +11,8 @@ import { Signal } from '../controls/signal';
 import { strings } from '../language';
 import { Group } from '../controls/group';
 
-export interface Props extends ColumnMapProps {
+export interface Props extends ColumnMapBaseProps {
+    compactUI: boolean;
     specCapabilities: SandDance.types.SpecCapabilities;
     scheme: string;
     colorColumn: string;
@@ -19,66 +20,74 @@ export interface Props extends ColumnMapProps {
     colorBinSignal: NewSignal;
     colorReverseSignal: NewSignal;
     dataContent: DataContent;
-    changeColorScheme: (scheme: string) => void;
-    changeColorBin: (colorBin: SandDance.types.ColorBin) => void;
+    onColorSchemeChange: (scheme: string) => void;
+    onColorBinChange: (colorBin: SandDance.types.ColorBin) => void;
     onColorBinCountChange: (value: number) => void;
     onColorReverseChange: (value: boolean) => void;
     disabled: boolean;
+    directColor: boolean;
+    onDirectColorChange: (value: boolean) => void;
 }
 
 export function Color(props: Props) {
     const colorColumn = props.dataContent.columns.filter(c => c.name === props.colorColumn)[0];
-    const disabledColorBin = !colorColumn || !colorColumn.quantitative;
+    const disabledColorBin = !colorColumn || !colorColumn.quantitative || props.directColor;
     const colorBin = props.colorBin || 'quantize';
     return (
         <div className="sanddance-color-dialog">
             <Group label={strings.labelColor}>
                 <ColumnMap
                     {...props}
+                    collapseLabel={props.compactUI}
                     selectedColumnName={props.colorColumn}
                     specRole={props.specCapabilities && props.specCapabilities.roles.filter(r => r.role === 'color')[0]}
                     key={0}
                 />
-                <Palette
+                {colorColumn && colorColumn.isColorData && <div
+                    className="sanddance-explanation"
+                    dangerouslySetInnerHTML={{ __html: strings.labelColorFieldIsColorData(colorColumn.name) }}
+                />}
+                {colorColumn && !colorColumn.isColorData && <Palette
+                    collapseLabel={props.compactUI}
                     scheme={props.scheme}
                     colorColumn={colorColumn}
                     changeColorScheme={scheme => {
-                        props.changeColorScheme(scheme);
+                        props.onColorSchemeChange(scheme);
                     }}
-                    dataContent={props.dataContent}
-                />
-                <Signal
-                    disabled={props.disabled}
+                    disabled={props.disabled || props.directColor || (colorColumn && colorColumn.isColorData)}
+                />}
+                {colorColumn && !colorColumn.isColorData && <Signal
+                    disabled={props.disabled || !colorColumn || props.directColor || (colorColumn && colorColumn.isColorData)}
                     signal={props.colorReverseSignal}
                     explorer={props.explorer}
                     onChange={props.onColorReverseChange}
-                />
+                />}
             </Group>
-            <Group label={strings.labelColorBin}>
+            {colorColumn && !colorColumn.isColorData && <Group label={strings.labelColorBin}>
                 <div className="sanddance-explanation">{strings.labelColorBinExplanation}</div>
                 <base.fabric.ChoiceGroup
                     options={[
                         {
-                            key: "continuous",
+                            key: 'continuous',
                             text: strings.labelColorBinNone,
                             checked: colorBin === 'continuous',
                             disabled: disabledColorBin
                         },
                         {
-                            key: "quantize",
+                            key: 'quantize',
                             text: strings.labelColorBinQuantize,
                             checked: colorBin === 'quantize',
                             disabled: disabledColorBin
                         },
                         {
-                            key: "quantile",
+                            key: 'quantile',
                             text: strings.labelColorBinQuantile,
                             checked: colorBin === 'quantile',
                             disabled: disabledColorBin
                         }
                     ]}
                     onChange={(e, o) => {
-                        props.changeColorBin(o.key as SandDance.types.ColorBin)
+                        props.onColorBinChange(o.key as SandDance.types.ColorBin);
                     }}
                 />
                 <Signal
@@ -87,7 +96,16 @@ export function Color(props: Props) {
                     explorer={props.explorer}
                     onChange={props.onColorBinCountChange}
                 />
-            </Group>
+            </Group>}
+            {colorColumn && !colorColumn.isColorData && <Group label={strings.labelColorOptions}>
+                <base.fabric.Toggle
+                    label={strings.selectDirectColor}
+                    disabled={!colorColumn.stats.hasColorData}
+                    checked={!!(colorColumn.stats.hasColorData && props.directColor)}
+                    onChange={(e, checked?: boolean) => props.onDirectColorChange(checked)}
+                />
+                <div className="sanddance-explanation" dangerouslySetInnerHTML={{ __html: strings.labelDataColors }} />
+            </Group>}
         </div>
     );
 }

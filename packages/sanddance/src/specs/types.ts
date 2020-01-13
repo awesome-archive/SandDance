@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from '../vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Color } from '@deck.gl/core/utils/color';
 import { Search } from '../searchExpression/types';
-import { TypeInference } from 'vega-typings';
+import { Transforms, TypeInference } from 'vega-typings';
 
 /**
  * Type of selection scope on an axis.
@@ -13,7 +13,7 @@ export type AxisSelectionType = 'exact' | 'range';
 /**
  * Types of SandDance visualizations.
  */
-export type Chart = 'barchart' | 'density' | 'grid' | 'scatterplot' | 'stacks' | 'treemap';
+export type Chart = 'barchart' | 'barchartH' | 'barchartV' | 'density' | 'grid' | 'scatterplot' | 'stacks' | 'treemap';
 
 export type ColorBin = 'continuous' | 'quantize' | 'quantile';
 
@@ -36,6 +36,11 @@ export interface Column {
      * Optional flag to specify if the column data is quantitative.
      */
     quantitative?: boolean;
+
+    /**
+    * Optional flag to specify if the column data is CSS colors.
+    */
+    isColorData?: boolean;
 
     /**
      * Optional stats object with metadata of column data content.
@@ -67,6 +72,22 @@ export interface ColumnStats {
      * Minimum value of data in this column, if column is numeric.
      */
     min?: number;
+
+    /**
+     * Optional flag to specify if the column data is sequential.
+     */
+    isSequential?: boolean;
+
+    /**
+     * Optional flag to specify if the column data contains negative numbers.
+     */
+    hasNegative?: boolean;
+
+    /**
+     * Optional flag to specify if the column data contains color data.
+     */
+    hasColorData?: boolean;
+
 }
 
 export interface ColumnTypeMap {
@@ -130,6 +151,16 @@ export interface Insight {
      * Optional flag to hide legend.
      */
     hideLegend?: boolean;
+
+    /**
+     * Optional flag to use CSS colors directly from data.
+     */
+    directColor?: boolean;
+
+    /**
+     * Optional array of Vega transforms to apply to the data.
+     */
+    transform?: Transforms[];
 }
 
 export type InsightColumnRoles = 'uid' | 'x' | 'y' | 'z' | 'group' | 'size' | 'color' | 'facet' | 'sort';
@@ -272,6 +303,11 @@ export interface SpecLanguage {
     facetRows: string;
 
     /**
+     * Label for mark opacity slider.
+     */
+    markOpacitySignal: string;
+
+    /**
      * Label for text scale slider.
      */
     textScaleSignal: string;
@@ -375,4 +411,10 @@ export interface SpecViewOptions {
     facetMargins: FacetMargins;
 
     tickSize: number
+}
+
+export interface SpecContext {
+    specColumns: SpecColumns;
+    insight: Insight;
+    specViewOptions: SpecViewOptions;
 }

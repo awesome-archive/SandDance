@@ -7,6 +7,7 @@
 @import "dataIndex";
 @import "dataScope";
 @import "group";
+@import "note";
 @import "palette";
 @import "search";
 @import "scrollable";
@@ -16,9 +17,9 @@
 
 //settings
 $sidetab-width: 50px;
-$toolbar-width: 250px;
+$toolbar-width: 300px;
 $toolbar-margin: 12px;
-$layout-margin-left: 0;
+$layout-margin-left: $sidetab-width;
 $layout-margin-right: 150px; //room for legend
 
 @include topbar($toolbar-margin: $toolbar-margin, $toolbar-width: $toolbar-width, $sidetab-width: $sidetab-width);
@@ -30,10 +31,27 @@ $layout-margin-right: 150px; //room for legend
 @include scrollable();
 @include search();
 @include snapshots();
+@include note();
 @include columnMap();
+
+.sanddance-dialog {
+    ul {
+        margin: 0;
+    }
+    section {
+        margin-top: 1em;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    .tip {
+        font-style: italic;
+    }
+}
 
 .sanddance-explorer {
     display: grid;
+    font-family: 'Segoe UI', sans-serif;
     font-size: 13px;
     grid-template-rows: 0fr auto;
     &.dark-theme {
@@ -60,6 +78,7 @@ $layout-margin-right: 150px; //room for legend
     .sanddance-view {
         display: grid;
         position: relative;
+        margin-left: $sidetab-width;
     }
     .sanddance-layout-unpinned, .sanddance-layout-pinned {
         position: absolute;
@@ -74,7 +93,7 @@ $layout-margin-right: 150px; //room for legend
         }
     }
     .sanddance-layout-pinned {
-        left: $toolbar-width + $layout-margin-left;
+        left: $toolbar-width;
     }
     .sanddance-ReactViewer {
         position: absolute;
@@ -85,7 +104,7 @@ $layout-margin-right: 150px; //room for legend
     }
     &.hide-legend {
         .sanddance-ReactViewer {
-            left: $layout-margin-left;
+            left: 0;
         }
     }
     &.show-center {
@@ -103,6 +122,7 @@ $layout-margin-right: 150px; //room for legend
         grid-template-areas: "side main";
         .sanddance-view {
             grid-area: main;
+            margin-left: 0;
         }
         .loading {
             grid-area: main;
@@ -113,6 +133,9 @@ $layout-margin-right: 150px; //room for legend
         }
         &.closed {
             grid-template-columns: 0 auto;
+            .sanddance-view {
+                margin-left: $sidetab-width;
+            }
         }
     }
     span.ms-layer {
@@ -131,7 +154,7 @@ $layout-margin-right: 150px; //room for legend
     bottom: unset;
     overflow-y: unset;
     padding-right: 1em;
-    padding-top: 32px;    
+    padding-top: 32px;
     h4,
     .sanddance-vegaControls,
     .sanddance-unitControls {
@@ -164,17 +187,47 @@ $layout-margin-right: 150px; //room for legend
 }
 
 .sanddance-signal {
-    margin-top: 1em;   
+    margin-top: 1em;
 }
 
-.dark-theme {
-    .sanddance-panel {
-        background-color: #000;
+.sanddance-legend {
+    th {
+        color: #005a9e;
+        cursor: pointer;
+        &:hover {
+            color: #2b88d8;
+        }
+    }
+    .legend-row:hover {
+        background-color: $highlight-color;
         color: #fff;
     }
 }
 
-.sanddance-legend .legend-row:hover {
-    background-color: $highlight-color;
-    color: #fff;
+.sanddance-dataExporter {
+    margin-top: 1em;
+}
+
+.sanddance-form-separate {
+    margin-top: 1em;
+}
+
+.dark-theme {
+    .sanddance-dialog {
+        a {
+            color: #00b4f0;
+        }
+    }
+    .sanddance-panel {
+        background-color: #000;
+        color: #fff;
+    }
+    .sanddance-legend {
+        th {
+            color: #3ac5f3;
+            &:hover {
+                color: #009ed3;
+            }
+        }
+    }
 }

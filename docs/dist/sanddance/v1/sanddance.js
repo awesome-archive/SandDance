@@ -7,61 +7,91 @@
     // Copyright (c) Microsoft Corporation. All rights reserved.
     // Licensed under the MIT license.
     const FieldNames = {
-        Active: "__SandDance__Active",
-        Collapsed: "__SandDance__Collapsed",
-        Selected: "__SandDance__Selected",
-        Top: "__SandDance__Top",
-        Index: "__SandDance__Index"
+        Active: '__SandDance__Active',
+        Collapsed: '__SandDance__Collapsed',
+        Selected: '__SandDance__Selected',
+        Top: '__SandDance__Top',
+        TopIndex: '__SandDance__TopIndex',
+        Index: '__SandDance__Index',
+        PowerBISelectionId: '__SandDance__PowerBISelectionId',
+        BarChartBin0: '__SandDance__BarChartBin0',
+        BarChartBin1: '__SandDance__BarChartBin1',
+        BarChartStack0: '__SandDance__BarChartStack0',
+        BarChartStack1: '__SandDance__BarChartStack1',
+        DensityCount: '__SandDance__DensityCount',
+        DensityRow: '__SandDance__DensityRow',
+        DensityXBin0: '__SandDance__DensityXBin0',
+        DensityXBin1: '__SandDance__DensityXBin1',
+        DensityYBin0: '__SandDance__DensityYBin0',
+        DensityYBin1: '__SandDance__DensityYBin1',
+        FacetBin0: '__SandDance__FacetBin0',
+        FacetBin1: '__SandDance__FacetBin1',
+        GridIndex: '__SandDance__GridIndex',
+        StacksLatBin0: '__SandDance__StacksLatBin0',
+        StacksLatBin1: '__SandDance__StacksLatBin1',
+        StacksLongBin0: '__SandDance__StacksLongBin0',
+        StacksLongBin1: '__SandDance__StacksLongBin1',
+        StacksStart: '__SandDance__StacksStart',
+        StacksEnd: '__SandDance__StacksEnd',
+        TreemapStackChildren: '__SandDance__TreemapStackChildren',
+        TreemapStackDepth: '__SandDance__TreemapStackDepth',
+        TreemapStackX0: '__SandDance__TreemapStackX0',
+        TreemapStackX1: '__SandDance__TreemapStackX1',
+        TreemapStackY0: '__SandDance__TreemapStackY0',
+        TreemapStackY1: '__SandDance__TreemapStackY1',
     };
     const DataNames = {
-        Pre: "PreData",
-        Main: "MainData",
-        EmptyBin: "EmptyBinsData",
-        TopLookup: "TopData",
-        Legend: "LegendData",
-        FacetGroupCell: "FacetGroupCellData",
-        FacetCellTitles: "FacetCellTitlesData"
+        Pre: 'PreData',
+        Main: 'MainData',
+        EmptyBin: 'EmptyBinsData',
+        TopLookup: 'TopData',
+        Legend: 'LegendData',
+        FacetGroupCell: 'FacetGroupCellData',
+        FacetCellTitles: 'FacetCellTitlesData',
+        QuantitativeData: 'QuantitativeData'
     };
     const ScaleNames = {
-        Color: "ColorScale",
-        X: "MainXScale",
-        Y: "MainYScale",
-        Z: "MainZScale"
+        Color: 'ColorScale',
+        X: 'MainXScale',
+        Y: 'MainYScale',
+        Z: 'MainZScale'
     };
     //Signal names
     const SignalNames = {
-        ColorBinCount: "RoleColor_BinCountSignal",
-        ColorReverse: "RoleColor_ReverseSignal",
-        FacetColumns: "RoleFacet_ColumnsSignal",
-        FacetRows: "RoleFacet_RowsSignal",
-        InnerPadding: "Chart_InnerPadding",
-        OuterPadding: "Chart_OuterPadding",
-        PointSize: "Chart_PointSizeSignal",
-        TextAngleX: "Text_AngleXSignal",
-        TextAngleY: "Text_AngleYSignal",
-        TextScale: "Text_ScaleSignal",
-        TextSize: "Text_SizeSignal",
-        TextTitleSize: "Text_TitleSizeSignal",
-        TreeMapMethod: "Chart_TreeMapMethodSignal",
-        XBins: "RoleX_BinsSignal",
-        XGridSize: "Chart_XGridSize",
-        YBins: "RoleY_BinsSignal",
-        YDomain: "RoleY_DomainSignal",
-        YGridSize: "Chart_YGridSize",
-        ZHeight: "RoleZ_HeightSignal",
-        ZProportion: "RoleZ_ProportionSignal"
+        ColorBinCount: 'RoleColor_BinCountSignal',
+        ColorReverse: 'RoleColor_ReverseSignal',
+        FacetColumns: 'RoleFacet_ColumnsSignal',
+        FacetRows: 'RoleFacet_RowsSignal',
+        InnerPadding: 'Chart_InnerPadding',
+        OuterPadding: 'Chart_OuterPadding',
+        MarkOpacity: 'Mark_OpacitySignal',
+        PointSize: 'Chart_PointSizeSignal',
+        TextAngleX: 'Text_AngleXSignal',
+        TextAngleY: 'Text_AngleYSignal',
+        TextScale: 'Text_ScaleSignal',
+        TextSize: 'Text_SizeSignal',
+        TextTitleSize: 'Text_TitleSizeSignal',
+        TreeMapMethod: 'Chart_TreeMapMethodSignal',
+        XDomain: 'RoleX_DomainSignal',
+        XBins: 'RoleX_BinsSignal',
+        XGridSize: 'Chart_XGridSize',
+        YBins: 'RoleY_BinsSignal',
+        YDomain: 'RoleY_DomainSignal',
+        YGridSize: 'Chart_YGridSize',
+        ZHeight: 'RoleZ_HeightSignal',
+        ZProportion: 'RoleZ_ProportionSignal'
     };
     //These are special formulaic data values
-    const Other = "__Other";
+    const Other = '__Other';
     //name of the "no-color" palette
-    const ColorScaleNone = "none";
+    const ColorScaleNone = 'none';
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
 
     var constants = /*#__PURE__*/Object.freeze({
+        ColorScaleNone: ColorScaleNone,
         FieldNames: FieldNames,
         ScaleNames: ScaleNames,
-        ColorScaleNone: ColorScaleNone,
         SignalNames: SignalNames
     });
 
@@ -168,7 +198,7 @@
     };
     function invertSearchExpression(input) {
         const operator = invertedOperators[input.operator];
-        const output = Object.assign({}, input, { operator });
+        const output = Object.assign(Object.assign({}, input), { operator });
         if (input.clause) {
             output.clause = invertedClauses[input.clause];
         }
@@ -215,11 +245,11 @@
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     // Licensed under the MIT license.
-    const GL_ORDINAL = "GL_ORDINAL";
+    const GL_ORDINAL = 'GL_ORDINAL';
     const layerNames = {
-        cubes: "LAYER_CUBES",
-        lines: "LAYER_LINES",
-        text: "LAYER_TEXT"
+        cubes: 'LAYER_CUBES',
+        lines: 'LAYER_LINES',
+        text: 'LAYER_TEXT'
     };
 
     var constants$1 = /*#__PURE__*/Object.freeze({
@@ -4586,6 +4616,16 @@
         }
         return div;
     }
+    /**
+     * Measure the outer height and width of an HTMLElement, including margin, padding and border.
+     * @param el HTML Element to measure.
+     */
+    function outerSize(el) {
+        const cs = getComputedStyle(el);
+        const height = parseFloat(cs.marginTop) + parseFloat(cs.paddingTop) + parseFloat(cs.borderTopWidth) + el.offsetHeight + parseFloat(cs.borderBottomWidth) + parseFloat(cs.paddingBottom) + parseFloat(cs.marginBottom);
+        const width = parseFloat(cs.marginLeft) + parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth) + el.offsetWidth + parseFloat(cs.borderRightWidth) + parseFloat(cs.paddingRight) + parseFloat(cs.marginRight);
+        return { height, width };
+    }
 
     var isMergeableObject = function isMergeableObject(value) {
     	return isNonNullObject(value)
@@ -4711,8 +4751,7 @@
     var reI = "\\s*([+-]?\\d+)\\s*",
         reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
         reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
-        reHex3 = /^#([0-9a-f]{3})$/,
-        reHex6 = /^#([0-9a-f]{6})$/,
+        reHex = /^#([0-9a-f]{3,8})$/,
         reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
         reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
         reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
@@ -4872,29 +4911,46 @@
     };
 
     define(Color, color, {
+      copy: function(channels) {
+        return Object.assign(new this.constructor, this, channels);
+      },
       displayable: function() {
         return this.rgb().displayable();
       },
-      hex: function() {
-        return this.rgb().hex();
-      },
-      toString: function() {
-        return this.rgb() + "";
-      }
+      hex: color_formatHex, // Deprecated! Use color.formatHex.
+      formatHex: color_formatHex,
+      formatHsl: color_formatHsl,
+      formatRgb: color_formatRgb,
+      toString: color_formatRgb
     });
 
+    function color_formatHex() {
+      return this.rgb().formatHex();
+    }
+
+    function color_formatHsl() {
+      return hslConvert(this).formatHsl();
+    }
+
+    function color_formatRgb() {
+      return this.rgb().formatRgb();
+    }
+
     function color(format) {
-      var m;
+      var m, l;
       format = (format + "").trim().toLowerCase();
-      return (m = reHex3.exec(format)) ? (m = parseInt(m[1], 16), new Rgb((m >> 8 & 0xf) | (m >> 4 & 0x0f0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1)) // #f00
-          : (m = reHex6.exec(format)) ? rgbn(parseInt(m[1], 16)) // #ff0000
+      return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
+          : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
+          : l === 8 ? new Rgb(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+          : l === 4 ? new Rgb((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+          : null) // invalid hex
           : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
           : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
           : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
           : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
           : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
           : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
-          : named.hasOwnProperty(format) ? rgbn(named[format])
+          : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
           : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
           : null;
     }
@@ -4939,23 +4995,29 @@
         return this;
       },
       displayable: function() {
-        return (0 <= this.r && this.r <= 255)
-            && (0 <= this.g && this.g <= 255)
-            && (0 <= this.b && this.b <= 255)
+        return (-0.5 <= this.r && this.r < 255.5)
+            && (-0.5 <= this.g && this.g < 255.5)
+            && (-0.5 <= this.b && this.b < 255.5)
             && (0 <= this.opacity && this.opacity <= 1);
       },
-      hex: function() {
-        return "#" + hex(this.r) + hex(this.g) + hex(this.b);
-      },
-      toString: function() {
-        var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
-        return (a === 1 ? "rgb(" : "rgba(")
-            + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
-            + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
-            + Math.max(0, Math.min(255, Math.round(this.b) || 0))
-            + (a === 1 ? ")" : ", " + a + ")");
-      }
+      hex: rgb_formatHex, // Deprecated! Use color.formatHex.
+      formatHex: rgb_formatHex,
+      formatRgb: rgb_formatRgb,
+      toString: rgb_formatRgb
     }));
+
+    function rgb_formatHex() {
+      return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+    }
+
+    function rgb_formatRgb() {
+      var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+      return (a === 1 ? "rgb(" : "rgba(")
+          + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
+          + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
+          + Math.max(0, Math.min(255, Math.round(this.b) || 0))
+          + (a === 1 ? ")" : ", " + a + ")");
+    }
 
     function hex(value) {
       value = Math.max(0, Math.min(255, Math.round(value) || 0));
@@ -5032,6 +5094,14 @@
         return (0 <= this.s && this.s <= 1 || isNaN(this.s))
             && (0 <= this.l && this.l <= 1)
             && (0 <= this.opacity && this.opacity <= 1);
+      },
+      formatHsl: function() {
+        var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+        return (a === 1 ? "hsl(" : "hsla(")
+            + (this.h || 0) + ", "
+            + (this.s || 0) * 100 + "%, "
+            + (this.l || 0) * 100 + "%"
+            + (a === 1 ? ")" : ", " + a + ")");
       }
     }));
 
@@ -5046,7 +5116,7 @@
     var deg2rad = Math.PI / 180;
     var rad2deg = 180 / Math.PI;
 
-    // https://beta.observablehq.com/@mbostock/lab-and-rgb
+    // https://observablehq.com/@mbostock/lab-and-rgb
     var K = 18,
         Xn = 0.96422,
         Yn = 1,
@@ -5058,11 +5128,7 @@
 
     function labConvert(o) {
       if (o instanceof Lab) return new Lab(o.l, o.a, o.b, o.opacity);
-      if (o instanceof Hcl) {
-        if (isNaN(o.h)) return new Lab(o.l, 0, 0, o.opacity);
-        var h = o.h * deg2rad;
-        return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
-      }
+      if (o instanceof Hcl) return hcl2lab(o);
       if (!(o instanceof Rgb)) o = rgbConvert(o);
       var r = rgb2lrgb(o.r),
           g = rgb2lrgb(o.g),
@@ -5128,7 +5194,7 @@
     function hclConvert(o) {
       if (o instanceof Hcl) return new Hcl(o.h, o.c, o.l, o.opacity);
       if (!(o instanceof Lab)) o = labConvert(o);
-      if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0, o.l, o.opacity);
+      if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
       var h = Math.atan2(o.b, o.a) * rad2deg;
       return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
     }
@@ -5144,6 +5210,12 @@
       this.opacity = +opacity;
     }
 
+    function hcl2lab(o) {
+      if (isNaN(o.h)) return new Lab(o.l, 0, 0, o.opacity);
+      var h = o.h * deg2rad;
+      return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
+    }
+
     define(Hcl, hcl, extend(Color, {
       brighter: function(k) {
         return new Hcl(this.h, this.c, this.l + K * (k == null ? 1 : k), this.opacity);
@@ -5152,7 +5224,7 @@
         return new Hcl(this.h, this.c, this.l - K * (k == null ? 1 : k), this.opacity);
       },
       rgb: function() {
-        return labConvert(this).rgb();
+        return hcl2lab(this).rgb();
       }
     }));
 
@@ -5218,12 +5290,32 @@
         return [c.r, c.g, c.b, c.opacity * 255];
     }
     /**
+     * Compares 2 colors to see if they are equal.
+     * @param a Color to compare
+     * @param b Color to compare
+     * @returns True if colors are equal.
+     */
+    function colorIsEqual(a, b) {
+        if (a.length !== b.length)
+            return false;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i])
+                return false;
+        }
+        return true;
+    }
+    /**
      * Convert a CSS color string to a Deck.gl Color array - (The rgba color of each object, in r, g, b, [a]. Each component is in the 0-255 range.).
      * @param cssColorSpecifier A CSS Color Module Level 3 specifier string.
      */
     function colorFromString(cssColorSpecifier) {
-        const c = color(cssColorSpecifier).rgb();
-        return rgbToDeckglColor(c);
+        if (cssColorSpecifier) {
+            const dc = color(cssColorSpecifier);
+            if (dc) {
+                const c = dc.rgb();
+                return rgbToDeckglColor(c);
+            }
+        }
     }
     /**
      * Convert a Deck.gl color to a CSS rgba() string.
@@ -5243,6 +5335,9 @@
         const c = hslColor.rgb();
         return rgbToDeckglColor(c);
     }
+    function isColor(cssColorSpecifier) {
+        return !!color(cssColorSpecifier);
+    }
 
     let vega = {
         CanvasHandler: null,
@@ -5258,6 +5353,7 @@
         View: null
     };
     let deck = {
+        CompositeLayer: null,
         COORDINATE_SYSTEM: null,
         Deck: null,
         Layer: null,
@@ -5266,6 +5362,7 @@
         _OrbitController: null
     };
     let layers = {
+        IconLayer: null,
         LineLayer: null,
         PolygonLayer: null,
         TextLayer: null
@@ -5273,7 +5370,8 @@
     let luma = {
         CubeGeometry: null,
         fp64: null,
-        Model: null
+        Model: null,
+        Texture2D: null
     };
     /**
      * References to dependency libraries.
@@ -5297,6 +5395,704 @@
         base.luma = luma;
         base.vega = vega;
     }
+
+    var tinySdf = TinySDF;
+    var default_1 = TinySDF;
+
+    var INF = 1e20;
+
+    function TinySDF(fontSize, buffer, radius, cutoff, fontFamily, fontWeight) {
+        this.fontSize = fontSize || 24;
+        this.buffer = buffer === undefined ? 3 : buffer;
+        this.cutoff = cutoff || 0.25;
+        this.fontFamily = fontFamily || 'sans-serif';
+        this.fontWeight = fontWeight || 'normal';
+        this.radius = radius || 8;
+        var size = this.size = this.fontSize + this.buffer * 2;
+
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = this.canvas.height = size;
+
+        this.ctx = this.canvas.getContext('2d');
+        this.ctx.font = this.fontWeight + ' ' + this.fontSize + 'px ' + this.fontFamily;
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillStyle = 'black';
+
+        // temporary arrays for the distance transform
+        this.gridOuter = new Float64Array(size * size);
+        this.gridInner = new Float64Array(size * size);
+        this.f = new Float64Array(size);
+        this.d = new Float64Array(size);
+        this.z = new Float64Array(size + 1);
+        this.v = new Int16Array(size);
+
+        // hack around https://bugzilla.mozilla.org/show_bug.cgi?id=737852
+        this.middle = Math.round((size / 2) * (navigator.userAgent.indexOf('Gecko/') >= 0 ? 1.2 : 1));
+    }
+
+    TinySDF.prototype.draw = function (char) {
+        this.ctx.clearRect(0, 0, this.size, this.size);
+        this.ctx.fillText(char, this.buffer, this.middle);
+
+        var imgData = this.ctx.getImageData(0, 0, this.size, this.size);
+        var alphaChannel = new Uint8ClampedArray(this.size * this.size);
+
+        for (var i = 0; i < this.size * this.size; i++) {
+            var a = imgData.data[i * 4 + 3] / 255; // alpha value
+            this.gridOuter[i] = a === 1 ? 0 : a === 0 ? INF : Math.pow(Math.max(0, 0.5 - a), 2);
+            this.gridInner[i] = a === 1 ? INF : a === 0 ? 0 : Math.pow(Math.max(0, a - 0.5), 2);
+        }
+
+        edt(this.gridOuter, this.size, this.size, this.f, this.d, this.v, this.z);
+        edt(this.gridInner, this.size, this.size, this.f, this.d, this.v, this.z);
+
+        for (i = 0; i < this.size * this.size; i++) {
+            var d = this.gridOuter[i] - this.gridInner[i];
+            alphaChannel[i] = Math.max(0, Math.min(255, Math.round(255 - 255 * (d / this.radius + this.cutoff))));
+        }
+
+        return alphaChannel;
+    };
+
+    // 2D Euclidean distance transform by Felzenszwalb & Huttenlocher https://cs.brown.edu/~pff/papers/dt-final.pdf
+    function edt(data, width, height, f, d, v, z) {
+        for (var x = 0; x < width; x++) {
+            for (var y = 0; y < height; y++) {
+                f[y] = data[y * width + x];
+            }
+            edt1d(f, d, v, z, height);
+            for (y = 0; y < height; y++) {
+                data[y * width + x] = d[y];
+            }
+        }
+        for (y = 0; y < height; y++) {
+            for (x = 0; x < width; x++) {
+                f[x] = data[y * width + x];
+            }
+            edt1d(f, d, v, z, width);
+            for (x = 0; x < width; x++) {
+                data[y * width + x] = Math.sqrt(d[x]);
+            }
+        }
+    }
+
+    // 1D squared distance transform
+    function edt1d(f, d, v, z, n) {
+        v[0] = 0;
+        z[0] = -INF;
+        z[1] = +INF;
+
+        for (var q = 1, k = 0; q < n; q++) {
+            var s = ((f[q] + q * q) - (f[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]);
+            while (s <= z[k]) {
+                k--;
+                s = ((f[q] + q * q) - (f[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]);
+            }
+            k++;
+            v[k] = q;
+            z[k] = s;
+            z[k + 1] = +INF;
+        }
+
+        for (q = 0, k = 0; q < n; q++) {
+            while (z[k + 1] < q) k++;
+            d[q] = (q - v[k]) * (q - v[k]) + f[v[k]];
+        }
+    }
+    tinySdf.default = default_1;
+
+    //from https://github.com/uber/deck.gl/blob/6.4-release/modules/layers/src/text-layer/font-atlas.js
+    const GL_TEXTURE_WRAP_S = 0x2802;
+    const GL_TEXTURE_WRAP_T = 0x2803;
+    const GL_CLAMP_TO_EDGE = 0x812f;
+    const MAX_CANVAS_WIDTH = 1024;
+    const BASELINE_SCALE = 0.9;
+    const HEIGHT_SCALE = 1.2;
+    function getDefaultCharacterSet() {
+        const charSet = [];
+        for (let i = 32; i < 128; i++) {
+            charSet.push(String.fromCharCode(i));
+        }
+        return charSet;
+    }
+    const DEFAULT_CHAR_SET = getDefaultCharacterSet();
+    const DEFAULT_FONT_FAMILY = 'Monaco, monospace';
+    const DEFAULT_FONT_WEIGHT = 'normal';
+    const DEFAULT_FONT_SETTINGS = {
+        fontSize: 64,
+        buffer: 2,
+        sdf: false,
+        cutoff: 0.25,
+        radius: 3
+    };
+    function populateAlphaChannel(alphaChannel, imageData) {
+        // populate distance value from tinySDF to image alpha channel	
+        for (let i = 0; i < alphaChannel.length; i++) {
+            imageData.data[4 * i + 3] = alphaChannel[i];
+        }
+    }
+    function setTextStyle(ctx, fontFamily, fontSize, fontWeight) {
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+        ctx.fillStyle = '#000';
+        ctx.textBaseline = 'alphabetic';
+        ctx.textAlign = 'left';
+    }
+    function buildMapping({ ctx, fontHeight, buffer, characterSet, maxCanvasWidth }) {
+        const mapping = {};
+        let row = 0;
+        let x = 0;
+        Array.from(characterSet).forEach(char => {
+            // measure texts
+            // TODO - use Advanced text metrics when they are adopted:
+            // https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics
+            const { width } = ctx.measureText(char);
+            if (x + width + buffer * 2 > maxCanvasWidth) {
+                x = 0;
+                row++;
+            }
+            mapping[char] = {
+                x: x + buffer,
+                y: row * (fontHeight + buffer * 2) + buffer,
+                width,
+                height: fontHeight,
+                mask: true
+            };
+            x += width + buffer * 2;
+        });
+        const canvasHeight = (row + 1) * (fontHeight + buffer * 2);
+        return { mapping, canvasHeight };
+    }
+    function makeFontAtlas(gl, fontSettings) {
+        const mergedFontSettings = Object.assign({
+            fontFamily: DEFAULT_FONT_FAMILY,
+            fontWeight: DEFAULT_FONT_WEIGHT,
+            characterSet: DEFAULT_CHAR_SET
+        }, DEFAULT_FONT_SETTINGS, fontSettings);
+        const { fontFamily, fontWeight, characterSet, fontSize, buffer, sdf, radius, cutoff } = mergedFontSettings;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        // build mapping
+        setTextStyle(ctx, fontFamily, fontSize, fontWeight);
+        const fontHeight = fontSize * HEIGHT_SCALE;
+        const { canvasHeight, mapping } = buildMapping({
+            ctx,
+            fontHeight,
+            buffer,
+            characterSet,
+            maxCanvasWidth: MAX_CANVAS_WIDTH
+        });
+        canvas.width = MAX_CANVAS_WIDTH;
+        canvas.height = canvasHeight;
+        setTextStyle(ctx, fontFamily, fontSize, fontWeight);
+        // layout characters
+        if (sdf) {
+            const tinySDF = new tinySdf(fontSize, buffer, radius, cutoff, fontFamily, fontWeight);
+            // used to store distance values from tinySDF	
+            const imageData = ctx.createImageData(tinySDF.size, tinySDF.size);
+            for (const char of characterSet) {
+                populateAlphaChannel(tinySDF.draw(char), imageData);
+                ctx.putImageData(imageData, mapping[char].x - buffer, mapping[char].y - buffer);
+            }
+        }
+        else {
+            for (const char of characterSet) {
+                ctx.fillText(char, mapping[char].x, mapping[char].y + fontSize * BASELINE_SCALE);
+            }
+        }
+        return {
+            scale: HEIGHT_SCALE,
+            mapping,
+            texture: new base.luma.Texture2D(gl, {
+                pixels: canvas,
+                // padding is added only between the characters but not for borders
+                // enforce CLAMP_TO_EDGE to avoid any artifacts.
+                parameters: {
+                    [GL_TEXTURE_WRAP_S]: GL_CLAMP_TO_EDGE,
+                    [GL_TEXTURE_WRAP_T]: GL_CLAMP_TO_EDGE
+                }
+            })
+        };
+    }
+
+    // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
+    //
+    // Permission is hereby granted, free of charge, to any person obtaining a copy
+    // of this software and associated documentation files (the "Software"), to deal
+    // in the Software without restriction, including without limitation the rights
+    // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    // copies of the Software, and to permit persons to whom the Software is
+    // furnished to do so, subject to the following conditions:
+    //
+    // The above copyright notice and this permission notice shall be included in
+    // all copies or substantial portions of the Software.
+    //
+    // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    // THE SOFTWARE.
+    //adapted from https://github.com/uber/deck.gl/blob/6.4-release/modules/layers/src/text-layer/multi-icon-layer/multi-icon-layer-fragment.glsl.js
+    var fs = `\
+#define SHADER_NAME multi-icon-layer-fragment-shader
+
+precision highp float;
+
+uniform sampler2D iconsTexture;
+uniform float buffer;
+uniform bool sdf;
+
+varying vec4 vColor;
+varying vec2 vTextureCoords;
+varying float vGamma;
+varying vec4 vHighlightColor;
+
+const float MIN_ALPHA = 0.05;
+
+void main(void) {
+  vec4 texColor = texture2D(iconsTexture, vTextureCoords);
+  
+  float alpha = texColor.a;
+
+  // if enable sdf (signed distance fields)	
+  if (sdf) {	
+    float distance = texture2D(iconsTexture, vTextureCoords).a;	
+    alpha = smoothstep(buffer - vGamma, buffer + vGamma, distance);	
+  }
+
+  // Take the global opacity and the alpha from vColor into account for the alpha component
+  float a = alpha * vColor.a;
+
+  if (picking_uActive) {
+
+    // use picking color for entire rectangle
+    gl_FragColor = vec4(picking_vRGBcolor_Aselected.rgb, 1.0);
+  
+  } else {
+
+    if (a < MIN_ALPHA) {
+      discard;
+    } else {
+
+      gl_FragColor = vec4(vColor.rgb, a);
+
+      // use highlight color if this fragment belongs to the selected object.
+      bool selected = bool(picking_vRGBcolor_Aselected.a);
+      if (selected) {
+        gl_FragColor = vec4(vHighlightColor.rgb, a);
+      }
+    }
+  }
+}
+`;
+
+    // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
+    //
+    // Permission is hereby granted, free of charge, to any person obtaining a copy
+    // of this software and associated documentation files (the "Software"), to deal
+    // in the Software without restriction, including without limitation the rights
+    // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    // copies of the Software, and to permit persons to whom the Software is
+    // furnished to do so, subject to the following conditions:
+    //
+    // The above copyright notice and this permission notice shall be included in
+    // all copies or substantial portions of the Software.
+    //
+    // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    // THE SOFTWARE.
+    //adapted from https://github.com/uber/deck.gl/blob/6.4-release/modules/layers/src/text-layer/multi-icon-layer/multi-icon-layer-vertex.glsl.js
+    var vs = `\
+#define SHADER_NAME multi-icon-layer-vertex-shader
+
+attribute vec2 positions;
+
+attribute vec3 instancePositions;
+attribute vec2 instancePositions64xyLow;
+attribute float instanceSizes;
+attribute float instanceAngles;
+attribute vec4 instanceColors;
+attribute vec3 instancePickingColors;
+attribute vec4 instanceIconFrames;
+attribute float instanceColorModes;
+attribute vec2 instanceOffsets;
+
+// the following three attributes are for the multi-icon layer
+attribute vec2 instancePixelOffset;
+attribute vec4 instanceHighlightColors;
+
+uniform float sizeScale;
+uniform vec2 iconsTextureDim;
+uniform float gamma;
+uniform float opacity;
+
+varying float vColorMode;
+varying vec4 vColor;
+varying vec2 vTextureCoords;
+varying float vGamma;
+varying vec4 vHighlightColor;
+
+vec2 rotate_by_angle(vec2 vertex, float angle) {
+  float angle_radian = angle * PI / 180.0;
+  float cos_angle = cos(angle_radian);
+  float sin_angle = sin(angle_radian);
+  mat2 rotationMatrix = mat2(cos_angle, -sin_angle, sin_angle, cos_angle);
+  return rotationMatrix * vertex;
+}
+
+void main(void) {
+  vec2 iconSize = instanceIconFrames.zw;
+  // scale icon height to match instanceSize
+  float instanceScale = iconSize.y == 0.0 ? 0.0 : instanceSizes / iconSize.y;
+
+  // scale and rotate vertex in "pixel" value and convert back to fraction in clipspace
+  vec2 pixelOffset = positions / 2.0 * iconSize + instanceOffsets;
+
+  pixelOffset = rotate_by_angle(pixelOffset, instanceAngles) * sizeScale * instanceScale;
+  pixelOffset += instancePixelOffset;
+  pixelOffset.y *= -1.0;
+
+  gl_Position = project_position_to_clipspace(instancePositions, instancePositions64xyLow, vec3(0.0));
+  gl_Position += project_pixel_to_clipspace(pixelOffset);
+
+  vTextureCoords = mix(
+    instanceIconFrames.xy,
+    instanceIconFrames.xy + iconSize,
+    (positions.xy + 1.0) / 2.0
+  ) / iconsTextureDim;
+
+  vTextureCoords.y = 1.0 - vTextureCoords.y;
+
+  vColor = vec4(instanceColors.rgb, instanceColors.a * opacity) / 255.;
+  vHighlightColor = vec4(instanceHighlightColors.rgb, instanceHighlightColors.a * opacity) / 255.;
+
+  picking_setPickingColor(instancePickingColors);
+
+  vGamma = gamma / (sizeScale * iconSize.y);
+}
+`;
+
+    // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
+    // TODO expose as layer properties
+    const DEFAULT_GAMMA = 0.2;
+    const DEFAULT_BUFFER = 192.0 / 256;
+    const defaultProps = {
+        getShiftInQueue: { type: 'accessor', value: x => x.shift || 0 },
+        getLengthOfQueue: { type: 'accessor', value: x => x.len || 1 },
+        // 1: left, 0: middle, -1: right
+        getAnchorX: { type: 'accessor', value: x => x.anchorX || 0 },
+        // 1: top, 0: center, -1: bottom
+        getAnchorY: { type: 'accessor', value: x => x.anchorY || 0 },
+        getPixelOffset: { type: 'accessor', value: [0, 0] },
+        // object with the same pickingIndex will be picked when any one of them is being picked
+        getPickingIndex: { type: 'accessor', value: x => x.objectIndex }
+    };
+    //https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants
+    const UNSIGNED_BYTE = 0x1401;
+    function _MultiIconLayer(...props) {
+        class __MultiIconLayer extends base.layers.IconLayer {
+            constructor(...props) {
+                super(...arguments);
+            }
+            getShaders() {
+                return Object.assign({}, super.getShaders(), {
+                    vs,
+                    fs
+                });
+            }
+            initializeState() {
+                super.initializeState();
+                const attributeManager = this.getAttributeManager();
+                attributeManager.addInstanced({
+                    instancePixelOffset: {
+                        size: 2,
+                        transition: true,
+                        accessor: 'getPixelOffset'
+                    },
+                    instanceHighlightColors: {
+                        size: 4,
+                        type: UNSIGNED_BYTE,
+                        transition: true,
+                        accessor: 'getHighlightColor',
+                        defaultValue: [0, 255, 0, 255]
+                    }
+                });
+            }
+            updateState(updateParams) {
+                super.updateState(updateParams);
+                const { changeFlags } = updateParams;
+                if (changeFlags.updateTriggersChanged &&
+                    (changeFlags.updateTriggersChanged.getAnchorX || changeFlags.updateTriggersChanged.getAnchorY)) {
+                    this.getAttributeManager().invalidate('instanceOffsets');
+                }
+            }
+            draw({ uniforms }) {
+                const { sdf } = this.props;
+                super.draw({
+                    uniforms: Object.assign({}, uniforms, {
+                        // Refer the following doc about gamma and buffer
+                        // https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817
+                        buffer: DEFAULT_BUFFER,
+                        gamma: DEFAULT_GAMMA,
+                        sdf: Boolean(sdf)
+                    })
+                });
+            }
+            calculateInstanceOffsets(attribute) {
+                const { data, iconMapping, getIcon, getAnchorX, getAnchorY, getLengthOfQueue, getShiftInQueue } = this.props;
+                const { value } = attribute;
+                let i = 0;
+                for (const object of data) {
+                    const icon = getIcon(object);
+                    const rect = iconMapping[icon] || {};
+                    const len = getLengthOfQueue(object);
+                    const shiftX = getShiftInQueue(object);
+                    value[i++] = ((getAnchorX(object) - 1) * len) / 2 + rect.width / 2 + shiftX || 0;
+                    value[i++] = (rect.height / 2) * getAnchorY(object) || 0;
+                }
+            }
+            calculateInstancePickingColors(attribute) {
+                const { data, getPickingIndex } = this.props;
+                const { value } = attribute;
+                let i = 0;
+                const pickingColor = [];
+                for (const point of data) {
+                    const index = getPickingIndex(point);
+                    this.encodePickingColor(index, pickingColor);
+                    value[i++] = pickingColor[0];
+                    value[i++] = pickingColor[1];
+                    value[i++] = pickingColor[2];
+                }
+            }
+        }
+        __MultiIconLayer.layerName = 'MultiIconLayer';
+        __MultiIconLayer.defaultProps = defaultProps;
+        const instance = new __MultiIconLayer(...arguments);
+        return instance;
+    }
+    //signature to allow this function to be used with the 'new' keyword.
+    //need to trick the compiler by casting to 'any'.
+    /**
+     * CubeLayer - a Deck.gl layer to render cuboids.
+     * This is instantiatable by calling `new MultiIconLayer()`.
+     */
+    const MultiIconLayer = _MultiIconLayer;
+
+    // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
+    const TEXT_ANCHOR = {
+        start: 1,
+        middle: 0,
+        end: -1
+    };
+    const ALIGNMENT_BASELINE = {
+        top: 1,
+        center: 0,
+        bottom: -1
+    };
+    const DEFAULT_COLOR = [0, 0, 0, 255];
+    const MISSING_CHAR_WIDTH = 32;
+    const FONT_SETTINGS_PROPS = ['fontSize', 'buffer', 'sdf', 'radius', 'cutoff'];
+    const defaultProps$1 = {
+        fp64: false,
+        sizeScale: 1,
+        characterSet: DEFAULT_CHAR_SET,
+        fontFamily: DEFAULT_FONT_FAMILY,
+        fontWeight: DEFAULT_FONT_WEIGHT,
+        fontSettings: {},
+        getText: { type: 'accessor', value: x => x.text },
+        getPosition: { type: 'accessor', value: x => x.position },
+        getColor: { type: 'accessor', value: DEFAULT_COLOR },
+        getSize: { type: 'accessor', value: 32 },
+        getAngle: { type: 'accessor', value: 0 },
+        getHighlightColor: { type: 'accessor', value: DEFAULT_COLOR },
+        getTextAnchor: { type: 'accessor', value: 'middle' },
+        getAlignmentBaseline: { type: 'accessor', value: 'center' },
+        getPixelOffset: { type: 'accessor', value: [0, 0] }
+    };
+    function _ChromaticTextLayer(props) {
+        class __ChromaticTextLayer extends base.deck.CompositeLayer {
+            updateState({ props, oldProps, changeFlags }) {
+                const fontChanged = this.fontChanged(oldProps, props);
+                if (fontChanged) {
+                    this.updateFontAtlas();
+                }
+                if (changeFlags.dataChanged ||
+                    fontChanged ||
+                    (changeFlags.updateTriggersChanged &&
+                        (changeFlags.updateTriggersChanged.all || changeFlags.updateTriggersChanged.getText))) {
+                    this.transformStringToLetters();
+                }
+            }
+            updateFontAtlas() {
+                const { gl } = this.context;
+                const { fontSettings, fontFamily, fontWeight, characterSet } = this.props;
+                const mergedFontSettings = Object.assign({}, DEFAULT_FONT_SETTINGS, fontSettings, {
+                    fontFamily,
+                    fontWeight,
+                    characterSet
+                });
+                const { scale, mapping, texture } = makeFontAtlas(gl, mergedFontSettings);
+                this.setState({
+                    scale,
+                    iconAtlas: texture,
+                    iconMapping: mapping
+                });
+            }
+            fontChanged(oldProps, props) {
+                if (oldProps.fontFamily !== props.fontFamily ||
+                    oldProps.characterSet !== props.characterSet ||
+                    oldProps.fontWeight !== props.fontWeight) {
+                    return true;
+                }
+                if (oldProps.fontSettings === props.fontSettings) {
+                    return false;
+                }
+                const oldFontSettings = oldProps.fontSettings || {};
+                const fontSettings = props.fontSettings || {};
+                return FONT_SETTINGS_PROPS.some(prop => oldFontSettings[prop] !== fontSettings[prop]);
+            }
+            getPickingInfo({ info }) {
+                // because `TextLayer` assign the same pickingInfoIndex for one text label,
+                // here info.index refers the index of text label in props.data
+                return Object.assign(info, {
+                    // override object with original data
+                    object: info.index >= 0 ? this.props.data[info.index] : null
+                });
+            }
+            /* eslint-disable no-loop-func */
+            transformStringToLetters() {
+                const { data, getText } = this.props;
+                const { iconMapping } = this.state;
+                const transformedData = [];
+                let objectIndex = 0;
+                for (const val of data) {
+                    const text = getText(val);
+                    if (text) {
+                        const letters = Array.from(text);
+                        const offsets = [0];
+                        let offsetLeft = 0;
+                        letters.forEach((letter, i) => {
+                            const datum = {
+                                text: letter,
+                                index: i,
+                                offsets,
+                                len: text.length,
+                                // reference of original object and object index
+                                object: val,
+                                objectIndex
+                            };
+                            const frame = iconMapping[letter];
+                            if (frame) {
+                                offsetLeft += frame.width;
+                            }
+                            else {
+                                //log.warn(`Missing character: ${letter}`)();
+                                offsetLeft += MISSING_CHAR_WIDTH;
+                            }
+                            offsets.push(offsetLeft);
+                            transformedData.push(datum);
+                        });
+                    }
+                    objectIndex++;
+                }
+                this.setState({ data: transformedData });
+            }
+            /* eslint-enable no-loop-func */
+            getLetterOffset(datum) {
+                return datum.offsets[datum.index];
+            }
+            getTextLength(datum) {
+                return datum.offsets[datum.offsets.length - 1];
+            }
+            _getAccessor(accessor) {
+                if (typeof accessor === 'function') {
+                    return x => accessor(x.object);
+                }
+                return accessor;
+            }
+            getAnchorXFromTextAnchor(getTextAnchor) {
+                return x => {
+                    const textAnchor = typeof getTextAnchor === 'function' ? getTextAnchor(x.object) : getTextAnchor;
+                    if (!TEXT_ANCHOR.hasOwnProperty(textAnchor)) {
+                        throw new Error(`Invalid text anchor parameter: ${textAnchor}`);
+                    }
+                    return TEXT_ANCHOR[textAnchor];
+                };
+            }
+            getAnchorYFromAlignmentBaseline(getAlignmentBaseline) {
+                return x => {
+                    const alignmentBaseline = typeof getAlignmentBaseline === 'function'
+                        ? getAlignmentBaseline(x.object)
+                        : getAlignmentBaseline;
+                    if (!ALIGNMENT_BASELINE.hasOwnProperty(alignmentBaseline)) {
+                        throw new Error(`Invalid alignment baseline parameter: ${alignmentBaseline}`);
+                    }
+                    return ALIGNMENT_BASELINE[alignmentBaseline];
+                };
+            }
+            renderLayers() {
+                const { data, scale, iconAtlas, iconMapping } = this.state;
+                const { getPosition, getColor, getSize, getAngle, getHighlightColor, getTextAnchor, getAlignmentBaseline, getPixelOffset, fp64, sdf, sizeScale, transitions, updateTriggers } = this.props;
+                const SubLayerClass = this.getSubLayerClass('characters', MultiIconLayer);
+                return new SubLayerClass({
+                    sdf,
+                    iconAtlas,
+                    iconMapping,
+                    getPosition: d => getPosition(d.object),
+                    getColor: this._getAccessor(getColor),
+                    getSize: this._getAccessor(getSize),
+                    getAngle: this._getAccessor(getAngle),
+                    getHighlightColor: this._getAccessor(getHighlightColor),
+                    getAnchorX: this.getAnchorXFromTextAnchor(getTextAnchor),
+                    getAnchorY: this.getAnchorYFromAlignmentBaseline(getAlignmentBaseline),
+                    getPixelOffset: this._getAccessor(getPixelOffset),
+                    fp64,
+                    sizeScale: sizeScale * scale,
+                    transitions: transitions && {
+                        getPosition: transitions.getPosition,
+                        getAngle: transitions.getAngle,
+                        getHighlightColor: transitions.getHighlightColor,
+                        getColor: transitions.getColor,
+                        getSize: transitions.getSize,
+                        getPixelOffset: updateTriggers.getPixelOffset
+                    }
+                }, this.getSubLayerProps({
+                    id: 'characters',
+                    updateTriggers: {
+                        getPosition: updateTriggers.getPosition,
+                        getAngle: updateTriggers.getAngle,
+                        getHighlightColor: updateTriggers.getHighlightColor,
+                        getColor: updateTriggers.getColor,
+                        getSize: updateTriggers.getSize,
+                        getPixelOffset: updateTriggers.getPixelOffset,
+                        getAnchorX: updateTriggers.getTextAnchor,
+                        getAnchorY: updateTriggers.getAlignmentBaseline
+                    }
+                }), {
+                    data,
+                    getIcon: d => d.text,
+                    getShiftInQueue: d => this.getLetterOffset(d),
+                    getLengthOfQueue: d => this.getTextLength(d)
+                });
+            }
+        }
+        __ChromaticTextLayer.layerName = 'TextLayer';
+        __ChromaticTextLayer.defaultProps = defaultProps$1;
+        const instance = new __ChromaticTextLayer(props);
+        return instance;
+    }
+    //signature to allow this function to be used with the 'new' keyword.
+    //need to trick the compiler by casting to 'any'.
+    /**
+     * TextLayer - a modification of deck.gl's TextLayer.
+     * This is instantiatable by calling `new TextLayer()`.
+     */
+    const ChromaticTextLayer = _ChromaticTextLayer;
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     // Licensed under the MIT license.
@@ -5323,7 +6119,7 @@
     // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     // THE SOFTWARE.
-    var fs = `\
+    var fs$1 = `\
 #define SHADER_NAME cube-layer-fragment-shader
 
 precision highp float;
@@ -5344,8 +6140,8 @@ void main(void) {
     const minHeight = '100px';
     const minWidth = '100px';
     const lightSettings = {
-        "2d": {},
-        "3d": {
+        '2d': {},
+        '3d': {
             lightsPosition: [-122.45, 37.66, 8000, -122.0, 38.0, 8000],
             ambientRatio: 0.3,
             diffuseRatio: 0.6,
@@ -5356,7 +6152,7 @@ void main(void) {
     };
     const defaultPresenterStyle = {
         cssPrefix: 'vega-deckgl-',
-        defaultCubeColor: [128, 128, 128, 171],
+        defaultCubeColor: [128, 128, 128, 255],
         highlightColor: [0, 0, 0, 255],
         lightSettings
     };
@@ -5389,11 +6185,25 @@ void main(void) {
     }
     const groupStrokeWidth = 1;
     const lineZ = -1;
-    const defaultView = "2d";
+    const defaultView = '2d';
     const min3dDepth = 0.05;
+    const minPixelSize = 0.5;
+
+    var defaults = /*#__PURE__*/Object.freeze({
+        minHeight: minHeight,
+        minWidth: minWidth,
+        defaultPresenterStyle: defaultPresenterStyle,
+        defaultPresenterConfig: defaultPresenterConfig,
+        createStage: createStage,
+        groupStrokeWidth: groupStrokeWidth,
+        lineZ: lineZ,
+        defaultView: defaultView,
+        min3dDepth: min3dDepth,
+        minPixelSize: minPixelSize
+    });
 
     // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
-    var vs = `\
+    var vs$1 = `\
 #define SHADER_NAME cube-layer-vertex-shader
 
 attribute vec3 positions;
@@ -5413,10 +6223,13 @@ varying vec4 vColor;
 
 void main(void) {
 
+  float x = instanceSizes.x > 0.0 ? max(instanceSizes.x, ${minPixelSize.toFixed(1)}) : 0.0;
+  float y = instanceSizes.y > 0.0 ? max(instanceSizes.y, ${minPixelSize.toFixed(1)}) : 0.0;
+
   // if alpha == 0.0, do not render element
   float noRender = float(instanceColors.a == 0.0);
-  float finalXScale = project_scale(instanceSizes.x) * mix(1.0, 0.0, noRender);
-  float finalYScale = project_scale(instanceSizes.y) * mix(1.0, 0.0, noRender);
+  float finalXScale = project_scale(x) * mix(1.0, 0.0, noRender);
+  float finalYScale = project_scale(y) * mix(1.0, 0.0, noRender);
   float finalZScale = project_scale(instanceSizes.z) * mix(1.0, 0.0, noRender);
 
   // cube geometry vertics are between -1 to 1, scale and transform it to between 0, 1
@@ -5432,7 +6245,7 @@ void main(void) {
   float lightWeight = 1.0;
   
   //allow for a small amount of error around the min3dDepth 
-  if (instanceSizes.z >= ${min3dDepth} - 0.0001) {
+  if (instanceSizes.z >= ${min3dDepth.toFixed(4)} - 0.0001) {
     lightWeight = lighting_getLightWeight(
       position_worldspace.xyz, // the w component is always 1.0
       normals
@@ -5451,9 +6264,9 @@ void main(void) {
 
     // Copyright (c) 2015 - 2017 Uber Technologies, Inc.
     //https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Constants
-    const UNSIGNED_BYTE = 0x1401;
-    const DEFAULT_COLOR = [255, 0, 255, 255];
-    const defaultProps = {
+    const UNSIGNED_BYTE$1 = 0x1401;
+    const DEFAULT_COLOR$1 = [255, 0, 255, 255];
+    const defaultProps$2 = {
         lightingMix: 0.5,
         fp64: false,
         getSize: x => x.size,
@@ -5465,7 +6278,7 @@ void main(void) {
         class __CubeLayer extends base.deck.Layer {
             getShaders() {
                 const projectModule = this.use64bitProjection() ? 'project64' : 'project32';
-                return { vs, fs, modules: [projectModule, 'lighting', 'picking'] };
+                return { vs: vs$1, fs: fs$1, modules: [projectModule, 'lighting', 'picking'] };
             }
             initializeState() {
                 const attributeManager = this.getAttributeManager();
@@ -5487,10 +6300,10 @@ void main(void) {
                     },
                     instanceColors: {
                         size: 4,
-                        type: UNSIGNED_BYTE,
+                        type: UNSIGNED_BYTE$1,
                         transition: true,
                         accessor: 'getColor',
-                        defaultValue: DEFAULT_COLOR
+                        defaultValue: DEFAULT_COLOR$1
                     }
                 });
             }
@@ -5541,7 +6354,7 @@ void main(void) {
             }
         }
         __CubeLayer.layerName = 'CubeLayer';
-        __CubeLayer.defaultProps = defaultProps;
+        __CubeLayer.defaultProps = defaultProps$2;
         const instance = new __CubeLayer(props);
         return instance;
     }
@@ -5562,8 +6375,8 @@ void main(void) {
     var tau = 2 * Math.PI;
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getLayers(presenter, config, stage, highlightColor, lightSettings, lightingMix, interpolator, guideLines) {
-        const cubeLayer = newCubeLayer(presenter, config, stage.cubeData, highlightColor, lightSettings, lightingMix, interpolator);
+    function getLayers(presenter, config, stage, lightSettings, lightingMix, interpolator, guideLines) {
+        const cubeLayer = newCubeLayer(presenter, config, stage.cubeData, presenter.style.highlightColor, lightSettings, lightingMix, interpolator);
         const { x, y } = stage.axes;
         const lines = concat(stage.gridLines, guideLines);
         const texts = [...stage.textData];
@@ -5575,6 +6388,8 @@ void main(void) {
                     lines.push.apply(lines, axis.ticks);
                 if (axis.tickText)
                     texts.push.apply(texts, axis.tickText);
+                if (axis.title)
+                    texts.push(axis.title);
             });
         });
         if (stage.facets) {
@@ -5586,7 +6401,7 @@ void main(void) {
             });
         }
         const lineLayer = newLineLayer(layerNames.lines, lines);
-        const textLayer = newTextLayer(layerNames.text, texts);
+        const textLayer = newTextLayer(presenter, layerNames.text, texts, config, presenter.style.fontFamily);
         return [textLayer, cubeLayer, lineLayer];
     }
     function newCubeLayer(presenter, config, cubeData, highlightColor, lightSettings, lightingMix, interpolator) {
@@ -5608,6 +6423,7 @@ void main(void) {
             onHover: (o, e) => {
                 if (o.index === -1) {
                     presenter.deckgl.interactiveState.onCube = false;
+                    config.onCubeHover(e && e.srcEvent, null);
                 }
                 else {
                     presenter.deckgl.interactiveState.onCube = true;
@@ -5632,16 +6448,43 @@ void main(void) {
             getStrokeWidth: (o) => o.strokeWidth
         });
     }
-    function newTextLayer(id, data) {
-        return new base.layers.TextLayer({
+    function newTextLayer(presenter, id, data, config, fontFamily) {
+        const props = {
             id,
             data,
             coordinateSystem: base.deck.COORDINATE_SYSTEM.IDENTITY,
-            getColor: o => o.color,
+            autoHighlight: true,
+            pickable: true,
+            getHighlightColor: config.getTextHighlightColor || (o => o.color),
+            onClick: (o, e) => {
+                let pe = e && e.srcEvent;
+                //handle iOS event
+                if (e.center) {
+                    pe = { clientX: e.center.x, clientY: e.center.y };
+                }
+                config.onTextClick && config.onTextClick(pe, o.object);
+            },
+            onHover: (o, e) => {
+                if (o.index === -1) {
+                    presenter.deckgl.interactiveState.onText = false;
+                }
+                else {
+                    presenter.deckgl.interactiveState.onText = config.onTextHover ? config.onTextHover(e && e.srcEvent, o.object) : true;
+                }
+            },
+            getColor: config.getTextColor || (o => o.color),
             getTextAnchor: o => o.textAnchor,
             getSize: o => o.size,
-            getAngle: o => o.angle
-        });
+            getAngle: o => o.angle,
+            fontSettings: {
+                sdf: true,
+                fontSize: 128
+            }
+        };
+        if (fontFamily) {
+            props.fontFamily = fontFamily;
+        }
+        return new ChromaticTextLayer(props);
     }
     function getTiming(duration, easing) {
         let timing;
@@ -5673,10 +6516,13 @@ void main(void) {
         addEl: addEl,
         clone: clone,
         colorFromString: colorFromString,
+        colorIsEqual: colorIsEqual,
         colorToString: colorToString,
         deepMerge: deepMerge,
+        isColor: isColor,
         getCubeLayer: getCubeLayer,
-        getCubes: getCubes
+        getCubes: getCubes,
+        outerSize: outerSize
     });
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -5882,12 +6728,12 @@ void main(void) {
         var sorted = Object.keys(props.legend.rows).sort((a, b) => +a - +b);
         sorted.forEach(i => addRow(props.legend.rows[i], +i));
         if (sorted.length) {
-            return (createElement(Table, { rows: rows, rowClassName: "legend-row", onRowClick: (e, i) => props.onClick(e, props.legend, i) }, props.legend.title !== void 0 && createElement("tr", null,
+            return (createElement(Table, { rows: rows, rowClassName: "legend-row", onRowClick: (e, i) => props.onClick(e, props.legend, i) }, props.legend.title !== void 0 && createElement("tr", { onClick: e => props.onClick(e, props.legend, null) },
                 createElement("th", { colSpan: 2 }, props.legend.title))));
         }
     };
     const symbolMap = {
-        'square': function (symbol) {
+        square: function (symbol) {
             return (createElement("div", { style: {
                     height: `${symbol.bounds.y2 - symbol.bounds.y1}px`,
                     width: `${symbol.bounds.x2 - symbol.bounds.x1}px`,
@@ -5939,7 +6785,8 @@ void main(void) {
             const i = label.datum.index;
             legend.rows[i] = legend.rows[i] || {};
             const row = legend.rows[i];
-            row.label = row.value = label.text;
+            row.label = label.text;
+            row.value = label.datum.value;
         }
     };
     const markStager$1 = (options, stage, scene, x, y, groupType) => {
@@ -5956,8 +6803,8 @@ void main(void) {
         let i = 0;
         base.vega.sceneVisit(scene, function (item) {
             //for orthographic (2d) - always use 0 or else Deck will not show them
-            const z = stage.view === "2d" ? 0 : (item.z || 0);
-            const depth = (stage.view === "2d" ? 0 : (item.depth || 0)) + min3dDepth;
+            const z = stage.view === '2d' ? 0 : (item.z || 0);
+            const depth = (stage.view === '2d' ? 0 : (item.depth || 0)) + min3dDepth;
             //change direction of y from SVG to GL
             const ty = -1;
             let ordinal = i;
@@ -5972,8 +6819,9 @@ void main(void) {
                 ordinal,
                 size: [item.width, item.height, depth],
                 position: [x + (item.x || 0) - options.offsetX, ty * (y + (item.y || 0) - options.offsetY) - item.height, z],
-                color: item.fill ? colorFromString(item.fill) : [128, 128, 128, 128]
+                color: colorFromString(item.fill) || options.defaultCubeColor || [128, 128, 128, 128]
             };
+            cube.color[3] = item.opacity === undefined ? 255 : 255 * item.opacity;
             stage.cubeData.push(cube);
             i++;
         });
@@ -5999,10 +6847,13 @@ void main(void) {
                 textAnchor: convertAlignment(item.align),
                 alignmentBaseline: convertBaseline(item.baseline)
             };
-            if (item.mark.role === "axis-label") {
+            if (item.mark.role === 'axis-label') {
                 const tickText = textItem;
-                tickText.value = item.datum['value'];
+                tickText.value = item.datum.value;
                 options.currAxis.tickText.push(tickText);
+            }
+            else if (item.mark.role === 'axis-title') {
+                options.currAxis.title = textItem;
             }
             else if (options.currFacetRect && !options.currFacetRect.facetTitle) {
                 options.currFacetRect.facetTitle = textItem;
@@ -6013,7 +6864,10 @@ void main(void) {
         });
     };
     function convertAngle(vegaTextAngle) {
-        return 360 - vegaTextAngle;
+        if (vegaTextAngle && !isNaN(vegaTextAngle)) {
+            return 360 - vegaTextAngle;
+        }
+        return 0;
     }
     function convertAlignment(textAlign) {
         switch (textAlign) {
@@ -6021,12 +6875,13 @@ void main(void) {
             case 'left': return 'start';
             case 'right': return 'end';
         }
+        return 'start';
     }
     function convertBaseline(baseline) {
         switch (baseline) {
             case 'middle': return 'center';
         }
-        return baseline;
+        return baseline || 'bottom';
     }
 
     var GroupType;
@@ -6039,17 +6894,17 @@ void main(void) {
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     function convertGroupRole(group) {
-        if (group.mark.role === "legend")
+        if (group.mark.role === 'legend')
             return GroupType.legend;
-        if (group.mark.role === "axis") {
+        if (group.mark.role === 'axis') {
             var vegaAxisDatum = group.datum;
             if (vegaAxisDatum) {
                 switch (vegaAxisDatum.orient) {
-                    case "bottom":
-                    case "top":
+                    case 'bottom':
+                    case 'top':
                         return GroupType.xAxis;
-                    case "left":
-                    case "right":
+                    case 'left':
+                    case 'right':
                         return GroupType.yAxis;
                 }
             }
@@ -6257,7 +7112,8 @@ void main(void) {
                 maxOrdinal: -1,
                 ordinalsSpecified: false,
                 currAxis: null,
-                currFacetRect: null
+                currFacetRect: null,
+                defaultCubeColor: this.style.defaultCubeColor
             };
             //determine if this is a vega scene
             if (scene.marktype) {
@@ -6266,9 +7122,6 @@ void main(void) {
             }
             else {
                 stage = sceneOrStage;
-            }
-            if (stage.cubeData.length === 0) {
-                return;
             }
             if (!this.deckgl) {
                 const classes = createDeckGLClassesForPresenter({
@@ -6281,8 +7134,11 @@ void main(void) {
                     onLayerClick: config && config.onLayerClick,
                     views: [new base.deck.OrbitView({ controller: this.OrbitControllerClass })],
                     container: this.getElement(PresenterElement.gl),
-                    getCursor: (x) => {
-                        if (x.onCube) {
+                    getCursor: (interactiveState) => {
+                        if (interactiveState.onText || interactiveState.onAxisSelection) {
+                            return 'pointer';
+                        }
+                        else if (interactiveState.onCube) {
                             return 'default';
                         }
                         else {
@@ -6291,7 +7147,7 @@ void main(void) {
                     }
                 };
                 if (stage.backgroundColor) {
-                    deckProps.style = { "background-color": colorToString(stage.backgroundColor) };
+                    deckProps.style = { 'background-color': colorToString(stage.backgroundColor) };
                 }
                 this.deckgl = new classes.DeckGL_Class(deckProps);
             }
@@ -6317,7 +7173,7 @@ void main(void) {
          * @param modifyConfig Optional presentation configuration object.
          */
         rePresent(stage, modifyConfig) {
-            const newStage = Object.assign({}, this._last.stage, stage);
+            const newStage = Object.assign(Object.assign({}, this._last.stage), stage);
             this.setDeckProps(newStage, this._last.height, this._last.width, this._last.cubeCount, modifyConfig);
         }
         isNewBounds(view, height, width, cubeCount) {
@@ -6362,7 +7218,8 @@ void main(void) {
                 }
             }
             const guideLines = this._showGuides && box(0, 0, height, width, '#0f0', 1, true);
-            const layers = getLayers(this, config, stage, this.style.highlightColor, lightSettings, lightingMix, linearInterpolator, guideLines);
+            config.preLayer && config.preLayer(stage);
+            const layers = getLayers(this, config, stage, lightSettings, lightingMix, linearInterpolator, guideLines);
             const deckProps = {
                 views: [new base.deck.OrbitView({ controller: this.OrbitControllerClass })],
                 viewState,
@@ -6408,7 +7265,19 @@ void main(void) {
         showGuides() {
             this._showGuides = true;
             this.getElement(PresenterElement.gl).classList.add('show-center');
-            this.rePresent(Object.assign({}, this._last.stage, { cubeData: this.getCubeData() }));
+            this.rePresent(Object.assign(Object.assign({}, this._last.stage), { cubeData: this.getCubeData() }));
+        }
+        finalize() {
+            this.animationCancel();
+            if (this.deckgl)
+                this.deckgl.finalize();
+            if (this.el)
+                this.el.innerHTML = '';
+            this._last = null;
+            this.deckgl = null;
+            this.el = null;
+            this.logger = null;
+            this.queuedAnimationOptions = null;
         }
     }
 
@@ -6508,6 +7377,7 @@ void main(void) {
     var index$2 = /*#__PURE__*/Object.freeze({
         constants: constants$1,
         controls: controls,
+        defaults: defaults,
         types: types$1,
         util: util,
         base: base,
@@ -6526,8 +7396,9 @@ void main(void) {
      * @param data Array of data objects.
      */
     function getColumnsFromData(data, columnTypes) {
-        const fields = Object.keys(data[0]);
-        const inferences = Object.assign({}, base.vega.inferTypes(data, fields), columnTypes);
+        const sample = data[0];
+        const fields = sample ? Object.keys(sample) : [];
+        const inferences = Object.assign(Object.assign({}, base.vega.inferTypes(data, fields)), columnTypes);
         const columns = fields.map(name => {
             const column = {
                 name,
@@ -6549,19 +7420,32 @@ void main(void) {
                 if (typeof column.quantitative !== 'boolean') {
                     column.quantitative = isQuantitative(column);
                 }
+                if (column.type === 'string') {
+                    checkIsColorData(data, column);
+                }
                 if (!column.stats) {
                     column.stats = getStats(data, column);
                 }
             }
         });
     }
+    function checkIsColorData(data, column) {
+        for (let i = 0; i < data.length; i++) {
+            if (!isColor(data[i][column.name])) {
+                return;
+            }
+        }
+        column.isColorData = true;
+    }
     function getStats(data, column) {
         const distinctMap = {};
         const stats = {
             distinctValueCount: null,
             max: null,
+            mean: null,
             min: null
         };
+        let sum = 0;
         for (let i = 0; i < data.length; i++) {
             let row = data[i];
             let value = row[column.name];
@@ -6572,9 +7456,40 @@ void main(void) {
             if (stats.min === null || value < stats.min) {
                 stats.min = value;
             }
+            let num = +value;
+            if (!isNaN(num)) {
+                sum += num;
+            }
+            if (column.type === 'string' && !stats.hasColorData && isColor(value)) {
+                stats.hasColorData = true;
+            }
+        }
+        if (column.quantitative) {
+            stats.mean = data.length > 0 && (sum / data.length);
+            stats.hasNegative = detectNegative(column, data);
+            if (column.type === 'integer') {
+                stats.isSequential = detectSequentialColumn(column, data);
+            }
         }
         stats.distinctValueCount = Object.keys(distinctMap).length;
         return stats;
+    }
+    function detectNegative(column, data) {
+        for (let i = 1; i < data.length; i++) {
+            if (data[i][column.name] < 0)
+                return true;
+        }
+        return false;
+    }
+    function detectSequentialColumn(column, data) {
+        if (data.length < 2)
+            return false;
+        let colname = column.name;
+        for (let i = 1; i < data.length; i++) {
+            if (data[i][colname] !== data[i - 1][colname] + 1)
+                return false;
+        }
+        return true;
     }
 
     const defaultViewerOptions = {
@@ -6623,17 +7538,18 @@ void main(void) {
             treeMapMethod: 'Method',
             facetColumns: 'Facet columns',
             facetRows: 'Facet rows',
-            textScaleSignal: "Text scale",
-            xAxisTextAngleSignal: "X axis text angle",
-            yAxisTextAngleSignal: "Y axis text angle",
-            zScaleProportion: "Z scale proportion to Y",
+            markOpacitySignal: 'Mark opacity',
+            textScaleSignal: 'Text scale',
+            xAxisTextAngleSignal: 'X axis text angle',
+            yAxisTextAngleSignal: 'Y axis text angle',
+            zScaleProportion: 'Z scale proportion to Y',
             selectionCount: count => `${count} items selected`
         },
         maxLegends: 19,
         onError: (errors) => {
             //console.log(`UnitVisViewer errors: ${errors.join('\n')}`);
         },
-        transitionDurations: Object.assign({}, defaultPresenterConfig.transitionDurations, { scope: 600 }),
+        transitionDurations: Object.assign(Object.assign({}, defaultPresenterConfig.transitionDurations), { scope: 600 }),
         selectionPolygonZ: -1,
         tickSize: 10,
         facetMargins: {
@@ -6645,6 +7561,7 @@ void main(void) {
     function getPresenterStyle(options) {
         var style = {
             cssPrefix,
+            fontFamily: options.fontFamily,
             defaultCubeColor: options.colors.defaultCube
         };
         if (options.colors.hoveredCube) {
@@ -6666,8 +7583,20 @@ void main(void) {
     };
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
+    function isInternalFieldName(columnName, includeVegaDeckGLFields = false) {
+        if (includeVegaDeckGLFields) {
+            if (columnName === GL_ORDINAL)
+                return true;
+        }
+        for (let f in FieldNames) {
+            if (columnName === FieldNames[f])
+                return true;
+        }
+        return false;
+    }
 
     var util$1 = /*#__PURE__*/Object.freeze({
+        isInternalFieldName: isInternalFieldName,
         getColumnsFromData: getColumnsFromData,
         inferAll: inferAll,
         ensureSearchExpressionGroupArray: ensureSearchExpressionGroupArray,
@@ -6865,7 +7794,9 @@ void main(void) {
                 try {
                     result[signalA.name] = view.signal(signalA.name);
                 }
-                catch (e) { }
+                catch (e) {
+                    // continue regardless of error
+                }
             }
         });
         return result;
@@ -6906,22 +7837,32 @@ void main(void) {
             z: getColumnByName(insight.columns && insight.columns.z)
         };
     }
+    function getDataIndexOfCube(cube, data) {
+        const len = data.length;
+        for (let i = 0; i < len; i++) {
+            if (data[i][GL_ORDINAL] === cube.ordinal) {
+                return i;
+            }
+        }
+    }
 
-    const FacetColumnsSequence = "FacetColumnsSequence";
-    const FacetRowsSequence = "FacetRowsSequence";
-    const SequenceNumber = "SequenceNumber";
-    const CellTitle = "CellTitle";
-    const CellFiller = "CellFiller";
+    const FacetColumnsSequence = 'FacetColumnsSequence';
+    const FacetRowsSequence = 'FacetRowsSequence';
+    const SequenceNumber = 'SequenceNumber';
+    const CellTitle = 'CellTitle';
+    const CellFiller = 'CellFiller';
     const facetTitleSeparator = ' - ';
-    function facetSignals(facets, specViewOptions) {
+    function facetSignals(context) {
+        const { insight } = context;
+        const { facets } = insight;
         const signals = [
             {
-                "name": SignalNames.FacetColumns,
-                "value": facets.columns,
+                name: SignalNames.FacetColumns,
+                value: facets.columns,
             },
             {
-                "name": SignalNames.FacetRows,
-                "value": facets.rows,
+                name: SignalNames.FacetRows,
+                value: facets.rows,
             }
         ];
         return signals;
@@ -6943,21 +7884,24 @@ void main(void) {
             }
         }
     }
-    function facetSize(facets, size, specViewOptions) {
+    function facetSize(context) {
+        const { insight, specViewOptions } = context;
+        const { facets, size } = insight;
         return {
             height: (size.height - (facets.rows + 1) * (specViewOptions.tickSize + specViewOptions.facetMargins.column)) / facets.columns,
             width: (size.width - (facets.columns + 1) * (specViewOptions.tickSize + specViewOptions.facetMargins.row)) / facets.rows,
         };
     }
-    function layout(specViewOptions) {
+    function layout(context) {
+        const { specViewOptions } = context;
         const layout = {
-            "columns": {
-                "signal": SignalNames.FacetColumns
+            columns: {
+                signal: SignalNames.FacetColumns
             },
-            "bounds": "full",
-            "padding": {
-                "column": specViewOptions.facetMargins.column,
-                "row": specViewOptions.facetMargins.row
+            bounds: 'full',
+            padding: {
+                column: specViewOptions.facetMargins.column,
+                row: specViewOptions.facetMargins.row
             }
         };
         return layout;
@@ -6987,12 +7931,12 @@ void main(void) {
         if (facetColumn && facetColumn.quantitative) {
             data = [
                 {
-                    "name": DataNames.Pre
+                    name: DataNames.Pre
                 },
                 emptyBinsDataSource(DataNames.EmptyBin, facetColumn, facets),
                 {
                     name,
-                    "source": [DataNames.Pre, DataNames.EmptyBin]
+                    source: [DataNames.Pre, DataNames.EmptyBin]
                 }
             ];
         }
@@ -7004,49 +7948,49 @@ void main(void) {
     function facetGroupData(source) {
         const data = [
             {
-                "name": DataNames.FacetCellTitles,
+                name: DataNames.FacetCellTitles,
                 source,
-                "transform": [
+                transform: [
                     {
-                        "type": "aggregate",
-                        "groupby": [CellTitle]
+                        type: 'aggregate',
+                        groupby: [CellTitle]
                     }
                 ]
             },
             {
-                "name": CellFiller,
-                "transform": [
+                name: CellFiller,
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": 0,
-                        "step": 1,
-                        "stop": { "signal": `${SignalNames.FacetColumns} * ${SignalNames.FacetRows} - length(data('${DataNames.FacetCellTitles}'))` }
+                        type: 'sequence',
+                        start: 0,
+                        step: 1,
+                        stop: { signal: `${SignalNames.FacetColumns} * ${SignalNames.FacetRows} - length(data('${DataNames.FacetCellTitles}'))` }
                     }
                 ]
             },
             {
-                "name": FacetColumnsSequence,
-                "transform": [
+                name: FacetColumnsSequence,
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": 0,
-                        "stop": {
-                            "signal": SignalNames.FacetColumns
+                        type: 'sequence',
+                        start: 0,
+                        stop: {
+                            signal: SignalNames.FacetColumns
                         },
-                        "as": SequenceNumber
+                        as: SequenceNumber
                     }
                 ]
             },
             {
-                "name": FacetRowsSequence,
-                "transform": [
+                name: FacetRowsSequence,
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": 0,
-                        "stop": {
-                            "signal": SignalNames.FacetRows
+                        type: 'sequence',
+                        start: 0,
+                        stop: {
+                            signal: SignalNames.FacetRows
                         },
-                        "as": SequenceNumber
+                        as: SequenceNumber
                     }
                 ]
             }
@@ -7060,32 +8004,35 @@ void main(void) {
             const step = facetBinStep(facetColumn, gridCapacity);
             transforms = [
                 {
-                    "type": "bin",
-                    "field": facetColumn.name,
+                    type: 'bin',
+                    field: facetColumn.name,
                     step,
                     nice: false,
-                    "extent": [facetColumn.stats.min, facetColumn.stats.max],
-                    "as": ["facetBin0", "facetBin1"]
+                    extent: [facetColumn.stats.min, facetColumn.stats.max],
+                    as: [
+                        FieldNames.FacetBin0,
+                        FieldNames.FacetBin1
+                    ]
                 },
                 {
-                    "type": "collect",
-                    "sort": {
-                        "field": "facetBin0"
+                    type: 'collect',
+                    sort: {
+                        field: FieldNames.FacetBin0
                     }
                 },
                 {
-                    "type": "formula",
-                    "expr": `format(datum.facetBin0, '~r') + '${facetTitleSeparator}' + format(datum.facetBin1, '~r')`,
-                    "as": CellTitle
+                    type: 'formula',
+                    expr: `format(datum.${FieldNames.FacetBin0}, '~r') + '${facetTitleSeparator}' + format(datum.${FieldNames.FacetBin1}, '~r')`,
+                    as: CellTitle
                 }
             ];
         }
         else {
             transforms = [
                 {
-                    "type": "formula",
-                    "expr": `datum[${JSON.stringify(facetColumn.name)}]`,
-                    "as": CellTitle
+                    type: 'formula',
+                    expr: `datum[${JSON.stringify(facetColumn.name)}]`,
+                    as: CellTitle
                 }
             ];
         }
@@ -7094,43 +8041,43 @@ void main(void) {
     function facetMarks(specViewOptions, sourceDataName, childMarks, childAxes, childData) {
         //TODO: create a style
         const cellFillerLineColor = colorToString(specViewOptions.colors.cellFillerLine);
-        const style = "cell";
+        const style = 'cell';
         const mark = {
             style,
-            "type": "group",
-            "from": {
-                "facet": {
-                    "name": DataNames.FacetGroupCell,
-                    "data": sourceDataName,
-                    "groupby": [CellTitle]
+            type: 'group',
+            from: {
+                facet: {
+                    name: DataNames.FacetGroupCell,
+                    data: sourceDataName,
+                    groupby: [CellTitle]
                 }
             },
-            "title": {
-                "frame": "group",
-                "offset": specViewOptions.facetMargins.title,
-                "text": {
-                    "signal": `parent['${CellTitle}']`
+            title: {
+                frame: 'group',
+                offset: specViewOptions.facetMargins.title,
+                text: {
+                    signal: `parent['${CellTitle}']`
                 },
-                "limit": {
-                    "signal": "width"
+                limit: {
+                    signal: 'width'
                 },
-                "color": colorToString(specViewOptions.colors.axisText),
-                "fontSize": {
-                    "signal": SignalNames.TextSize
+                color: colorToString(specViewOptions.colors.axisText),
+                fontSize: {
+                    signal: SignalNames.TextSize
                 }
             },
-            "encode": {
-                "update": {
-                    "width": {
-                        "signal": "width"
+            encode: {
+                update: {
+                    width: {
+                        signal: 'width'
                     },
-                    "height": {
-                        "signal": "height"
+                    height: {
+                        signal: 'height'
                     }
                 }
             },
-            "data": childData,
-            "marks": childMarks.map(mark => {
+            data: childData,
+            marks: childMarks.map(mark => {
                 if (mark.from && mark.from.data && mark.from.data === sourceDataName) {
                     mark.from.data = DataNames.FacetGroupCell;
                 }
@@ -7150,21 +8097,21 @@ void main(void) {
             });
         }
         const filler = {
-            "style": "cell",
-            "type": "group",
-            "from": { "data": CellFiller },
-            "title": {
-                "frame": "group",
-                "offset": specViewOptions.facetMargins.title,
-                "text": "",
-                "fontSize": {
-                    "signal": SignalNames.TextSize
+            style: 'cell',
+            type: 'group',
+            from: { data: CellFiller },
+            title: {
+                frame: 'group',
+                offset: specViewOptions.facetMargins.title,
+                text: '',
+                fontSize: {
+                    signal: SignalNames.TextSize
                 }
             },
-            "encode": {
-                "update": {
-                    "width": { "signal": "width" },
-                    "height": { "signal": "height" }
+            encode: {
+                update: {
+                    width: { signal: 'width' },
+                    height: { signal: 'height' }
                 }
             }
         };
@@ -7184,13 +8131,13 @@ void main(void) {
             });
         }
         const rowHeader = {
-            "type": "group",
-            "role": "row-header",
-            "from": {
-                "facet": {
-                    "name": "row-headers",
-                    "data": FacetRowsSequence,
-                    "groupby": [
+            type: 'group',
+            role: 'row-header',
+            from: {
+                facet: {
+                    name: 'row-headers',
+                    data: FacetRowsSequence,
+                    groupby: [
                         SequenceNumber
                     ]
                 }
@@ -7202,13 +8149,13 @@ void main(void) {
             ];
         }
         const columnFooter = {
-            "type": "group",
-            "role": "column-footer",
-            "from": {
-                "facet": {
-                    "name": "column-footers",
-                    "data": FacetColumnsSequence,
-                    "groupby": [
+            type: 'group',
+            role: 'column-footer',
+            from: {
+                facet: {
+                    name: 'column-footers',
+                    data: FacetColumnsSequence,
+                    groupby: [
                         SequenceNumber
                     ]
                 }
@@ -7237,7 +8184,7 @@ void main(void) {
 
     function notNice(niceValue) {
         //convert "nice" numbers to numeric value
-        return niceValue.replace(/,/g, '');
+        return (niceValue + '').replace(/,/g, '');
     }
     function tickValue(axis, i) {
         const tick = axis.tickText[i];
@@ -7255,6 +8202,9 @@ void main(void) {
         return searchExpression;
     }
     function selectExact(column, value) {
+        if (value == null) {
+            return selectNullOrEmpty(column);
+        }
         const searchExpression = {
             name: column.name,
             operator: '==',
@@ -7320,7 +8270,7 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function axisSelectionLayer(specCapabilities, columns, stage, clickHandler, highlightColor, polygonZ) {
+    function axisSelectionLayer(presenter, specCapabilities, columns, stage, clickHandler, highlightColor, polygonZ) {
         const polygons = [];
         const xRole = specCapabilities.roles.filter(r => r.role === 'x')[0];
         if (xRole && xRole.axisSelection) {
@@ -7351,6 +8301,14 @@ void main(void) {
             extruded: false,
             highlightColor,
             id: 'selections',
+            onHover: (o, e) => {
+                if (o.index === -1) {
+                    presenter.deckgl.interactiveState.onAxisSelection = false;
+                }
+                else {
+                    presenter.deckgl.interactiveState.onAxisSelection = true;
+                }
+            },
             onClick,
             getElevation: () => 0,
             getFillColor: () => [0, 0, 0, 0],
@@ -7380,14 +8338,14 @@ void main(void) {
             else {
                 divisions = ticks.slice(1, -1).map(tick => tick.sourcePosition[dim]);
             }
-            function add(p2, i) {
+            const add = (p2, i) => {
                 var coords = [[p1, q1], [p2, q1], [p2, q2], [p1, q2]];
                 polygons.push({
                     search: getSearch(axis, column, i),
                     polygon: vertical ? coords.map(xy => xy.reverse()) : coords
                 });
                 p1 = p2;
-            }
+            };
             let p1 = domain.sourcePosition[dim];
             const q1 = domain.sourcePosition[vertical ? 0 : 1];
             const q2 = q1 - size;
@@ -7442,123 +8400,152 @@ void main(void) {
         });
     }
 
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    // Licensed under the MIT license.
+    const BarChartScaleNames = {
+        bucketScale: 'bucketScale',
+        levelScale: 'levelScale',
+        compartmentScale: 'compartmentScale'
+    };
+    const BarChartSignalNames = {
+        aspectRatioSignal: 'aspectRatioSignal',
+        compartmentsPerLevelSignal: 'compartmentsPerLevelSignal',
+        compartmentHeightSignal: 'compartmentHeightSignal',
+        levelExtentSignal: 'levelExtentSignal',
+        quantitativeBinSignal: 'quantitativeBinSignal'
+    };
+
     function partialAxes(specViewOptions, xColumnQuantitative, yColumnQuantitative) {
         const lineColor = colorToString(specViewOptions.colors.axisLine);
         const axisColor = {
-            "domainColor": lineColor,
-            "tickColor": lineColor,
-            "labelColor": colorToString(specViewOptions.colors.axisText)
+            domainColor: lineColor,
+            tickColor: lineColor,
+            labelColor: colorToString(specViewOptions.colors.axisText)
         };
-        const bottom = Object.assign({ "orient": "bottom", "labelAlign": "left", "labelAngle": {
-                "signal": SignalNames.TextAngleX
-            }, "labelFontSize": {
-                "signal": SignalNames.TextSize
-            }, "titleAngle": {
-                "signal": SignalNames.TextAngleX
-            }, "titleAlign": "left", "titleFontSize": {
-                "signal": SignalNames.TextTitleSize
-            }, "titleColor": colorToString(specViewOptions.colors.axisText), "tickSize": specViewOptions.tickSize }, axisColor);
+        const bottom = Object.assign({ orient: 'bottom', labelAlign: 'left', labelAngle: {
+                signal: SignalNames.TextAngleX
+            }, labelFontSize: {
+                signal: SignalNames.TextSize
+            }, titleAngle: {
+                signal: SignalNames.TextAngleX
+            }, titleAlign: 'left', titleFontSize: {
+                signal: SignalNames.TextTitleSize
+            }, titleColor: colorToString(specViewOptions.colors.axisText), tickSize: specViewOptions.tickSize }, axisColor);
         if (xColumnQuantitative) {
-            bottom.format = "~r";
+            bottom.format = '~r';
         }
-        const left = Object.assign({ "orient": "left", "labelAlign": "right", "labelAngle": {
-                "signal": SignalNames.TextAngleY
-            }, "labelFontSize": {
-                "signal": SignalNames.TextSize
-            }, "titleAngle": {
-                "signal": SignalNames.TextAngleY
-            }, "titleAlign": "right", "titleFontSize": {
-                "signal": SignalNames.TextTitleSize
-            }, "titleColor": colorToString(specViewOptions.colors.axisText), "tickSize": specViewOptions.tickSize }, axisColor);
+        const left = Object.assign({ orient: 'left', labelAlign: 'right', labelAngle: {
+                signal: SignalNames.TextAngleY
+            }, labelFontSize: {
+                signal: SignalNames.TextSize
+            }, titleAngle: {
+                signal: SignalNames.TextAngleY
+            }, titleAlign: 'right', titleFontSize: {
+                signal: SignalNames.TextTitleSize
+            }, titleColor: colorToString(specViewOptions.colors.axisText), tickSize: specViewOptions.tickSize }, axisColor);
         if (yColumnQuantitative) {
-            left.format = "~r";
+            left.format = '~r';
         }
         return { left, bottom };
     }
 
-    function getAxes (specViewOptions, columns) {
-        const pa = partialAxes(specViewOptions, columns.x.quantitative, true);
+    function getAxes (context) {
+        const { specColumns, specViewOptions } = context;
+        const pa = partialAxes(specViewOptions, true, specColumns.y.quantitative);
         const axes = [
-            Object.assign({ "scale": ScaleNames.X, "title": columns.x.name }, pa.bottom),
-            Object.assign({ "scale": "yscalelabel", "title": specViewOptions.language.count, "encode": {
-                    "labels": {
-                        "update": {
-                            "text": {
-                                "signal": "shapesPerRow * datum.value"
+            Object.assign({ scale: ScaleNames.Y, title: specColumns.y.name }, pa.left),
+            Object.assign({ scale: BarChartScaleNames.levelScale, title: specViewOptions.language.count, encode: {
+                    labels: {
+                        update: {
+                            text: {
+                                signal: `${BarChartSignalNames.compartmentsPerLevelSignal} * datum.value`
                             }
                         }
                     }
-                } }, pa.left)
+                } }, pa.bottom)
         ];
         return axes;
     }
 
-    function getQualitative (columns) {
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getQualitative (context) {
+        const { specColumns } = context;
         const stackTransform = {
-            "type": "stack",
-            "groupby": [
+            type: 'stack',
+            groupby: [
                 {
-                    "field": columns.x.name
+                    field: specColumns.y.name
                 }
+            ],
+            as: [
+                FieldNames.BarChartStack0,
+                FieldNames.BarChartStack1
             ]
         };
-        if (columns.sort) {
+        if (specColumns.sort) {
             stackTransform.sort = {
-                "field": columns.sort.name
+                field: specColumns.sort.name
             };
         }
         const transforms = [
             stackTransform,
             {
-                "type": "extent",
-                "signal": "xtent",
-                "field": "y1"
+                type: 'extent',
+                signal: BarChartSignalNames.levelExtentSignal,
+                field: FieldNames.BarChartStack1
             }
         ];
         return transforms;
     }
 
-    function getQuantitative (columns, groupBy) {
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getQuantitative (context, groupBy) {
+        const { specColumns } = context;
+        const bucket_extent = 'bucket_extent';
         const stackTransform = {
-            "type": "stack",
-            "groupby": [
-                "__bin0"
+            type: 'stack',
+            groupby: [
+                FieldNames.BarChartBin0
+            ],
+            as: [
+                FieldNames.BarChartStack0,
+                FieldNames.BarChartStack1
             ]
         };
         if (groupBy) {
             stackTransform.groupby.push(groupBy.name);
         }
-        if (columns.sort) {
+        if (specColumns.sort) {
             stackTransform.sort = {
-                "field": columns.sort.name
+                field: specColumns.sort.name
             };
         }
         const transforms = [
             {
-                "type": "extent",
-                "field": columns.x.name,
-                "signal": "var_extent"
+                type: 'extent',
+                field: specColumns.y.name,
+                signal: bucket_extent
             },
             {
-                "type": "bin",
-                "field": columns.x.name,
-                "extent": {
-                    "signal": "var_extent"
+                type: 'bin',
+                field: specColumns.y.name,
+                extent: {
+                    signal: bucket_extent
                 },
-                "maxbins": {
-                    "signal": SignalNames.XBins
+                maxbins: {
+                    signal: SignalNames.YBins
                 },
-                "as": [
-                    "__bin0",
-                    "__bin1"
+                as: [
+                    FieldNames.BarChartBin0,
+                    FieldNames.BarChartBin1
                 ],
-                "signal": "binSignal"
+                signal: BarChartSignalNames.quantitativeBinSignal
             },
             stackTransform,
             {
-                "type": "extent",
-                "signal": "xtent",
-                "field": "y1"
+                type: 'extent',
+                signal: BarChartSignalNames.levelExtentSignal,
+                field: FieldNames.BarChartStack1
             }
         ];
         return transforms;
@@ -7577,30 +8564,38 @@ void main(void) {
     function topLookup(column, count) {
         const data = [
             {
-                "name": DataNames.TopLookup,
-                "source": DataNames.Main,
-                "transform": [
-                    { "type": "aggregate", "groupby": [column.name] },
-                    { "type": "identifier", "as": "id" },
-                    { "type": "filter", "expr": `datum.id <= ${count}` }
+                name: DataNames.TopLookup,
+                source: DataNames.Main,
+                transform: [
+                    { type: 'aggregate', groupby: [column.name] },
+                    {
+                        type: 'window',
+                        ops: [
+                            'count'
+                        ],
+                        as: [
+                            FieldNames.TopIndex
+                        ]
+                    },
+                    { type: 'filter', expr: `datum.${FieldNames.TopIndex} <= ${count}` }
                 ]
             },
             {
-                "name": DataNames.Legend,
-                "source": DataNames.Main,
-                "transform": [
+                name: DataNames.Legend,
+                source: DataNames.Main,
+                transform: [
                     {
-                        "type": "lookup",
-                        "from": DataNames.TopLookup,
-                        "key": column.name,
-                        "fields": [column.name],
-                        "values": [column.name],
-                        "as": [FieldNames.Top]
+                        type: 'lookup',
+                        from: DataNames.TopLookup,
+                        key: column.name,
+                        fields: [column.name],
+                        values: [column.name],
+                        as: [FieldNames.Top]
                     },
                     {
-                        "type": "formula",
-                        "expr": `datum.${FieldNames.Top} || '${Other}'`,
-                        "as": FieldNames.Top
+                        type: 'formula',
+                        expr: `datum.${FieldNames.Top} == null ? '${Other}' : datum.${FieldNames.Top}`,
+                        as: FieldNames.Top
                     }
                 ]
             }
@@ -7609,218 +8604,235 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData (namespace, insight, columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
-        const nestedDataName = columns.facet && columns.facet.quantitative ? DataNames.Pre : DataNames.Main;
-        const data = allTruthy(facetSourceData(columns.facet, insight.facets, DataNames.Main), categoricalColor && topLookup(columns.color, specViewOptions.maxLegends), [
-            nested(namespace, categoricalColor ? DataNames.Legend : nestedDataName, columns),
-            stacked(namespace, namespace.nested, columns.facet && facetTransforms(columns.facet, insight.facets))
-        ], columns.x.quantitative && [
+    function getData (context, namespace) {
+        const { specColumns, insight, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
+        const nestedDataName = specColumns.facet && specColumns.facet.quantitative ? DataNames.Pre : DataNames.Main;
+        const data = allTruthy(facetSourceData(specColumns.facet, insight.facets, DataNames.Main), categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), [
+            bucketed(context, namespace, categoricalColor ? DataNames.Legend : nestedDataName),
+            stacked(namespace, namespace.bucket, specColumns.facet && facetTransforms(specColumns.facet, insight.facets))
+        ], specColumns.y.quantitative && [
             {
-                "name": "xaxisdata",
-                "transform": [
+                name: DataNames.QuantitativeData,
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": {
-                            "signal": "binSignal.start"
+                        type: 'sequence',
+                        start: {
+                            signal: `${BarChartSignalNames.quantitativeBinSignal}.start`
                         },
-                        "stop": {
-                            "signal": "binSignal.stop"
+                        stop: {
+                            signal: `${BarChartSignalNames.quantitativeBinSignal}.stop`
                         },
-                        "step": {
-                            "signal": "binSignal.step"
+                        step: {
+                            signal: `${BarChartSignalNames.quantitativeBinSignal}.step`
                         }
                     }
                 ]
             }
-        ], columns.facet && facetGroupData(namespace.stacked));
+        ], specColumns.facet && facetGroupData(namespace.stacked));
         return data;
     }
-    function nested(namespace, source, columns) {
+    function bucketed(context, namespace, source) {
+        const { specColumns: columns } = context;
         const data = {
-            "name": namespace.nested,
+            name: namespace.bucket,
             source,
-            "transform": columns.x.quantitative ?
-                getQuantitative(columns, columns.facet)
+            transform: columns.y.quantitative ?
+                getQuantitative(context, columns.facet)
                 :
-                    getQualitative(columns)
+                    getQualitative(context)
         };
         return data;
     }
     function stacked(namespace, source, transforms) {
         const data = {
-            "name": namespace.stacked,
+            name: namespace.stacked,
             source,
-            "transform": allTruthy(transforms, xy(namespace))
+            transform: allTruthy(transforms, xy(namespace))
         };
         return data;
     }
     function xy(namespace) {
         const transforms = [
             {
-                "type": "formula",
-                "expr": "floor(datum.y0 / shapesPerRow)",
-                "as": namespace.__row
+                type: 'formula',
+                expr: `floor(datum.${FieldNames.BarChartStack0} / ${BarChartSignalNames.compartmentsPerLevelSignal})`,
+                as: namespace.__level
             },
             {
-                "type": "formula",
-                "expr": "datum.y0 % shapesPerRow",
-                "as": namespace.__column
+                type: 'formula',
+                expr: `datum.${FieldNames.BarChartStack0} % ${BarChartSignalNames.compartmentsPerLevelSignal}`,
+                as: namespace.__compartment
             }
         ];
         return transforms;
+    }
+
+    function fill(context) {
+        const { specColumns, insight, specViewOptions } = context;
+        const colorColumn = specColumns.color;
+        return colorColumn ?
+            colorColumn.isColorData || insight.directColor ?
+                {
+                    field: colorColumn.name
+                }
+                :
+                    {
+                        scale: ScaleNames.Color,
+                        field: colorColumn.quantitative ? colorColumn.name : FieldNames.Top
+                    }
+            :
+                {
+                    value: colorToString(specViewOptions.colors.defaultCube)
+                };
+    }
+    function opacity(context) {
+        const result = {
+            signal: SignalNames.MarkOpacity
+        };
+        return result;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     function testForCollapseSelection() {
         return `datum.${FieldNames.Collapsed}`;
     }
-    function zeroIfCollapsed(numericValueRef) {
-        const rules = [
-            {
-                "test": testForCollapseSelection(),
-                "value": 0
-            },
-            numericValueRef
-        ];
-        return rules;
-    }
-    function collapseY(numericValueRef) {
-        const rules = [
-            {
-                "scale": ScaleNames.Y,
-                "test": testForCollapseSelection(),
-                "signal": `${SignalNames.YDomain}[0]`
-            },
-            numericValueRef
-        ];
-        return rules;
-    }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function fill(colorColumn, specViewOptions) {
-        return colorColumn ?
-            {
-                "scale": ScaleNames.Color,
-                "field": colorColumn.quantitative ? colorColumn.name : FieldNames.Top
-            }
-            :
-                {
-                    "value": colorToString(specViewOptions.colors.defaultCube)
-                };
-    }
-
-    // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks (namespace, columns, specViewOptions) {
+    function getMarks (context, namespace) {
+        const { specColumns } = context;
         const mark = {
-            "type": "rect",
-            "from": {
-                "data": namespace.stacked
+            type: 'rect',
+            from: {
+                data: namespace.stacked
             },
-            "encode": {
-                "update": {
-                    "x": {
-                        "scale": ScaleNames.X,
-                        "field": columns.x.quantitative ? "__bin0" : columns.x.name,
-                        "offset": {
-                            "scale": "xnewinternalscale",
-                            "field": namespace.__column
+            encode: {
+                update: {
+                    y: {
+                        scale: ScaleNames.Y,
+                        field: specColumns.y.quantitative ? FieldNames.BarChartBin0 : specColumns.y.name,
+                        offset: {
+                            scale: BarChartScaleNames.compartmentScale,
+                            field: namespace.__compartment
                         }
                     },
-                    "width": {
-                        "scale": "xnewinternalscale",
-                        "band": true
-                    },
-                    "y": collapseY({
-                        "scale": ScaleNames.Y,
-                        "field": namespace.__row,
-                        "band": true,
-                        "offset": {
-                            "signal": `-bandwidth('${ScaleNames.Y}')-1`
+                    height: [
+                        {
+                            test: `bandwidth('${BarChartScaleNames.compartmentScale}') < 1`,
+                            value: minPixelSize
+                        },
+                        {
+                            scale: BarChartScaleNames.compartmentScale,
+                            band: 1
                         }
-                    }),
-                    "height": zeroIfCollapsed({
-                        "scale": ScaleNames.Y,
-                        "band": true
-                    }),
-                    "fill": fill(columns.color, specViewOptions)
+                    ],
+                    x: [
+                        {
+                            scale: ScaleNames.X,
+                            test: testForCollapseSelection(),
+                            signal: `${SignalNames.XDomain}[0]`
+                        },
+                        {
+                            scale: ScaleNames.X,
+                            field: namespace.__level,
+                            band: 1,
+                            offset: {
+                                signal: `-bandwidth('${ScaleNames.X}')-1`
+                            }
+                        }
+                    ],
+                    width: [
+                        {
+                            test: testForCollapseSelection(),
+                            value: 0
+                        },
+                        {
+                            test: `bandwidth('${ScaleNames.X}') < 1`,
+                            value: minPixelSize
+                        },
+                        {
+                            scale: ScaleNames.X,
+                            band: 1
+                        }
+                    ],
+                    fill: fill(context),
+                    opacity: opacity(context)
                 }
             }
         };
-        if (columns.z) {
+        if (specColumns.z) {
             const update = mark.encode.update;
             update.z = {
-                "value": 0
+                value: 0
             };
-            update.depth = zeroIfCollapsed({
-                "scale": ScaleNames.Z,
-                "field": columns.z.name
-            });
+            update.depth = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
         }
         return [mark];
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function qualitativeScales (namespace, columns) {
+    function qualitativeScales (context, namespace) {
+        const { specColumns } = context;
         const scales = [
             {
-                "name": "xscaleavailable",
-                "type": "band",
-                "range": "width",
-                "domain": {
-                    "data": namespace.nested,
-                    "field": columns.x.name,
-                    "sort": true
+                name: BarChartScaleNames.bucketScale,
+                type: 'band',
+                range: 'height',
+                domain: {
+                    data: namespace.bucket,
+                    field: specColumns.y.name,
+                    sort: true
                 }
             },
             {
-                "name": ScaleNames.X,
-                "type": "band",
-                "range": [
+                name: ScaleNames.Y,
+                type: 'band',
+                range: [
                     0,
                     {
-                        "signal": "width"
+                        signal: 'height'
                     }
                 ],
-                "padding": 0.01,
-                "domain": {
-                    "data": namespace.stacked,
-                    "field": columns.x.name,
-                    "sort": true
-                }
+                padding: 0.01,
+                domain: {
+                    data: namespace.stacked,
+                    field: specColumns.y.name,
+                    sort: true
+                },
+                reverse: true
             }
         ];
         return scales;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function quantitativeScales (namespace, columns) {
+    function quantitativeScales () {
         const scales = [
             {
-                "name": "xscaleavailable",
-                "type": "band",
-                "range": "width",
-                "domain": {
-                    "data": namespace.nested,
-                    "field": "__bin0",
-                    "sort": true
-                }
-            },
-            {
-                "name": ScaleNames.X,
-                "type": "band",
-                "range": [
+                name: ScaleNames.Y,
+                type: 'band',
+                range: [
                     0,
                     {
-                        "signal": "width"
+                        signal: 'height'
                     }
                 ],
-                "padding": 0.01,
-                "domain": {
-                    "data": "xaxisdata",
-                    "field": "data",
-                    "sort": true
-                }
+                padding: 0.01,
+                domain: {
+                    data: DataNames.QuantitativeData,
+                    field: 'data',
+                    sort: true
+                },
+                reverse: true
             }
         ];
         return scales;
@@ -7829,30 +8841,30 @@ void main(void) {
     function linearScale(name, data, field, range, reverse, zero) {
         const scale = {
             name,
-            "type": "linear",
+            type: 'linear',
             range,
-            "round": true,
+            round: true,
             reverse,
-            "domain": {
+            domain: {
                 data,
                 field
             },
             zero,
-            "nice": true
+            nice: true
         };
         return scale;
     }
     function pointScale(name, data, range, field, reverse) {
         const scale = {
             name,
-            "type": "point",
+            type: 'point',
             range,
-            "domain": {
+            domain: {
                 data,
                 field,
                 sort: true
             },
-            "padding": 0.5
+            padding: 0.5
         };
         if (reverse !== undefined) {
             scale.reverse = reverse;
@@ -7869,301 +8881,329 @@ void main(void) {
         const range = {
             scheme
         };
-        const reverse = { "signal": SignalNames.ColorReverse };
+        const reverse = { signal: SignalNames.ColorReverse };
         if (colorBin !== 'continuous') {
             range.count = { signal: SignalNames.ColorBinCount };
         }
         switch (colorBin) {
-            case 'continuous':
+            case 'continuous': {
                 const sequentialScale = {
                     name,
-                    "type": "sequential",
+                    type: 'sequential',
                     domain,
                     range,
                     reverse
                 };
                 return sequentialScale;
-            case 'quantile':
+            }
+            case 'quantile': {
                 const quantileScale = {
                     name,
-                    "type": "quantile",
+                    type: 'quantile',
                     domain,
                     range,
                     reverse
                 };
                 return quantileScale;
-            default:
+            }
+            default: {
                 const quantizeScale = {
                     name,
-                    "type": "quantize",
+                    type: 'quantize',
                     domain,
                     range,
                     reverse
                 };
                 return quantizeScale;
+            }
         }
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales (namespace, insight, columns) {
+    function getScales (context, namespace) {
+        const { specColumns, insight } = context;
         const scales = [
             {
-                "name": "xnewinternalscale",
-                "type": "band",
-                "range": [
+                name: BarChartScaleNames.compartmentScale,
+                type: 'band',
+                range: [
                     0,
                     {
-                        "signal": "xdesbandwidth"
+                        signal: BarChartSignalNames.compartmentHeightSignal
                     }
                 ],
-                "padding": 0.1,
-                "domain": {
-                    "signal": "sequence(0, shapesPerRow+1, 1)"
+                padding: 0.1,
+                domain: {
+                    signal: `sequence(0, ${BarChartSignalNames.compartmentsPerLevelSignal}+1, 1)`
                 }
             },
             {
-                "name": "yscalelabel",
-                "range": [
+                name: BarChartScaleNames.levelScale,
+                range: [
                     {
-                        "signal": "height"
+                        signal: '0'
                     },
                     {
-                        "signal": "0"
+                        signal: 'width'
                     }
                 ],
-                "round": true,
-                "domain": {
-                    "data": namespace.stacked,
-                    "field": namespace.__row,
-                    "sort": true
+                round: true,
+                domain: {
+                    data: namespace.stacked,
+                    field: namespace.__level,
+                    sort: true
                 },
-                "zero": true,
-                "nice": true
+                zero: true,
+                nice: true
             },
             {
-                "name": ScaleNames.Y,
-                "type": "band",
-                "range": [
+                name: ScaleNames.X,
+                type: 'band',
+                range: [
                     {
-                        "signal": "height"
+                        signal: '0'
                     },
                     {
-                        "signal": "0"
+                        signal: 'width'
                     }
                 ],
-                "padding": 0.1,
-                "round": true,
-                "reverse": false,
-                "align": 1,
-                "domain": {
-                    "data": namespace.stacked,
-                    "field": namespace.__row,
-                    "sort": true
+                padding: 0.1,
+                round: false,
+                reverse: false,
+                align: 1,
+                domain: {
+                    data: namespace.stacked,
+                    field: namespace.__level,
+                    sort: true
                 }
             }
         ];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, namespace.nested, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, namespace.bucket, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": namespace.nested,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: namespace.bucket,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
-        if (columns.z) {
-            const zRange = [0, { "signal": SignalNames.ZHeight }];
-            scales.push(columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, true)
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, true)
                 :
-                    pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name));
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
         }
-        return scales.concat(columns.x.quantitative ? quantitativeScales(namespace, columns) : qualitativeScales(namespace, columns));
+        return scales.concat(specColumns.y.quantitative ? quantitativeScales() : qualitativeScales(context, namespace));
     }
 
-    function textSignals(specViewOptions) {
+    const defaultZProportion = 0.6;
+    function textSignals(context) {
+        const { specViewOptions } = context;
         const signals = [
             {
-                "name": SignalNames.ZProportion,
-                "value": 0.6,
-                "bind": {
-                    "name": specViewOptions.language.zScaleProportion,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": 0.2,
-                    "max": 2,
-                    "step": 0.1
+                name: SignalNames.ZProportion,
+                value: defaultZProportion,
+                bind: {
+                    name: specViewOptions.language.zScaleProportion,
+                    debounce: 50,
+                    input: 'range',
+                    min: 0.2,
+                    max: 2,
+                    step: 0.1
                 }
             },
             {
-                "name": SignalNames.ZHeight,
-                "update": `height * ${SignalNames.ZProportion}`
+                name: SignalNames.ZHeight,
+                update: `height * ${SignalNames.ZProportion}`
             },
             {
-                "name": SignalNames.TextScale,
-                "value": 2,
-                "bind": {
-                    "name": specViewOptions.language.textScaleSignal,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": 1,
-                    "max": 5,
-                    "step": 0.5
+                name: SignalNames.TextScale,
+                value: 2,
+                bind: {
+                    name: specViewOptions.language.textScaleSignal,
+                    debounce: 50,
+                    input: 'range',
+                    min: 1,
+                    max: 5,
+                    step: 0.5
                 }
             },
             {
-                "name": SignalNames.TextSize,
-                "update": `${SignalNames.TextScale} * 10`
+                name: SignalNames.TextSize,
+                update: `${SignalNames.TextScale} * 10`
             },
             {
-                "name": SignalNames.TextTitleSize,
-                "update": `${SignalNames.TextScale} * 15`
+                name: SignalNames.TextTitleSize,
+                update: `${SignalNames.TextScale} * 15`
             },
             {
-                "name": SignalNames.TextAngleX,
-                "value": 30,
-                "bind": {
-                    "name": specViewOptions.language.xAxisTextAngleSignal,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": 0,
-                    "max": 90,
-                    "step": 1
+                name: SignalNames.TextAngleX,
+                value: 30,
+                bind: {
+                    name: specViewOptions.language.xAxisTextAngleSignal,
+                    debounce: 50,
+                    input: 'range',
+                    min: 0,
+                    max: 90,
+                    step: 1
                 }
             },
             {
-                "name": SignalNames.TextAngleY,
-                "value": 0,
-                "bind": {
-                    "name": specViewOptions.language.yAxisTextAngleSignal,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": -90,
-                    "max": 0,
-                    "step": 1
+                name: SignalNames.TextAngleY,
+                value: 0,
+                bind: {
+                    name: specViewOptions.language.yAxisTextAngleSignal,
+                    debounce: 50,
+                    input: 'range',
+                    min: -90,
+                    max: 0,
+                    step: 1
+                }
+            },
+            {
+                name: SignalNames.MarkOpacity,
+                value: 1,
+                bind: {
+                    name: specViewOptions.language.markOpacitySignal,
+                    debounce: 50,
+                    input: 'range',
+                    min: 0.1,
+                    max: 1,
+                    step: 0.05
                 }
             }
         ];
         return signals;
     }
-    function colorBinCountSignal(specViewOptions) {
+    function colorBinCountSignal(context) {
+        const { specViewOptions } = context;
         const signal = {
-            "name": SignalNames.ColorBinCount,
-            "value": 7,
-            "bind": {
-                "name": specViewOptions.language.colorBinCount,
-                "input": "range",
-                "min": 1,
-                "max": specViewOptions.maxLegends + 1,
-                "step": 1
+            name: SignalNames.ColorBinCount,
+            value: 7,
+            bind: {
+                name: specViewOptions.language.colorBinCount,
+                input: 'range',
+                min: 1,
+                max: specViewOptions.maxLegends + 1,
+                step: 1
             }
         };
         return signal;
     }
-    function colorReverseSignal(specViewOptions) {
+    function colorReverseSignal(context) {
+        const { specViewOptions } = context;
         const signal = {
-            "name": SignalNames.ColorReverse,
-            "value": false,
-            "bind": {
-                "name": specViewOptions.language.colorReverse,
-                "input": "checkbox"
+            name: SignalNames.ColorReverse,
+            value: false,
+            bind: {
+                name: specViewOptions.language.colorReverse,
+                input: 'checkbox'
             }
         };
         return signal;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals (insight, columns, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
+    function getSignals (context) {
+        const { specColumns, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
             {
-                "name": SignalNames.YDomain,
-                "update": `domain('${ScaleNames.Y}')`
+                name: SignalNames.XDomain,
+                update: `domain('${ScaleNames.X}')`
             },
-            columns.x.quantitative && {
-                "name": SignalNames.XBins,
-                "value": 7,
-                "bind": {
-                    "name": specViewOptions.language.XBinSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 20,
-                    "step": 1
+            specColumns.y.quantitative && {
+                name: SignalNames.YBins,
+                value: 7,
+                bind: {
+                    name: specViewOptions.language.YBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 20,
+                    step: 1
                 }
             },
             {
-                "name": "xdesbandwidth",
-                "update": `bandwidth('${columns.x.quantitative ? ScaleNames.X : 'xscaleavailable'}')`
+                name: BarChartSignalNames.compartmentHeightSignal,
+                update: `bandwidth('${specColumns.y.quantitative ? ScaleNames.Y : BarChartScaleNames.bucketScale}')`
             },
             {
-                "name": "binAspect",
-                "update": "xdesbandwidth/height"
+                name: BarChartSignalNames.aspectRatioSignal,
+                update: `${BarChartSignalNames.compartmentHeightSignal}/width`
             },
             {
-                "name": "shapesPerRow",
-                "update": "ceil(sqrt(binAspect*xtent[1]))"
+                name: BarChartSignalNames.compartmentsPerLevelSignal,
+                update: `ceil(sqrt(${BarChartSignalNames.aspectRatioSignal}*${BarChartSignalNames.levelExtentSignal}[1]))`
             },
-            colorBinCountSignal(specViewOptions),
-            colorReverseSignal(specViewOptions)
-        ], columns.facet && facetSignals(insight.facets, specViewOptions));
+            colorBinCountSignal(context),
+            colorReverseSignal(context)
+        ], specColumns.facet && facetSignals(context));
         return signals;
     }
 
-    // Copyright (c) Microsoft Corporation. All rights reserved.
     function legend(column) {
         const legend = {
-            "orient": "none",
-            "title": column.name,
-            "fill": ScaleNames.Color,
-            "encode": {
-                "symbols": {
-                    "update": {
-                        "shape": {
-                            "value": "square"
+            orient: 'none',
+            title: column.name,
+            fill: ScaleNames.Color,
+            encode: {
+                symbols: {
+                    update: {
+                        shape: {
+                            value: 'square'
                         }
                     }
                 }
             }
         };
         if (column.quantitative) {
-            legend.type = "symbol";
+            legend.type = 'symbol';
+            legend.format = '~r';
         }
         return legend;
+    }
+    function getLegends(context) {
+        const { specColumns, insight } = context;
+        if (specColumns.color && !insight.hideLegend && !insight.directColor && !specColumns.color.isColorData) {
+            return [legend(specColumns.color)];
+        }
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     // Licensed under the MIT license.
     class NameSpace {
         constructor(nameSpace = '') {
-            ['nested', 'stacked', '__column', '__row'].forEach(name => {
+            ['bucket', 'stacked', '__compartment', '__level'].forEach(name => {
                 this[name] = `${name}${nameSpace}`;
             });
         }
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const barchart = (insight, columns, specViewOptions) => {
+    const barchartH = (context) => {
+        const { specColumns, insight, specViewOptions } = context;
         const errors = [];
-        if (!columns.x)
-            errors.push(`Must set a field for x axis`);
+        if (!specColumns.y)
+            errors.push('Must set a field for y axis');
         checkForFacetErrors(insight.facets, errors);
         const specCapabilities = {
             roles: [
                 {
-                    role: 'x',
+                    role: 'y',
                     binnable: true,
-                    axisSelection: columns.x && columns.x.quantitative ? 'range' : 'exact',
-                    signals: [SignalNames.XBins]
+                    axisSelection: specColumns.y && specColumns.y.quantitative ? 'range' : 'exact',
+                    signals: [SignalNames.YBins]
                 },
                 {
                     role: 'z',
@@ -8193,182 +9233,721 @@ void main(void) {
         const rootNamespace = new NameSpace();
         let axes;
         if (!insight.hideAxes) {
-            axes = getAxes(specViewOptions, columns);
+            axes = getAxes(context);
         }
         let marks;
-        if (columns.facet) {
+        if (specColumns.facet) {
             const cellNamespace = new NameSpace('Cell');
-            const cellMarks = getMarks(cellNamespace, columns, specViewOptions);
-            const cd = columns.x.quantitative ?
+            const cellMarks = getMarks(context, cellNamespace);
+            const cd = specColumns.y.quantitative ?
                 [
                     stacked(cellNamespace, DataNames.FacetGroupCell)
                 ]
                 :
                     [
-                        nested(cellNamespace, DataNames.FacetGroupCell, columns),
-                        stacked(cellNamespace, cellNamespace.nested)
+                        bucketed(context, cellNamespace, DataNames.FacetGroupCell),
+                        stacked(cellNamespace, cellNamespace.bucket)
                     ];
             marks = facetMarks(specViewOptions, rootNamespace.stacked, cellMarks, axes, cd);
             axes = [];
         }
         else {
-            marks = getMarks(rootNamespace, columns, specViewOptions);
+            marks = getMarks(context, rootNamespace);
         }
-        const size = columns.facet ? facetSize(insight.facets, insight.size, specViewOptions) : insight.size;
+        const size = specColumns.facet ? facetSize(context) : insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals(insight, columns, specViewOptions),
-            scales: getScales(rootNamespace, insight, columns),
-            data: getData(rootNamespace, insight, columns, specViewOptions),
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals(context),
+            scales: getScales(context, rootNamespace),
+            data: getData(context, rootNamespace),
             marks
         };
         if (!insight.hideAxes && axes && axes.length) {
             vegaSpec.axes = axes;
         }
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
-        if (columns.facet) {
-            vegaSpec.layout = layout(specViewOptions);
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
         }
         else {
             //use autosize only when not faceting
-            vegaSpec.autosize = "fit";
+            vegaSpec.autosize = 'fit';
         }
         return { vegaSpec, specCapabilities };
     };
 
-    function getAxes$1 (specViewOptions, columns) {
-        const pa = partialAxes(specViewOptions, columns.x.quantitative, columns.y.quantitative);
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    // Licensed under the MIT license.
+    const BarChartScaleNames$1 = {
+        bucketScale: 'bucketScale',
+        levelScale: 'levelScale',
+        compartmentScale: 'compartmentScale'
+    };
+    const BarChartSignalNames$1 = {
+        aspectRatioSignal: 'aspectRatioSignal',
+        compartmentsPerLevelSignal: 'compartmentsPerLevelSignal',
+        compartmentWidthSignal: 'compartmentWidthSignal',
+        levelExtentSignal: 'levelExtentSignal',
+        quantitativeBinSignal: 'quantitativeBinSignal'
+    };
+
+    function getAxes$1 (context) {
+        const { specColumns, specViewOptions } = context;
+        const pa = partialAxes(specViewOptions, specColumns.x.quantitative, true);
         const axes = [
-            Object.assign({ "scale": "xscale", "title": columns.x.name, "bandPosition": 0.5, "grid": true, "labelFlush": true }, pa.bottom),
-            Object.assign({ "scale": "yscale", "title": columns.y.name, "bandPosition": columns.y.quantitative ? 0 : 0.5, "grid": true, "labelFlush": true }, pa.left)
+            Object.assign({ scale: ScaleNames.X, title: specColumns.x.name }, pa.bottom),
+            Object.assign({ scale: BarChartScaleNames$1.levelScale, title: specViewOptions.language.count, encode: {
+                    labels: {
+                        update: {
+                            text: {
+                                signal: `${BarChartSignalNames$1.compartmentsPerLevelSignal} * datum.value`
+                            }
+                        }
+                    }
+                } }, pa.left)
         ];
         return axes;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData$1 (insight, columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
+    function getQualitative$1 (context) {
+        const { specColumns } = context;
+        const stackTransform = {
+            type: 'stack',
+            groupby: [
+                {
+                    field: specColumns.x.name
+                }
+            ],
+            as: [
+                FieldNames.BarChartStack0,
+                FieldNames.BarChartStack1
+            ]
+        };
+        if (specColumns.sort) {
+            stackTransform.sort = {
+                field: specColumns.sort.name
+            };
+        }
+        const transforms = [
+            stackTransform,
+            {
+                type: 'extent',
+                signal: BarChartSignalNames$1.levelExtentSignal,
+                field: FieldNames.BarChartStack1
+            }
+        ];
+        return transforms;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getQuantitative$1 (context, groupBy) {
+        const { specColumns } = context;
+        const bucket_extent = 'bucket_extent';
+        const stackTransform = {
+            type: 'stack',
+            groupby: [
+                FieldNames.BarChartBin0
+            ],
+            as: [
+                FieldNames.BarChartStack0,
+                FieldNames.BarChartStack1
+            ]
+        };
+        if (groupBy) {
+            stackTransform.groupby.push(groupBy.name);
+        }
+        if (specColumns.sort) {
+            stackTransform.sort = {
+                field: specColumns.sort.name
+            };
+        }
+        const transforms = [
+            {
+                type: 'extent',
+                field: specColumns.x.name,
+                signal: bucket_extent
+            },
+            {
+                type: 'bin',
+                field: specColumns.x.name,
+                extent: {
+                    signal: bucket_extent
+                },
+                maxbins: {
+                    signal: SignalNames.XBins
+                },
+                as: [
+                    FieldNames.BarChartBin0,
+                    FieldNames.BarChartBin1
+                ],
+                signal: BarChartSignalNames$1.quantitativeBinSignal
+            },
+            stackTransform,
+            {
+                type: 'extent',
+                signal: BarChartSignalNames$1.levelExtentSignal,
+                field: FieldNames.BarChartStack1
+            }
+        ];
+        return transforms;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getData$1 (context, namespace) {
+        const { specColumns, insight, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
+        const nestedDataName = specColumns.facet && specColumns.facet.quantitative ? DataNames.Pre : DataNames.Main;
+        const data = allTruthy(facetSourceData(specColumns.facet, insight.facets, DataNames.Main), categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), [
+            bucketed$1(context, namespace, categoricalColor ? DataNames.Legend : nestedDataName),
+            stacked$1(namespace, namespace.bucket, specColumns.facet && facetTransforms(specColumns.facet, insight.facets))
+        ], specColumns.x.quantitative && [
+            {
+                name: DataNames.QuantitativeData,
+                transform: [
+                    {
+                        type: 'sequence',
+                        start: {
+                            signal: `${BarChartSignalNames$1.quantitativeBinSignal}.start`
+                        },
+                        stop: {
+                            signal: `${BarChartSignalNames$1.quantitativeBinSignal}.stop`
+                        },
+                        step: {
+                            signal: `${BarChartSignalNames$1.quantitativeBinSignal}.step`
+                        }
+                    }
+                ]
+            }
+        ], specColumns.facet && facetGroupData(namespace.stacked));
+        return data;
+    }
+    function bucketed$1(context, namespace, source) {
+        const { specColumns: columns } = context;
+        const data = {
+            name: namespace.bucket,
+            source,
+            transform: columns.x.quantitative ?
+                getQuantitative$1(context, columns.facet)
+                :
+                    getQualitative$1(context)
+        };
+        return data;
+    }
+    function stacked$1(namespace, source, transforms) {
+        const data = {
+            name: namespace.stacked,
+            source,
+            transform: allTruthy(transforms, xy$1(namespace))
+        };
+        return data;
+    }
+    function xy$1(namespace) {
+        const transforms = [
+            {
+                type: 'formula',
+                expr: `floor(datum.${FieldNames.BarChartStack0} / ${BarChartSignalNames$1.compartmentsPerLevelSignal})`,
+                as: namespace.__level
+            },
+            {
+                type: 'formula',
+                expr: `datum.${FieldNames.BarChartStack0} % ${BarChartSignalNames$1.compartmentsPerLevelSignal}`,
+                as: namespace.__compartment
+            }
+        ];
+        return transforms;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getMarks$1 (context, namespace) {
+        const { specColumns } = context;
+        const mark = {
+            type: 'rect',
+            from: {
+                data: namespace.stacked
+            },
+            encode: {
+                update: {
+                    x: {
+                        scale: ScaleNames.X,
+                        field: specColumns.x.quantitative ? FieldNames.BarChartBin0 : specColumns.x.name,
+                        offset: {
+                            scale: BarChartScaleNames$1.compartmentScale,
+                            field: namespace.__compartment
+                        }
+                    },
+                    width: [
+                        {
+                            test: `bandwidth('${BarChartScaleNames$1.compartmentScale}') < 1`,
+                            value: minPixelSize
+                        },
+                        {
+                            scale: BarChartScaleNames$1.compartmentScale,
+                            band: 1
+                        }
+                    ],
+                    y: [
+                        {
+                            scale: ScaleNames.Y,
+                            test: testForCollapseSelection(),
+                            signal: `${SignalNames.YDomain}[0]`
+                        },
+                        {
+                            scale: ScaleNames.Y,
+                            field: namespace.__level,
+                            band: 1,
+                            offset: {
+                                signal: `-bandwidth('${ScaleNames.Y}')-1`
+                            }
+                        }
+                    ],
+                    height: [
+                        {
+                            test: testForCollapseSelection(),
+                            value: 0
+                        },
+                        {
+                            test: `bandwidth('${ScaleNames.Y}') < 1`,
+                            value: minPixelSize
+                        },
+                        {
+                            scale: ScaleNames.Y,
+                            band: 1
+                        }
+                    ],
+                    fill: fill(context),
+                    opacity: opacity(context)
+                }
+            }
+        };
+        if (specColumns.z) {
+            const update = mark.encode.update;
+            update.z = {
+                value: 0
+            };
+            update.depth = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
+        }
+        return [mark];
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function qualitativeScales$1 (context, namespace) {
+        const { specColumns } = context;
+        const scales = [
+            {
+                name: BarChartScaleNames$1.bucketScale,
+                type: 'band',
+                range: 'width',
+                domain: {
+                    data: namespace.bucket,
+                    field: specColumns.x.name,
+                    sort: true
+                }
+            },
+            {
+                name: ScaleNames.X,
+                type: 'band',
+                range: [
+                    0,
+                    {
+                        signal: 'width'
+                    }
+                ],
+                padding: 0.01,
+                domain: {
+                    data: namespace.stacked,
+                    field: specColumns.x.name,
+                    sort: true
+                }
+            }
+        ];
+        return scales;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function quantitativeScales$1 () {
+        const scales = [
+            {
+                name: ScaleNames.X,
+                type: 'band',
+                range: [
+                    0,
+                    {
+                        signal: 'width'
+                    }
+                ],
+                padding: 0.01,
+                domain: {
+                    data: DataNames.QuantitativeData,
+                    field: 'data',
+                    sort: true
+                }
+            }
+        ];
+        return scales;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getScales$1 (context, namespace) {
+        const { specColumns, insight } = context;
+        const scales = [
+            {
+                name: BarChartScaleNames$1.compartmentScale,
+                type: 'band',
+                range: [
+                    0,
+                    {
+                        signal: BarChartSignalNames$1.compartmentWidthSignal
+                    }
+                ],
+                padding: 0.1,
+                domain: {
+                    signal: `sequence(0, ${BarChartSignalNames$1.compartmentsPerLevelSignal}+1, 1)`
+                }
+            },
+            {
+                name: BarChartScaleNames$1.levelScale,
+                range: [
+                    {
+                        signal: 'height'
+                    },
+                    {
+                        signal: '0'
+                    }
+                ],
+                round: true,
+                domain: {
+                    data: namespace.stacked,
+                    field: namespace.__level,
+                    sort: true
+                },
+                zero: true,
+                nice: true
+            },
+            {
+                name: ScaleNames.Y,
+                type: 'band',
+                range: [
+                    {
+                        signal: 'height'
+                    },
+                    {
+                        signal: '0'
+                    }
+                ],
+                padding: 0.1,
+                round: false,
+                reverse: false,
+                align: 1,
+                domain: {
+                    data: namespace.stacked,
+                    field: namespace.__level,
+                    sort: true
+                }
+            }
+        ];
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, namespace.bucket, specColumns.color.name, insight.scheme));
+            }
+            else {
+                scales.push({
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: namespace.bucket,
+                        field: FieldNames.Top,
+                        sort: true
+                    },
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
+                    },
+                    reverse: { signal: SignalNames.ColorReverse }
+                });
+            }
+        }
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, true)
+                :
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
+        }
+        return scales.concat(specColumns.x.quantitative ? quantitativeScales$1() : qualitativeScales$1(context, namespace));
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getSignals$1 (context) {
+        const { specColumns, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
+            {
+                name: SignalNames.YDomain,
+                update: `domain('${ScaleNames.Y}')`
+            },
+            specColumns.x.quantitative && {
+                name: SignalNames.XBins,
+                value: 7,
+                bind: {
+                    name: specViewOptions.language.XBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 20,
+                    step: 1
+                }
+            },
+            {
+                name: BarChartSignalNames$1.compartmentWidthSignal,
+                update: `bandwidth('${specColumns.x.quantitative ? ScaleNames.X : BarChartScaleNames$1.bucketScale}')`
+            },
+            {
+                name: BarChartSignalNames$1.aspectRatioSignal,
+                update: `${BarChartSignalNames$1.compartmentWidthSignal}/height`
+            },
+            {
+                name: BarChartSignalNames$1.compartmentsPerLevelSignal,
+                update: `ceil(sqrt(${BarChartSignalNames$1.aspectRatioSignal}*${BarChartSignalNames$1.levelExtentSignal}[1]))`
+            },
+            colorBinCountSignal(context),
+            colorReverseSignal(context)
+        ], specColumns.facet && facetSignals(context));
+        return signals;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    // Licensed under the MIT license.
+    class NameSpace$1 {
+        constructor(nameSpace = '') {
+            ['bucket', 'stacked', '__compartment', '__level'].forEach(name => {
+                this[name] = `${name}${nameSpace}`;
+            });
+        }
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    const barchartV = (context) => {
+        const { specColumns, insight, specViewOptions } = context;
+        const errors = [];
+        if (!specColumns.x)
+            errors.push('Must set a field for x axis');
+        checkForFacetErrors(insight.facets, errors);
+        const specCapabilities = {
+            roles: [
+                {
+                    role: 'x',
+                    binnable: true,
+                    axisSelection: specColumns.x && specColumns.x.quantitative ? 'range' : 'exact',
+                    signals: [SignalNames.XBins]
+                },
+                {
+                    role: 'z',
+                    allowNone: true
+                },
+                {
+                    role: 'color',
+                    allowNone: true
+                },
+                {
+                    role: 'sort',
+                    allowNone: true
+                },
+                {
+                    role: 'facet',
+                    allowNone: true
+                }
+            ]
+        };
+        if (errors.length) {
+            return {
+                errors,
+                specCapabilities,
+                vegaSpec: null,
+            };
+        }
+        const rootNamespace = new NameSpace$1();
+        let axes;
+        if (!insight.hideAxes) {
+            axes = getAxes$1(context);
+        }
+        let marks;
+        if (specColumns.facet) {
+            const cellNamespace = new NameSpace$1('Cell');
+            const cellMarks = getMarks$1(context, cellNamespace);
+            const cd = specColumns.x.quantitative ?
+                [
+                    stacked$1(cellNamespace, DataNames.FacetGroupCell)
+                ]
+                :
+                    [
+                        bucketed$1(context, cellNamespace, DataNames.FacetGroupCell),
+                        stacked$1(cellNamespace, cellNamespace.bucket)
+                    ];
+            marks = facetMarks(specViewOptions, rootNamespace.stacked, cellMarks, axes, cd);
+            axes = [];
+        }
+        else {
+            marks = getMarks$1(context, rootNamespace);
+        }
+        const size = specColumns.facet ? facetSize(context) : insight.size;
+        var vegaSpec = {
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$1(context),
+            scales: getScales$1(context, rootNamespace),
+            data: getData$1(context, rootNamespace),
+            marks
+        };
+        if (!insight.hideAxes && axes && axes.length) {
+            vegaSpec.axes = axes;
+        }
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
+        }
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
+        }
+        else {
+            //use autosize only when not faceting
+            vegaSpec.autosize = 'fit';
+        }
+        return { vegaSpec, specCapabilities };
+    };
+
+    function getAxes$2 (context) {
+        const { specColumns, specViewOptions } = context;
+        const pa = partialAxes(specViewOptions, specColumns.x.quantitative, specColumns.y.quantitative);
+        const axes = [
+            Object.assign({ scale: 'xscale', title: specColumns.x.name, bandPosition: 0.5, grid: true, labelFlush: true }, pa.bottom),
+            Object.assign({ scale: 'yscale', title: specColumns.y.name, bandPosition: specColumns.y.quantitative ? 0 : 0.5, grid: true, labelFlush: true }, pa.left)
+        ];
+        return axes;
+    }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    function getData$2 (context) {
+        const { specColumns, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const data = allTruthy([
             {
-                "name": DataNames.Main,
-                "transform": allTruthy([
+                name: DataNames.Main,
+                transform: allTruthy(specColumns.x.quantitative && [
                     {
-                        "type": "formula",
-                        "as": "ff_field1",
-                        "expr": `datum[${JSON.stringify(columns.x.name)}]`
+                        type: 'extent',
+                        field: specColumns.x.name,
+                        signal: 'var_Xextent'
                     },
                     {
-                        "type": "formula",
-                        "as": "ff_field2",
-                        "expr": `datum[${JSON.stringify(columns.y.name)}]`
-                    }
-                ], columns.x.quantitative && [
-                    {
-                        "type": "extent",
-                        "field": columns.x.name,
-                        "signal": "var_Xextent"
-                    },
-                    {
-                        "type": "bin",
-                        "field": columns.x.name,
-                        "extent": {
-                            "signal": "var_Xextent"
+                        type: 'bin',
+                        field: specColumns.x.name,
+                        extent: {
+                            signal: 'var_Xextent'
                         },
-                        "maxbins": {
-                            "signal": SignalNames.XBins
+                        maxbins: {
+                            signal: SignalNames.XBins
                         },
-                        "as": [
-                            "__binx0",
-                            "__binx1"
+                        as: [
+                            FieldNames.DensityXBin0,
+                            FieldNames.DensityXBin1
                         ],
-                        "signal": "binXSignal"
+                        signal: 'binXSignal'
                     }
-                ], columns.y.quantitative && [
+                ], specColumns.y.quantitative && [
                     {
-                        "type": "extent",
-                        "field": columns.y.name,
-                        "signal": "var_Yextent"
+                        type: 'extent',
+                        field: specColumns.y.name,
+                        signal: 'var_Yextent'
                     },
                     {
-                        "type": "bin",
-                        "field": columns.y.name,
-                        "extent": {
-                            "signal": "var_Yextent"
+                        type: 'bin',
+                        field: specColumns.y.name,
+                        extent: {
+                            signal: 'var_Yextent'
                         },
-                        "maxbins": {
-                            "signal": SignalNames.YBins
+                        maxbins: {
+                            signal: SignalNames.YBins
                         },
-                        "as": [
-                            "__biny0",
-                            "__biny1"
+                        as: [
+                            FieldNames.DensityYBin0,
+                            FieldNames.DensityYBin1
                         ],
-                        "signal": "binYSignal"
+                        signal: 'binYSignal'
                     }
                 ])
             }
-        ], columns.x.quantitative && [
+        ], specColumns.x.quantitative && [
             {
-                "name": "xaxisdata",
-                "transform": [
+                name: 'xaxisdata',
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": {
-                            "signal": "binXSignal.start"
+                        type: 'sequence',
+                        start: {
+                            signal: 'binXSignal.start'
                         },
-                        "stop": {
-                            "signal": "binXSignal.stop"
+                        stop: {
+                            signal: 'binXSignal.stop'
                         },
-                        "step": {
-                            "signal": "binXSignal.step"
+                        step: {
+                            signal: 'binXSignal.step'
                         }
                     }
                 ]
             }
-        ], columns.y.quantitative && [
+        ], specColumns.y.quantitative && [
             {
-                "name": "yaxisdata",
-                "transform": [
+                name: 'yaxisdata',
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": {
-                            "signal": "binYSignal.start"
+                        type: 'sequence',
+                        start: {
+                            signal: 'binYSignal.start'
                         },
-                        "stop": {
-                            "signal": "binYSignal.stop"
+                        stop: {
+                            signal: 'binYSignal.stop'
                         },
-                        "step": {
-                            "signal": "binYSignal.step"
+                        step: {
+                            signal: 'binYSignal.step'
                         }
                     }
                 ]
             }
-        ], categoricalColor && topLookup(columns.color, specViewOptions.maxLegends), [
+        ], categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), [
             {
-                "name": "aggregated",
-                "source": categoricalColor ? DataNames.Legend : DataNames.Main,
-                "transform": [
+                name: 'aggregated',
+                source: categoricalColor ? DataNames.Legend : DataNames.Main,
+                transform: [
                     {
-                        "type": "joinaggregate",
-                        "groupby": [
-                            columns.x.quantitative ? "__binx0" : "ff_field1",
-                            columns.y.quantitative ? "__biny0" : "ff_field2"
+                        type: 'joinaggregate',
+                        groupby: [
+                            specColumns.x.quantitative ? FieldNames.DensityXBin0 : specColumns.x.name,
+                            specColumns.y.quantitative ? FieldNames.DensityYBin0 : specColumns.y.name
                         ],
-                        "ops": [
-                            "count"
+                        ops: [
+                            'count'
                         ],
-                        "as": [
-                            "count"
+                        as: [
+                            FieldNames.DensityCount
                         ]
                     },
-                    windowTransform(columns),
+                    windowTransform(specColumns),
                     {
-                        "type": "extent",
-                        "field": "s1",
-                        "signal": "cextent"
+                        type: 'extent',
+                        field: FieldNames.DensityRow,
+                        signal: 'cextent'
                     }
                 ]
             }
@@ -8377,23 +9956,23 @@ void main(void) {
     }
     function windowTransform(columns) {
         const t = {
-            "type": "window",
-            "groupby": [
-                columns.x.quantitative ? "__binx0" : "ff_field1",
-                columns.y.quantitative ? "__biny0" : "ff_field2"
+            type: 'window',
+            groupby: [
+                columns.x.quantitative ? FieldNames.DensityXBin0 : columns.x.name,
+                columns.y.quantitative ? FieldNames.DensityYBin0 : columns.y.name
             ],
-            "ops": [
-                "row_number"
+            ops: [
+                'row_number'
             ],
-            "as": [
-                "s1"
+            as: [
+                FieldNames.DensityRow
             ]
         };
         if (columns.sort) {
             t.sort = {
-                "field": [columns.sort.name],
-                "order": [
-                    "descending"
+                field: [columns.sort.name],
+                order: [
+                    'descending'
                 ]
             };
         }
@@ -8401,230 +9980,241 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks$1 (columns, specViewOptions) {
+    function getMarks$2 (context) {
+        const { specColumns } = context;
         const mark = {
-            "type": "rect",
-            "from": {
-                "data": "aggregated"
+            type: 'rect',
+            from: {
+                data: 'aggregated'
             },
-            "sort": {
-                "field": [
-                    "ff_field1",
-                    "ff_field2"
+            sort: {
+                field: [
+                    specColumns.x.name,
+                    specColumns.y.name
                 ],
-                "order": [
-                    "ascending",
-                    "ascending"
+                order: [
+                    'ascending',
+                    'ascending'
                 ]
             },
-            "encode": {
-                "update": {
-                    "xc": {
-                        "scale": "xscale",
-                        "field": columns.x.quantitative ? "__binx0" : "ff_field1",
-                        "offset": {
-                            "signal": "scale('sizescale', ((datum.s1-1) % floor(sqrt(datum.count))))-scale('sizescale', sqrt(datum.count)-2)/2"
+            encode: {
+                update: {
+                    xc: {
+                        scale: 'xscale',
+                        field: specColumns.x.quantitative ? FieldNames.DensityXBin0 : specColumns.x.name,
+                        offset: {
+                            signal: `scale('sizescale', ((datum.${FieldNames.DensityRow}-1) % floor(sqrt(datum.${FieldNames.DensityCount}))))-scale('sizescale', sqrt(datum.${FieldNames.DensityCount})-2)/2`
                         }
                     },
-                    "yc": {
-                        "scale": "yscale",
-                        "field": columns.y.quantitative ? "__biny0" : "ff_field2",
-                        "offset": {
-                            "signal": "scale('sizescale',height/width*floor(((datum.s1-1) / floor(sqrt(datum.count))))) - scale('sizescale', height/width*sqrt(datum.count)+2)/2"
+                    yc: {
+                        scale: 'yscale',
+                        field: specColumns.y.quantitative ? FieldNames.DensityYBin0 : specColumns.y.name,
+                        offset: {
+                            signal: `scale('sizescale',height/width*floor(((datum.${FieldNames.DensityRow}-1) / floor(sqrt(datum.${FieldNames.DensityCount}))))) - scale('sizescale', height/width*sqrt(datum.${FieldNames.DensityCount})+2)/2`
                         }
                     },
-                    "width": {
-                        "signal": "unitsize"
+                    width: {
+                        signal: 'unitsize'
                     },
-                    "height": {
-                        "signal": "height/width*unitsize"
+                    height: {
+                        signal: 'height/width*unitsize'
                     },
-                    "fill": fill(columns.color, specViewOptions)
+                    fill: fill(context),
+                    opacity: opacity(context)
                 }
             }
         };
-        if (columns.z) {
+        if (specColumns.z) {
             const update = mark.encode.update;
             update.z = {
-                "value": 0
+                value: 0
             };
-            update.depth = zeroIfCollapsed({
-                "scale": ScaleNames.Z,
-                "field": columns.z.name
-            });
+            update.depth = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
         }
         return [mark];
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales$1 (columns, insight) {
+    function getScales$2 (context) {
+        const { specColumns, insight } = context;
         const scales = [
             {
-                "name": "xscale",
-                "type": "point",
-                "domain": columns.x.quantitative ?
+                name: 'xscale',
+                type: 'point',
+                domain: specColumns.x.quantitative ?
                     {
-                        "data": "xaxisdata",
-                        "field": "data",
-                        "sort": true
+                        data: 'xaxisdata',
+                        field: 'data',
+                        sort: true
                     }
                     :
                         {
-                            "data": DataNames.Main,
-                            "field": columns.x.name,
-                            "sort": true
+                            data: DataNames.Main,
+                            field: specColumns.x.name,
+                            sort: true
                         },
-                "range": "width",
-                "padding": 0.5
+                range: 'width',
+                padding: 0.5
             },
             {
-                "name": "yscale",
-                "type": "point",
-                "domain": columns.y.quantitative ?
+                name: 'yscale',
+                type: 'point',
+                domain: specColumns.y.quantitative ?
                     {
-                        "data": "yaxisdata",
-                        "field": "data",
-                        "sort": true
+                        data: 'yaxisdata',
+                        field: 'data',
+                        sort: true
                     }
                     :
                         {
-                            "data": DataNames.Main,
-                            "field": columns.y.name,
-                            "sort": true
+                            data: DataNames.Main,
+                            field: specColumns.y.name,
+                            sort: true
                         },
-                "range": "height",
-                "reverse": true,
-                "padding": 0.5
+                range: 'height',
+                reverse: true,
+                padding: 0.5
             },
             {
-                "name": "sizescale",
-                "type": "linear",
-                "domain": [
+                name: 'sizescale',
+                type: 'linear',
+                domain: [
                     0,
                     {
-                        "signal": "sqrt(cextent[1])"
+                        signal: 'sqrt(cextent[1])'
                     }
                 ],
-                "range": [
+                range: [
                     0,
                     {
-                        "signal": "width/max(xsize,ysize)"
+                        signal: 'width/max(xsize,ysize)'
                     }
                 ]
             }
         ];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
-        if (columns.z) {
-            const zRange = [0, { "signal": SignalNames.ZHeight }];
-            scales.push(columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, true)
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, true)
                 :
-                    pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name));
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
         }
         return scales;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals$1 (insight, columns, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
-            colorBinCountSignal(specViewOptions),
-            colorReverseSignal(specViewOptions),
+    function getSignals$2 (context) {
+        const { specColumns, insight, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
+            colorBinCountSignal(context),
+            colorReverseSignal(context),
             {
-                "name": "unitpad",
-                "value": 0.1,
-                "bind": {
-                    "name": SignalNames.InnerPadding,
-                    "input": "range",
-                    "min": 0.1,
-                    "max": 1.0,
-                    "step": 0.1
+                name: 'unitpad',
+                value: 0.1,
+                bind: {
+                    name: SignalNames.InnerPadding,
+                    input: 'range',
+                    min: 0.1,
+                    max: 1.0,
+                    step: 0.1
                 }
             },
             {
-                "name": "xsize",
-                "update": "domain('xscale').length"
+                name: 'xsize',
+                update: 'domain(\'xscale\').length'
             },
             {
-                "name": "ysize",
-                "update": "domain('yscale').length"
+                name: 'ysize',
+                update: 'domain(\'yscale\').length'
             },
             {
-                "name": "cellwidth",
-                "update": "width/max(xsize,ysize)"
+                name: 'cellwidth',
+                update: 'width/max(xsize,ysize)'
             },
             {
-                "name": "maxnumbers",
-                "update": "sqrt(cextent[1])"
+                name: 'maxnumbers',
+                update: 'sqrt(cextent[1])'
             },
             {
-                "name": "unitsize",
-                "update": "cellwidth/((1 + unitpad)*maxnumbers)"
+                name: 'unitsize',
+                update: 'cellwidth/((1 + unitpad)*maxnumbers)'
             },
-            columns.x.quantitative && {
-                "name": SignalNames.XBins,
-                "value": 30,
-                "bind": {
-                    "name": specViewOptions.language.XBinSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 60,
-                    "step": 1
+            specColumns.x.quantitative && {
+                name: SignalNames.XBins,
+                value: 30,
+                bind: {
+                    name: specViewOptions.language.XBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 60,
+                    step: 1
                 }
             },
-            columns.y.quantitative && {
-                "name": SignalNames.YBins,
-                "value": 30,
-                "bind": {
-                    "name": specViewOptions.language.YBinSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 60,
-                    "step": 1
+            specColumns.y.quantitative && {
+                name: SignalNames.YBins,
+                value: 30,
+                bind: {
+                    name: specViewOptions.language.YBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 60,
+                    step: 1
                 }
             }
-        ], insight.columns.facet && facetSignals(insight.facets, specViewOptions));
+        ], insight.columns.facet && facetSignals(context));
         return signals;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const density = (insight, columns, specViewOptions) => {
+    const density = (context) => {
+        const { specColumns, insight } = context;
         const errors = [];
-        if (!columns.x)
-            errors.push(`Must set a field for x axis`);
-        if (!columns.y)
-            errors.push(`Must set a field for y axis`);
+        if (!specColumns.x)
+            errors.push('Must set a field for x axis');
+        if (!specColumns.y)
+            errors.push('Must set a field for y axis');
         checkForFacetErrors(insight.facets, errors);
         const specCapabilities = {
             roles: [
                 {
                     role: 'x',
                     binnable: true,
-                    axisSelection: columns.x && columns.x.quantitative ? 'range' : 'exact',
+                    axisSelection: specColumns.x && specColumns.x.quantitative ? 'range' : 'exact',
                     signals: [SignalNames.XBins]
                 },
                 {
                     role: 'y',
                     binnable: true,
-                    axisSelection: columns.y && columns.y.quantitative ? 'range' : 'exact',
+                    axisSelection: specColumns.y && specColumns.y.quantitative ? 'range' : 'exact',
                     signals: [SignalNames.YBins]
                 },
                 {
@@ -8648,185 +10238,198 @@ void main(void) {
                 vegaSpec: null,
             };
         }
-        const size = columns.facet ? facetSize(insight.facets, insight.size, specViewOptions) : insight.size;
+        const size = specColumns.facet ? facetSize(context) : insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals$1(insight, columns, specViewOptions),
-            data: getData$1(insight, columns, specViewOptions),
-            scales: getScales$1(columns, insight),
-            marks: getMarks$1(columns, specViewOptions)
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$2(context),
+            data: getData$2(context),
+            scales: getScales$2(context),
+            marks: getMarks$2(context)
         };
         if (!insight.hideAxes) {
-            vegaSpec.axes = getAxes$1(specViewOptions, columns);
+            vegaSpec.axes = getAxes$2(context);
         }
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
-        if (columns.facet) {
-            vegaSpec.layout = layout(specViewOptions);
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
         }
         else {
             //use autosize only when not faceting
-            vegaSpec.autosize = "fit";
+            vegaSpec.autosize = 'fit';
         }
         return { vegaSpec, specCapabilities };
     };
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData$2 (columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
+    function getData$3 (context) {
+        const { specColumns, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const data = allTruthy([
             {
-                "name": DataNames.Main,
-                "transform": allTruthy([
-                    columns.sort && {
-                        "type": "collect",
-                        "sort": { "field": columns.sort.name }
+                name: DataNames.Main,
+                transform: allTruthy([
+                    specColumns.sort && {
+                        type: 'collect',
+                        sort: { field: specColumns.sort.name }
                     },
                     {
-                        "type": "window",
-                        "ops": [
-                            "count"
+                        type: 'window',
+                        ops: [
+                            'count'
                         ],
-                        "as": [
-                            FieldNames.Index
+                        as: [
+                            FieldNames.GridIndex
                         ]
                     }
                 ])
             }
-        ], categoricalColor && topLookup(columns.color, specViewOptions.maxLegends));
+        ], categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends));
         return data;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     // Licensed under the MIT license.
-    const ColumnCount = "columncount";
-    const RowCount = "rowcount";
-    const Total = "total";
+    const ColumnCount = 'columncount';
+    const RowCount = 'rowcount';
+    const Total = 'total';
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks$2 (data, columns, specViewOptions) {
+    function getMarks$3 (context, data) {
+        const { specColumns } = context;
         const marks = [
             {
-                "type": "rect",
-                "from": {
+                type: 'rect',
+                from: {
                     data
                 },
-                "encode": {
-                    "update": {
-                        "x": {
-                            "signal": `(datum['${FieldNames.Index}']-1)%${ColumnCount}`,
-                            "scale": ScaleNames.X
+                encode: {
+                    update: {
+                        x: {
+                            signal: `(datum.${FieldNames.GridIndex}-1)%${ColumnCount}`,
+                            scale: ScaleNames.X
                         },
-                        "width": {
-                            "scale": ScaleNames.X,
-                            "band": true
+                        width: {
+                            scale: ScaleNames.X,
+                            band: true
                         },
-                        "y": {
-                            "signal": `floor((datum['${FieldNames.Index}']-1)/${ColumnCount})`,
-                            "scale": ScaleNames.Y
+                        y: {
+                            signal: `floor((datum.${FieldNames.GridIndex}-1)/${ColumnCount})`,
+                            scale: ScaleNames.Y
                         },
-                        "height": {
-                            "scale": ScaleNames.Y,
-                            "band": true
+                        height: {
+                            scale: ScaleNames.Y,
+                            band: true
                         },
-                        "fill": fill(columns.color, specViewOptions)
+                        fill: fill(context),
+                        opacity: opacity(context)
                     }
                 }
             }
         ];
-        if (columns.z) {
+        if (specColumns.z) {
             const update = marks[0].encode.update;
             update.z = {
-                "value": 0
+                value: 0
             };
-            update.depth = zeroIfCollapsed({
-                "scale": ScaleNames.Z,
-                "field": columns.z.name
-            });
+            update.depth = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
         }
         return marks;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales$2 (columns, insight) {
+    function getScales$3 (context) {
+        const { specColumns, insight } = context;
         const scales = [
             {
-                "name": ScaleNames.X,
-                "type": "band",
-                "domain": {
-                    "signal": `sequence(0, ${ColumnCount}, 1)`
+                name: ScaleNames.X,
+                type: 'band',
+                domain: {
+                    signal: `sequence(0, ${ColumnCount}, 1)`
                 },
-                "range": "width",
-                "paddingInner": 0.1,
-                "paddingOuter": 0
+                range: 'width',
+                paddingInner: 0.1,
+                paddingOuter: 0
             },
             {
-                "name": ScaleNames.Y,
-                "type": "band",
-                "domain": {
-                    "signal": `sequence(0, ${RowCount}, 1)`
+                name: ScaleNames.Y,
+                type: 'band',
+                domain: {
+                    signal: `sequence(0, ${RowCount}, 1)`
                 },
-                "range": "height",
-                "paddingInner": 0.1,
-                "paddingOuter": 0
+                range: 'height',
+                paddingInner: 0.1,
+                paddingOuter: 0
             }
         ];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
-        if (columns.z) {
-            const zRange = [0, { "signal": SignalNames.ZHeight }];
-            scales.push(columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, false)
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, false)
                 :
-                    pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name));
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
         }
         return scales;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals$2 (insight, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
-            colorBinCountSignal(specViewOptions),
+    function getSignals$3 (context) {
+        const { insight } = context;
+        const signals = allTruthy(textSignals(context), [
+            colorBinCountSignal(context),
             {
-                "name": Total,
-                "update": `data('${DataNames.Main}').length`
+                name: Total,
+                update: `data('${DataNames.Main}').length`
             },
             {
-                "name": ColumnCount,
-                "update": `ceil(sqrt((width/height)*${Total}))`
+                name: ColumnCount,
+                update: `ceil(sqrt((width/height)*${Total}))`
             },
             {
-                "name": RowCount,
-                "update": `${Total}/${ColumnCount}`
+                name: RowCount,
+                update: `${Total}/${ColumnCount}`
             },
-            colorReverseSignal(specViewOptions)
-        ], insight.columns && insight.columns.facet && facetSignals(insight.facets, specViewOptions));
+            colorReverseSignal(context)
+        ], insight.columns && insight.columns.facet && facetSignals(context));
         return signals;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const grid = (insight, columns, specViewOptions) => {
+    const grid = (context) => {
+        const { specColumns, insight } = context;
         const errors = [];
         const specCapabilities = {
             roles: [
@@ -8851,174 +10454,214 @@ void main(void) {
                 vegaSpec: null,
             };
         }
-        const categoricalColor = columns.color && !columns.color.quantitative;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const dataName = categoricalColor ? DataNames.Legend : DataNames.Main;
         const size = insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals$2(insight, specViewOptions),
-            scales: getScales$2(columns, insight),
-            data: getData$2(columns, specViewOptions),
-            marks: getMarks$2(dataName, columns, specViewOptions)
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$3(context),
+            scales: getScales$3(context),
+            data: getData$3(context),
+            marks: getMarks$3(context, dataName)
         };
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
         //use autosize only when not faceting
-        vegaSpec.autosize = "fit";
+        vegaSpec.autosize = 'fit';
         return { vegaSpec, specCapabilities };
     };
 
-    function getAxes$2 (specViewOptions, columns) {
-        const pa = partialAxes(specViewOptions, columns.x.quantitative, columns.y.quantitative);
+    function getAxes$3 (context) {
+        const { specColumns, specViewOptions } = context;
+        const pa = partialAxes(specViewOptions, specColumns.x.quantitative, specColumns.y.quantitative);
         const axes = [
-            Object.assign({ "scale": ScaleNames.X, "title": columns.x.name }, pa.bottom),
-            Object.assign({ "scale": ScaleNames.Y, "title": columns.y.name }, pa.left)
+            Object.assign({ scale: ScaleNames.X, title: specColumns.x.name }, pa.bottom),
+            Object.assign({ scale: ScaleNames.Y, title: specColumns.y.name }, pa.left)
         ];
         return axes;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData$3 (insight, columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
-        const ScatterDataName = "SandDanceScatterPlotData";
-        const data = allTruthy(facetSourceData(columns.facet, insight.facets, ScatterDataName), [
+    function getData$4 (context) {
+        const { specColumns, insight, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
+        const ScatterDataName = 'SandDanceScatterPlotData';
+        const data = allTruthy(facetSourceData(specColumns.facet, insight.facets, ScatterDataName), [
             {
-                "name": DataNames.Main,
-                "source": ScatterDataName,
-                "transform": allTruthy(columns.facet && facetTransforms(columns.facet, insight.facets))
+                name: DataNames.Main,
+                source: ScatterDataName,
+                transform: allTruthy(filterInvalidWhenNumeric(specColumns.x), filterInvalidWhenNumeric(specColumns.y), filterInvalidWhenNumeric(specColumns.z), specColumns.facet && facetTransforms(specColumns.facet, insight.facets))
             }
-        ], categoricalColor && topLookup(columns.color, specViewOptions.maxLegends), columns.facet && facetGroupData(DataNames.Main));
+        ], categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), specColumns.facet && facetGroupData(DataNames.Main));
         return data;
+    }
+    function filterInvalidWhenNumeric(column) {
+        if (column && column.quantitative) {
+            const transforms = [
+                {
+                    type: 'filter',
+                    expr: `datum[${JSON.stringify(column.name)}] != null`
+                }
+            ];
+            return transforms;
+        }
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks$3 (columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
+    function getMarks$4 (context) {
+        const { specColumns } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const marks = [
             {
-                "type": "rect",
-                "from": {
-                    "data": categoricalColor ? DataNames.Legend : DataNames.Main
+                type: 'rect',
+                from: {
+                    data: categoricalColor ? DataNames.Legend : DataNames.Main
                 },
-                "encode": {
-                    "update": {
-                        "x": {
-                            "scale": ScaleNames.X,
-                            "field": columns.x.name,
-                            "offset": 1
+                encode: {
+                    update: {
+                        x: {
+                            scale: ScaleNames.X,
+                            field: specColumns.x.name,
+                            offset: 1
                         },
-                        "width": { "signal": SignalNames.PointSize },
-                        "y": collapseY({
-                            "scale": ScaleNames.Y,
-                            "field": columns.y.name,
-                            "offset": {
-                                "signal": `-${SignalNames.PointSize}`
+                        width: { signal: SignalNames.PointSize },
+                        y: [
+                            {
+                                scale: ScaleNames.Y,
+                                test: testForCollapseSelection(),
+                                signal: `${SignalNames.YDomain}[0]`
+                            },
+                            {
+                                scale: ScaleNames.Y,
+                                field: specColumns.y.name,
+                                offset: {
+                                    signal: `-${SignalNames.PointSize}`
+                                }
                             }
-                        }),
-                        "height": zeroIfCollapsed({ "signal": SignalNames.PointSize }),
-                        "fill": fill(columns.color, specViewOptions)
+                        ],
+                        height: [
+                            {
+                                test: testForCollapseSelection(),
+                                value: 0
+                            },
+                            {
+                                signal: SignalNames.PointSize
+                            }
+                        ],
+                        fill: fill(context),
+                        opacity: opacity(context)
                     }
                 }
             }
         ];
-        if (columns.z) {
+        if (specColumns.z) {
             const update = marks[0].encode.update;
-            update.z = zeroIfCollapsed({
-                "scale": ScaleNames.Z,
-                "field": columns.z.name
-            });
-            update.depth = { "signal": SignalNames.PointSize };
+            update.z = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
+            update.depth = { signal: SignalNames.PointSize };
         }
         return marks;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales$3 (columns, insight) {
+    function getScales$4 (context) {
+        const { specColumns, insight } = context;
         const scales = [
-            (columns.x.quantitative ?
-                linearScale(ScaleNames.X, DataNames.Main, columns.x.name, "width", false, false)
+            (specColumns.x.quantitative ?
+                linearScale(ScaleNames.X, DataNames.Main, specColumns.x.name, 'width', false, false)
                 :
-                    pointScale(ScaleNames.X, DataNames.Main, "width", columns.x.name)),
-            (columns.y.quantitative ?
-                linearScale(ScaleNames.Y, DataNames.Main, columns.y.name, "height", false, false)
+                    pointScale(ScaleNames.X, DataNames.Main, 'width', specColumns.x.name)),
+            (specColumns.y.quantitative ?
+                linearScale(ScaleNames.Y, DataNames.Main, specColumns.y.name, 'height', false, false)
                 :
-                    pointScale(ScaleNames.Y, DataNames.Main, "height", columns.y.name, true))
+                    pointScale(ScaleNames.Y, DataNames.Main, 'height', specColumns.y.name, true))
         ];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
-        if (columns.z) {
-            const zRange = [0, { "signal": SignalNames.ZHeight }];
-            scales.push(columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, false)
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, false)
                 :
-                    pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name));
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
         }
         return scales;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals$3 (insight, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
+    function getSignals$4 (context) {
+        const { insight, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
             {
-                "name": SignalNames.YDomain,
-                "update": `domain('${ScaleNames.Y}')`
+                name: SignalNames.YDomain,
+                update: `domain('${ScaleNames.Y}')`
             },
             {
-                "name": SignalNames.PointSize,
-                "value": 5,
-                "bind": {
-                    "name": specViewOptions.language.scatterPointSize,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": 1,
-                    "max": 25,
-                    "step": 1
+                name: SignalNames.PointSize,
+                value: 5,
+                bind: {
+                    name: specViewOptions.language.scatterPointSize,
+                    debounce: 50,
+                    input: 'range',
+                    min: 1,
+                    max: 25,
+                    step: 1
                 }
             },
-            colorBinCountSignal(specViewOptions),
-            colorReverseSignal(specViewOptions)
-        ], insight.columns.facet && facetSignals(insight.facets, specViewOptions));
+            colorBinCountSignal(context),
+            colorReverseSignal(context)
+        ], insight.columns.facet && facetSignals(context));
         return signals;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const scatterplot = (insight, columns, specViewOptions) => {
+    const scatterplot = (context) => {
+        const { specColumns, insight, specViewOptions } = context;
         const errors = [];
-        if (!columns.x)
-            errors.push(`Must set a field for x axis`);
-        if (!columns.y)
-            errors.push(`Must set a field for y axis`);
+        if (!specColumns.x)
+            errors.push('Must set a field for x axis');
+        if (!specColumns.y)
+            errors.push('Must set a field for y axis');
         checkForFacetErrors(insight.facets, errors);
         const specCapabilities = {
             roles: [
                 {
                     role: 'x',
-                    axisSelection: columns.x && columns.x.quantitative ? 'range' : 'exact'
+                    axisSelection: specColumns.x && specColumns.x.quantitative ? 'range' : 'exact'
                 },
                 {
                     role: 'y',
-                    axisSelection: columns.y && columns.y.quantitative ? 'range' : 'exact'
+                    axisSelection: specColumns.y && specColumns.y.quantitative ? 'range' : 'exact'
                 },
                 {
                     role: 'z',
@@ -9048,170 +10691,173 @@ void main(void) {
         }
         let axes;
         if (!insight.hideAxes) {
-            axes = getAxes$2(specViewOptions, columns);
+            axes = getAxes$3(context);
         }
-        let marks = getMarks$3(columns, specViewOptions);
-        if (columns.facet) {
+        let marks = getMarks$4(context);
+        if (specColumns.facet) {
             marks = facetMarks(specViewOptions, marks[0].from.data, marks, axes);
             axes = [];
         }
-        const size = columns.facet ? facetSize(insight.facets, insight.size, specViewOptions) : insight.size;
+        const size = specColumns.facet ? facetSize(context) : insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals$3(insight, specViewOptions),
-            data: getData$3(insight, columns, specViewOptions),
-            scales: getScales$3(columns, insight),
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$4(context),
+            data: getData$4(context),
+            scales: getScales$4(context),
             marks
         };
         if (!insight.hideAxes && axes && axes.length) {
             vegaSpec.axes = axes;
         }
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
-        if (columns.facet) {
-            vegaSpec.layout = layout(specViewOptions);
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
         }
         else {
             //use autosize only when not faceting
-            vegaSpec.autosize = "fit";
+            vegaSpec.autosize = 'fit';
         }
         return { vegaSpec, specCapabilities };
     };
 
-    function getAxes$3 (specViewOptions, columns) {
-        const pa = partialAxes(specViewOptions, columns.x.quantitative, columns.y.quantitative);
+    function getAxes$4 (context) {
+        const { specColumns, specViewOptions } = context;
+        const pa = partialAxes(specViewOptions, specColumns.x.quantitative, specColumns.y.quantitative);
         const axes = [
-            Object.assign({ "scale": "xband", "title": columns.x.name, "bandPosition": 0.5, "grid": true, "labelFlush": true }, pa.bottom),
-            Object.assign({ "scale": "yband", "title": columns.y.name, "bandPosition": columns.y.quantitative ? 0 : 0.5, "grid": true, "labelFlush": true }, pa.left)
+            Object.assign({ scale: 'xband', title: specColumns.x.name, bandPosition: 0.5, grid: true, labelFlush: true }, pa.bottom),
+            Object.assign({ scale: 'yband', title: specColumns.y.name, bandPosition: specColumns.y.quantitative ? 0 : 0.5, grid: true, labelFlush: true }, pa.left)
         ];
         return axes;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData$4 (insight, columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
+    function getData$5 (context) {
+        const { specColumns, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const data = allTruthy([
             {
-                "name": DataNames.Main,
-                "transform": allTruthy([
+                name: DataNames.Main,
+                transform: allTruthy([
                     {
-                        "type": "extent",
-                        "field": columns.x.name,
-                        "signal": "long_extent"
+                        type: 'extent',
+                        field: specColumns.x.name,
+                        signal: 'long_extent'
                     },
                     {
-                        "type": "extent",
-                        "field": columns.y.name,
-                        "signal": "lat_extent"
+                        type: 'extent',
+                        field: specColumns.y.name,
+                        signal: 'lat_extent'
                     },
-                    columns.x.quantitative && {
-                        "type": "bin",
-                        "field": columns.x.name,
-                        "extent": {
-                            "signal": "long_extent"
+                    specColumns.x.quantitative && {
+                        type: 'bin',
+                        field: specColumns.x.name,
+                        extent: {
+                            signal: 'long_extent'
                         },
-                        "maxbins": {
-                            "signal": SignalNames.XBins
+                        maxbins: {
+                            signal: SignalNames.XBins
                         },
-                        "nice": false,
-                        "as": [
-                            "long0",
-                            "long1"
+                        nice: false,
+                        as: [
+                            FieldNames.StacksLongBin0,
+                            FieldNames.StacksLongBin1
                         ],
-                        "signal": "binXSignal"
+                        signal: 'binXSignal'
                     },
-                    columns.y.quantitative && {
-                        "type": "bin",
-                        "field": columns.y.name,
-                        "extent": {
-                            "signal": "lat_extent"
+                    specColumns.y.quantitative && {
+                        type: 'bin',
+                        field: specColumns.y.name,
+                        extent: {
+                            signal: 'lat_extent'
                         },
-                        "nice": false,
-                        "maxbins": {
-                            "signal": SignalNames.YBins
+                        nice: false,
+                        maxbins: {
+                            signal: SignalNames.YBins
                         },
-                        "as": [
-                            "lat0",
-                            "lat1"
+                        as: [
+                            FieldNames.StacksLatBin0,
+                            FieldNames.StacksLatBin1
                         ],
-                        "signal": "binYSignal"
+                        signal: 'binYSignal'
                     }
                 ])
             }
-        ], columns.x.quantitative && [
+        ], specColumns.x.quantitative && [
             {
-                "name": "xaxisdata",
-                "transform": [
+                name: 'xaxisdata',
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": {
-                            "signal": "binXSignal.start"
+                        type: 'sequence',
+                        start: {
+                            signal: 'binXSignal.start'
                         },
-                        "stop": {
-                            "signal": "binXSignal.stop"
+                        stop: {
+                            signal: 'binXSignal.stop'
                         },
-                        "step": {
-                            "signal": "binXSignal.step"
+                        step: {
+                            signal: 'binXSignal.step'
                         }
                     }
                 ]
             }
-        ], columns.y.quantitative && [
+        ], specColumns.y.quantitative && [
             {
-                "name": "yaxisdata",
-                "transform": [
+                name: 'yaxisdata',
+                transform: [
                     {
-                        "type": "sequence",
-                        "start": {
-                            "signal": "binYSignal.start"
+                        type: 'sequence',
+                        start: {
+                            signal: 'binYSignal.start'
                         },
-                        "stop": {
-                            "signal": "binYSignal.stop"
+                        stop: {
+                            signal: 'binYSignal.stop'
                         },
-                        "step": {
-                            "signal": "binYSignal.step"
+                        step: {
+                            signal: 'binYSignal.step'
                         }
                     }
                 ]
             }
-        ], categoricalColor && topLookup(columns.color, specViewOptions.maxLegends), [
+        ], categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), [
             {
-                "name": "stackedgroup",
-                "source": categoricalColor ? DataNames.Legend : DataNames.Main,
-                "transform": [
-                    stackTransform(columns.sort, columns.x, columns.y),
+                name: 'stackedgroup',
+                source: categoricalColor ? DataNames.Legend : DataNames.Main,
+                transform: [
+                    stackTransform(specColumns.sort, specColumns.x, specColumns.y),
                     {
-                        "type": "extent",
-                        "signal": "xtent",
-                        "field": "s1"
+                        type: 'extent',
+                        signal: 'xtent',
+                        field: FieldNames.StacksStart
                     },
                     {
-                        "type": "formula",
-                        "expr": "datum.s2 % columns",
-                        "as": "_columns"
+                        type: 'formula',
+                        expr: `datum.${FieldNames.StacksEnd} % columns`,
+                        as: '_columns'
                     },
                     {
-                        "type": "formula",
-                        "expr": "floor(datum.s1 / columns)",
-                        "as": "row"
+                        type: 'formula',
+                        expr: `floor(datum.${FieldNames.StacksStart} / columns)`,
+                        as: 'row'
                     },
                     {
-                        "type": "formula",
-                        "expr": `datum.s1 % ${SignalNames.XGridSize}`,
-                        "as": "column"
+                        type: 'formula',
+                        expr: `datum.${FieldNames.StacksStart} % ${SignalNames.XGridSize}`,
+                        as: 'column'
                     },
                     {
-                        "type": "formula",
-                        "expr": `floor((datum.s1 % columns)/ ${SignalNames.XGridSize})`,
-                        "as": "depth"
+                        type: 'formula',
+                        expr: `floor((datum.${FieldNames.StacksStart} % columns)/ ${SignalNames.XGridSize})`,
+                        as: 'depth'
                     },
                     {
-                        "type": "extent",
-                        "signal": "rowxtent",
-                        "field": "row"
+                        type: 'extent',
+                        signal: 'rowxtent',
+                        field: 'row'
                     }
                 ]
             }
@@ -9220,66 +10866,68 @@ void main(void) {
     }
     function stackTransform(sortColumn, xColumn, yColumn) {
         const st = {
-            "type": "stack",
-            "groupby": [
-                yColumn.quantitative ? "lat0" : yColumn.name,
-                xColumn.quantitative ? "long0" : xColumn.name
+            type: 'stack',
+            groupby: [
+                yColumn.quantitative ? FieldNames.StacksLatBin0 : yColumn.name,
+                xColumn.quantitative ? FieldNames.StacksLongBin0 : xColumn.name
             ],
-            "as": [
-                "s1",
-                "s2"
+            as: [
+                FieldNames.StacksStart,
+                FieldNames.StacksEnd
             ]
         };
         if (sortColumn) {
             st.sort = {
-                "field": sortColumn.name
+                field: sortColumn.name
             };
         }
         return st;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks$4 (columns, specViewOptions) {
+    function getMarks$5 (context) {
+        const { specColumns } = context;
         const marks = [
             {
-                "name": "marks2",
-                "type": "rect",
-                "from": {
-                    "data": "stackedgroup"
+                name: 'marks2',
+                type: 'rect',
+                from: {
+                    data: 'stackedgroup'
                 },
-                "encode": {
-                    "update": {
-                        "x": {
-                            "scale": "xband",
-                            "field": columns.x.quantitative ? "long0" : columns.x.name,
-                            "offset": {
-                                "scale": "xinternalscale",
-                                "field": "column"
+                encode: {
+                    update: {
+                        x: {
+                            scale: 'xband',
+                            field: specColumns.x.quantitative ? FieldNames.StacksLongBin0 : specColumns.x.name,
+                            offset: {
+                                scale: 'xinternalscale',
+                                field: 'column'
                             }
                         },
-                        "y": {
-                            "scale": "yband",
-                            "field": columns.y.quantitative ? "lat0" : columns.y.name,
-                            "offset": {
-                                "scale": "yinternalscale",
-                                "field": "depth"
+                        y: {
+                            scale: 'yband',
+                            field: specColumns.y.quantitative ? FieldNames.StacksLatBin0 : specColumns.y.name,
+                            offset: {
+                                scale: 'yinternalscale',
+                                field: 'depth'
                             }
                         },
-                        "z": {
-                            "scale": "zband",
-                            "field": "row"
+                        z: {
+                            scale: 'zband',
+                            field: 'row'
                         },
-                        "depth": {
-                            "scale": "zband",
-                            "band": true
+                        depth: {
+                            scale: 'zband',
+                            band: true
                         },
-                        "width": {
-                            "signal": "actsize"
+                        width: {
+                            signal: 'actsize'
                         },
-                        "height": {
-                            "signal": "actsize"
+                        height: {
+                            signal: 'actsize'
                         },
-                        "fill": fill(columns.color, specViewOptions)
+                        fill: fill(context),
+                        opacity: opacity(context)
                     }
                 }
             }
@@ -9288,125 +10936,126 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales$4 (columns, insight) {
+    function getScales$5 (context) {
+        const { specColumns, insight } = context;
         const scales = [
             {
-                "name": "xband",
-                "type": "band",
-                "domain": columns.x.quantitative ?
+                name: 'xband',
+                type: 'band',
+                domain: specColumns.x.quantitative ?
                     {
-                        "data": "xaxisdata",
-                        "field": "data",
-                        "sort": true
+                        data: 'xaxisdata',
+                        field: 'data',
+                        sort: true
                     }
                     :
                         {
-                            "data": DataNames.Main,
-                            "field": columns.x.quantitative ? "long0" : columns.x.name,
-                            "sort": true
+                            data: DataNames.Main,
+                            field: specColumns.x.quantitative ? FieldNames.StacksLongBin0 : specColumns.x.name,
+                            sort: true
                         },
-                "range": [
+                range: [
                     0,
                     {
-                        "signal": "width"
+                        signal: 'width'
                     }
                 ],
-                "padding": { "signal": SignalNames.OuterPadding },
-                "round": true
+                padding: { signal: SignalNames.OuterPadding },
+                round: true
             },
             {
-                "name": "yband",
-                "type": "band",
-                "reverse": true,
-                "domain": columns.y.quantitative ?
+                name: 'yband',
+                type: 'band',
+                reverse: true,
+                domain: specColumns.y.quantitative ?
                     {
-                        "data": "yaxisdata",
-                        "field": "data",
-                        "sort": true
+                        data: 'yaxisdata',
+                        field: 'data',
+                        sort: true
                     }
                     :
                         {
-                            "data": DataNames.Main,
-                            "field": columns.y.quantitative ? "lat0" : columns.y.name,
-                            "sort": true
+                            data: DataNames.Main,
+                            field: specColumns.y.quantitative ? FieldNames.StacksLatBin0 : specColumns.y.name,
+                            sort: true
                         },
-                "range": "height",
-                "padding": { "signal": SignalNames.OuterPadding },
-                "round": true
+                range: 'height',
+                padding: { signal: SignalNames.OuterPadding },
+                round: true
             },
             {
-                "name": "zband",
-                "type": "band",
-                "reverse": false,
-                "domain": {
-                    "data": "stackedgroup",
-                    "field": "row",
-                    "sort": true
+                name: 'zband',
+                type: 'band',
+                reverse: false,
+                domain: {
+                    data: 'stackedgroup',
+                    field: 'row',
+                    sort: true
                 },
-                "align": 0.0,
-                "range": [
+                align: 0.0,
+                range: [
                     0,
                     {
-                        "signal": "countheight"
+                        signal: 'countheight'
                     }
                 ],
-                "padding": { "signal": SignalNames.InnerPadding },
-                "round": false
+                padding: { signal: SignalNames.InnerPadding },
+                round: false
             },
             {
-                "name": "xinternalscale",
-                "type": "band",
-                "range": [
+                name: 'xinternalscale',
+                type: 'band',
+                range: [
                     0,
                     {
-                        "signal": "xbandw"
+                        signal: 'xbandw'
                     }
                 ],
-                "padding": {
-                    "signal": SignalNames.InnerPadding
+                padding: {
+                    signal: SignalNames.InnerPadding
                 },
-                "domain": {
-                    "data": "stackedgroup",
-                    "field": "column",
-                    "sort": true
+                domain: {
+                    data: 'stackedgroup',
+                    field: 'column',
+                    sort: true
                 }
             },
             {
-                "name": "yinternalscale",
-                "type": "band",
-                "range": [
+                name: 'yinternalscale',
+                type: 'band',
+                range: [
                     0,
                     {
-                        "signal": "ybandw"
+                        signal: 'ybandw'
                     }
                 ],
-                "padding": {
-                    "signal": SignalNames.InnerPadding
+                padding: {
+                    signal: SignalNames.InnerPadding
                 },
-                "domain": {
-                    "data": "stackedgroup",
-                    "field": "depth",
-                    "sort": true
+                domain: {
+                    data: 'stackedgroup',
+                    field: 'depth',
+                    sort: true
                 }
             }
         ];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
@@ -9414,128 +11063,130 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals$4 (insight, columns, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
-            colorBinCountSignal(specViewOptions),
-            colorReverseSignal(specViewOptions),
+    function getSignals$5 (context) {
+        const { specColumns, insight, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
+            colorBinCountSignal(context),
+            colorReverseSignal(context),
             {
-                "name": SignalNames.XGridSize,
-                "value": 3,
-                "bind": {
-                    "name": specViewOptions.language.XGridSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 20,
-                    "step": 1
+                name: SignalNames.XGridSize,
+                value: 3,
+                bind: {
+                    name: specViewOptions.language.XGridSize,
+                    input: 'range',
+                    min: 1,
+                    max: 20,
+                    step: 1
                 }
             },
             {
-                "name": SignalNames.YGridSize,
-                "value": 3,
-                "bind": {
-                    "name": specViewOptions.language.YGridSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 20,
-                    "step": 1
+                name: SignalNames.YGridSize,
+                value: 3,
+                bind: {
+                    name: specViewOptions.language.YGridSize,
+                    input: 'range',
+                    min: 1,
+                    max: 20,
+                    step: 1
                 }
             },
-            columns.x.quantitative && {
-                "name": SignalNames.XBins,
-                "value": 30,
-                "bind": {
-                    "name": specViewOptions.language.XBinSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 60,
-                    "step": 1
+            specColumns.x.quantitative && {
+                name: SignalNames.XBins,
+                value: 30,
+                bind: {
+                    name: specViewOptions.language.XBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 60,
+                    step: 1
                 }
             },
-            columns.y.quantitative && {
-                "name": SignalNames.YBins,
-                "value": 30,
-                "bind": {
-                    "name": specViewOptions.language.YBinSize,
-                    "input": "range",
-                    "min": 1,
-                    "max": 60,
-                    "step": 1
-                }
-            },
-            {
-                "name": SignalNames.InnerPadding,
-                "value": 0.1,
-                "bind": {
-                    "name": specViewOptions.language.InnerPaddingSize,
-                    "input": "range",
-                    "min": 0.1,
-                    "max": 0.6,
-                    "step": 0.1
+            specColumns.y.quantitative && {
+                name: SignalNames.YBins,
+                value: 30,
+                bind: {
+                    name: specViewOptions.language.YBinSize,
+                    input: 'range',
+                    min: 1,
+                    max: 60,
+                    step: 1
                 }
             },
             {
-                "name": SignalNames.OuterPadding,
-                "value": 0.2,
-                "bind": {
-                    "name": specViewOptions.language.OuterPaddingSize,
-                    "input": "range",
-                    "min": 0.1,
-                    "max": 0.6,
-                    "step": 0.1
+                name: SignalNames.InnerPadding,
+                value: 0.1,
+                bind: {
+                    name: specViewOptions.language.InnerPaddingSize,
+                    input: 'range',
+                    min: 0.1,
+                    max: 0.6,
+                    step: 0.1
                 }
             },
             {
-                "name": "columns",
-                "update": `${SignalNames.XGridSize}*${SignalNames.YGridSize}`
+                name: SignalNames.OuterPadding,
+                value: 0.2,
+                bind: {
+                    name: specViewOptions.language.OuterPaddingSize,
+                    input: 'range',
+                    min: 0.1,
+                    max: 0.6,
+                    step: 0.1
+                }
             },
             {
-                "name": "xbandw",
-                "update": `bandwidth('xband')`
+                name: 'columns',
+                update: `${SignalNames.XGridSize}*${SignalNames.YGridSize}`
             },
             {
-                "name": "xbandsize",
-                "update": `(xbandw / (${SignalNames.XGridSize} + ${SignalNames.InnerPadding}))*(1-${SignalNames.InnerPadding})`
+                name: 'xbandw',
+                update: 'bandwidth(\'xband\')'
             },
             {
-                "name": "ybandw",
-                "update": `height/((${columns.y.quantitative ? SignalNames.YBins : columns.y.stats.distinctValueCount}) * (1 + ${SignalNames.OuterPadding}))`
+                name: 'xbandsize',
+                update: `(xbandw / (${SignalNames.XGridSize} + ${SignalNames.InnerPadding}))*(1-${SignalNames.InnerPadding})`
             },
             {
-                "name": "ybandsize",
-                "update": `(ybandw / (${SignalNames.YGridSize} + ${SignalNames.InnerPadding}))*(1-${SignalNames.InnerPadding})`
+                name: 'ybandw',
+                update: `height/((${specColumns.y.quantitative ? SignalNames.YBins : specColumns.y.stats.distinctValueCount}) * (1 + ${SignalNames.OuterPadding}))`
             },
             {
-                "name": "actsize",
-                "update": "min(xbandsize,ybandsize)"
+                name: 'ybandsize',
+                update: `(ybandw / (${SignalNames.YGridSize} + ${SignalNames.InnerPadding}))*(1-${SignalNames.InnerPadding})`
             },
             {
-                "name": "countheight",
-                "update": "rowxtent[1]*actsize"
+                name: 'actsize',
+                update: 'min(xbandsize,ybandsize)'
+            },
+            {
+                name: 'countheight',
+                update: `rowxtent[1]*actsize*${SignalNames.ZProportion}/${defaultZProportion}`
             }
-        ], insight.columns.facet && facetSignals(insight.facets, specViewOptions));
+        ], insight.columns.facet && facetSignals(context));
         return signals;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const stacks = (insight, columns, specViewOptions) => {
+    const stacks = (context) => {
+        const { specColumns, insight } = context;
         const errors = [];
-        if (!columns.x)
-            errors.push(`Must set a field for x axis`);
-        if (!columns.y)
-            errors.push(`Must set a field for y axis`);
+        if (!specColumns.x)
+            errors.push('Must set a field for x axis');
+        if (!specColumns.y)
+            errors.push('Must set a field for y axis');
         checkForFacetErrors(insight.facets, errors);
         const specCapabilities = {
             roles: [
                 {
                     role: 'x',
                     binnable: true,
-                    axisSelection: columns.x && columns.x.quantitative ? 'range' : 'exact',
+                    axisSelection: specColumns.x && specColumns.x.quantitative ? 'range' : 'exact',
                     signals: [SignalNames.XBins]
                 },
                 {
                     role: 'y',
                     binnable: true,
-                    axisSelection: columns.y && columns.y.quantitative ? 'range' : 'exact',
+                    axisSelection: specColumns.y && specColumns.y.quantitative ? 'range' : 'exact',
                     signals: [SignalNames.YBins]
                 },
                 {
@@ -9559,154 +11210,175 @@ void main(void) {
                 vegaSpec: null,
             };
         }
-        const size = columns.facet ? facetSize(insight.facets, insight.size, specViewOptions) : insight.size;
+        const size = specColumns.facet ? facetSize(context) : insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals$4(insight, columns, specViewOptions),
-            data: getData$4(insight, columns, specViewOptions),
-            scales: getScales$4(columns, insight),
-            marks: getMarks$4(columns, specViewOptions)
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$5(context),
+            data: getData$5(context),
+            scales: getScales$5(context),
+            marks: getMarks$5(context)
         };
         if (!insight.hideAxes) {
-            vegaSpec.axes = getAxes$3(specViewOptions, columns);
+            vegaSpec.axes = getAxes$4(context);
         }
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
-        if (columns.facet) {
-            vegaSpec.layout = layout(specViewOptions);
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
         }
         else {
             //use autosize only when not faceting
-            vegaSpec.autosize = "fit";
+            vegaSpec.autosize = 'fit';
         }
         return { vegaSpec, specCapabilities };
     };
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getData$5 (insight, columns, specViewOptions) {
-        const categoricalColor = columns.color && !columns.color.quantitative;
-        const TreeMapDataName = "SandDanceTreeMapData";
-        const data = allTruthy(facetSourceData(columns.facet, insight.facets, TreeMapDataName), [
+    function getData$6 (context) {
+        const { specColumns, insight, specViewOptions } = context;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
+        const TreeMapDataName = 'SandDanceTreeMapData';
+        const data = allTruthy(facetSourceData(specColumns.facet, insight.facets, TreeMapDataName), [
             {
-                "name": DataNames.Main,
-                "source": TreeMapDataName,
-                "transform": allTruthy(columns.facet && facetTransforms(columns.facet, insight.facets), !columns.facet && treemapTransforms(insight))
+                name: DataNames.Main,
+                source: TreeMapDataName,
+                transform: allTruthy(specColumns.facet && facetTransforms(specColumns.facet, insight.facets), !specColumns.facet && treemapTransforms(insight))
             }
-        ], categoricalColor && topLookup(columns.color, specViewOptions.maxLegends), columns.facet && facetGroupData(DataNames.Main));
+        ], categoricalColor && topLookup(specColumns.color, specViewOptions.maxLegends), specColumns.facet && facetGroupData(DataNames.Main));
         return data;
     }
     function treemapTransforms(insight) {
         const transforms = [
             {
-                "type": "nest",
-                "keys": [insight.columns.group || "__NONE__"]
+                type: 'nest',
+                keys: [insight.columns.group || '__NONE__']
             },
             {
-                "type": "treemap",
-                "field": insight.columns.size,
-                "sort": { "field": "value", "order": "descending" },
-                "round": true,
-                "method": { "signal": SignalNames.TreeMapMethod },
-                "padding": 1,
-                "size": [{ "signal": "width" }, { "signal": "height" }]
+                type: 'treemap',
+                field: insight.columns.size,
+                sort: { field: 'value', order: 'descending' },
+                round: true,
+                method: { signal: SignalNames.TreeMapMethod },
+                padding: 1,
+                size: [{ signal: 'width' }, { signal: 'height' }],
+                as: [
+                    FieldNames.TreemapStackX0,
+                    FieldNames.TreemapStackY0,
+                    FieldNames.TreemapStackX1,
+                    FieldNames.TreemapStackY1,
+                    FieldNames.TreemapStackDepth,
+                    FieldNames.TreemapStackChildren
+                ]
             }
         ];
         return transforms;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getMarks$5 (data, columns, specViewOptions) {
+    function getMarks$6 (context, data) {
+        const { specColumns } = context;
         const marks = [
             {
-                "type": "rect",
-                "from": {
+                type: 'rect',
+                from: {
                     data
                 },
-                "encode": {
-                    "update": {
-                        "x": { "field": "x0" },
-                        "y": { "field": "y0" },
-                        "x2": { "field": "x1" },
-                        "y2": { "field": "y1" },
-                        "fill": fill(columns.color, specViewOptions)
+                encode: {
+                    update: {
+                        x: { field: FieldNames.TreemapStackX0 },
+                        y: { field: FieldNames.TreemapStackY0 },
+                        x2: { field: FieldNames.TreemapStackX1 },
+                        y2: { field: FieldNames.TreemapStackY1 },
+                        fill: fill(context),
+                        opacity: opacity(context)
                     }
                 }
             }
         ];
-        if (columns.z) {
+        if (specColumns.z) {
             const update = marks[0].encode.update;
             update.z = {
-                "value": 0
+                value: 0
             };
-            update.depth = zeroIfCollapsed({
-                "scale": ScaleNames.Z,
-                "field": columns.z.name
-            });
+            update.depth = [
+                {
+                    test: testForCollapseSelection(),
+                    value: 0
+                },
+                {
+                    scale: ScaleNames.Z,
+                    field: specColumns.z.name
+                }
+            ];
         }
         return marks;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getScales$5 (columns, insight) {
+    function getScales$6 (context) {
+        const { specColumns, insight } = context;
         const scales = [];
-        if (columns.color) {
-            if (columns.color.quantitative) {
-                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+        if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+            if (specColumns.color.quantitative) {
+                scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
             }
             else {
                 scales.push({
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 });
             }
         }
-        if (columns.z) {
-            const zRange = [0, { "signal": SignalNames.ZHeight }];
-            scales.push(columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, false)
+        if (specColumns.z) {
+            const zRange = [0, { signal: SignalNames.ZHeight }];
+            scales.push(specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, false)
                 :
-                    pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name));
+                    pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name));
         }
         return scales;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function getSignals$5 (insight, specViewOptions) {
-        const signals = allTruthy(textSignals(specViewOptions), [
-            colorBinCountSignal(specViewOptions),
+    function getSignals$6 (context) {
+        const { insight, specViewOptions } = context;
+        const signals = allTruthy(textSignals(context), [
+            colorBinCountSignal(context),
             {
-                "name": SignalNames.TreeMapMethod,
-                "value": "squarify",
-                "bind": {
-                    "name": specViewOptions.language.treeMapMethod,
-                    "input": "select",
-                    "options": [
-                        "squarify", "binary"
+                name: SignalNames.TreeMapMethod,
+                value: 'squarify',
+                bind: {
+                    name: specViewOptions.language.treeMapMethod,
+                    input: 'select',
+                    options: [
+                        'squarify', 'binary'
                     ]
                 }
             },
-            colorReverseSignal(specViewOptions)
-        ], insight.columns.facet && facetSignals(insight.facets, specViewOptions));
+            colorReverseSignal(context)
+        ], insight.columns.facet && facetSignals(context));
         return signals;
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    const treemap = (insight, columns, specViewOptions) => {
+    const treemap = (context) => {
+        const { specColumns, insight, specViewOptions } = context;
         const errors = [];
-        if (!columns.size)
-            errors.push(`Must set a field for size`);
+        if (!specColumns.size)
+            errors.push('Must set a field for size');
         checkForFacetErrors(insight.facets, errors);
         const specCapabilities = {
             roles: [
@@ -9740,56 +11412,60 @@ void main(void) {
                 vegaSpec: null,
             };
         }
-        const categoricalColor = columns.color && !columns.color.quantitative;
+        const categoricalColor = specColumns.color && !specColumns.color.quantitative;
         const dataName = categoricalColor ? DataNames.Legend : DataNames.Main;
-        const TreeMapName = "SandDanceTreeMapFaceted";
-        const data = getData$5(insight, columns, specViewOptions);
-        let marks = getMarks$5(columns.facet ? TreeMapName : dataName, columns, specViewOptions);
-        if (columns.facet) {
+        const TreeMapName = 'SandDanceTreeMapFaceted';
+        const data = getData$6(context);
+        let marks = getMarks$6(context, specColumns.facet ? TreeMapName : dataName);
+        if (specColumns.facet) {
             const childData = {
-                "name": TreeMapName,
-                "source": DataNames.FacetGroupCell,
-                "transform": treemapTransforms(insight)
+                name: TreeMapName,
+                source: DataNames.FacetGroupCell,
+                transform: treemapTransforms(insight)
             };
             marks = facetMarks(specViewOptions, dataName, marks, null, [childData]);
             marks[0].marks;
         }
-        const size = columns.facet ? facetSize(insight.facets, insight.size, specViewOptions) : insight.size;
+        const size = specColumns.facet ? facetSize(context) : insight.size;
         var vegaSpec = {
-            "$schema": "https://vega.github.io/schema/vega/v3.json",
-            "height": size.height,
-            "width": size.width,
-            signals: getSignals$5(insight, specViewOptions),
+            $schema: 'https://vega.github.io/schema/vega/v3.json',
+            height: size.height,
+            width: size.width,
+            signals: getSignals$6(context),
             data,
-            scales: getScales$5(columns, insight),
+            scales: getScales$6(context),
             marks
         };
-        if (columns.color && !insight.hideLegend) {
-            vegaSpec.legends = [legend(columns.color)];
+        const legends = getLegends(context);
+        if (legends) {
+            vegaSpec.legends = legends;
         }
-        if (columns.facet) {
-            vegaSpec.layout = layout(specViewOptions);
+        if (specColumns.facet) {
+            vegaSpec.layout = layout(context);
         }
         else {
             //use autosize only when not faceting
-            vegaSpec.autosize = "fit";
+            vegaSpec.autosize = 'fit';
         }
         return { vegaSpec, specCapabilities };
     };
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     const creators = {
-        barchart,
+        barchart: barchartV,
+        barchartH,
+        barchartV,
         density,
         grid,
         scatterplot,
         stacks,
         treemap
     };
-    function create(insight, specColumns, specViewOptions) {
+    function create(context) {
+        const { insight } = context;
         const creator = creators[insight.chart];
         if (creator) {
-            const specResult = creator(insight, specColumns, specViewOptions);
+            const specResult = creator(context);
             //TODO: find why Vega is doing this. fixup for facets
             if (specResult.vegaSpec && insight.columns && insight.columns.facet && insight.facets.columns === 2 && insight.facets.rows === 1) {
                 specResult.vegaSpec.width = insight.size.width / 3;
@@ -9799,7 +11475,8 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
-    function cloneVegaSpecWithData(insight, specColumns, specViewOptions, currData) {
+    function cloneVegaSpecWithData(context, currData) {
+        const { specColumns } = context;
         const columns = [
             specColumns.color,
             specColumns.facet,
@@ -9811,7 +11488,7 @@ void main(void) {
             specColumns.z
         ];
         inferAll(columns, currData);
-        const specResult = create(insight, specColumns, specViewOptions);
+        const specResult = create(context);
         if (!specResult.errors) {
             const data0 = specResult.vegaSpec.data[0];
             data0.values = currData;
@@ -9820,6 +11497,17 @@ void main(void) {
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
+    function valueToBoolean(value) {
+        if (typeof value === 'string') {
+            switch (value.toLowerCase()) {
+                case 'true':
+                    return true;
+                case 'false':
+                    return false;
+            }
+        }
+        return !!value;
+    }
     function valueToString(value) {
         if (value == null) {
             return '';
@@ -9857,6 +11545,7 @@ void main(void) {
             this.groups.forEach(group => {
                 group.expressions.forEach(ex => {
                     ex.column = this.getColumn(ex.name);
+                    ex.valueBool = valueToBoolean(ex.value);
                     ex.valueLow = valueToString(ex.value).toLocaleLowerCase();
                     ex.stringOperation = isStringOperation(ex);
                 });
@@ -9879,9 +11568,19 @@ void main(void) {
             }
             let dataValue = actualDataValue;
             let expressionValue = ex.value;
-            if ((ex.column && ex.column.type === 'string') || ex.stringOperation) {
-                dataValue = valueToString(actualDataValue).toLocaleLowerCase();
-                expressionValue = ex.valueLow;
+            if (ex.column) {
+                if (ex.column.type === 'string' || ex.stringOperation) {
+                    dataValue = valueToString(actualDataValue).toLocaleLowerCase();
+                    expressionValue = ex.valueLow;
+                }
+                else if (ex.column.type === 'boolean') {
+                    dataValue = valueToBoolean(actualDataValue);
+                    expressionValue = ex.valueBool;
+                }
+                else if (ex.column.quantitative) {
+                    dataValue = +actualDataValue;
+                    expressionValue = +ex.value;
+                }
             }
             switch (ex.operator) {
                 case '!=':
@@ -9911,7 +11610,7 @@ void main(void) {
                 //run on all columns
                 const group = {
                     expressions: this.columns.map((column, i) => {
-                        const ex2 = Object.assign({}, ex, { column, name: column.name });
+                        const ex2 = Object.assign(Object.assign({}, ex), { column, name: column.name });
                         if (i) {
                             ex2.clause = '||';
                         }
@@ -10047,6 +11746,15 @@ void main(void) {
             }
             return { datum: null, index: -1 };
         }
+        finalize() {
+            this.data = null;
+            this.filteredData = null;
+            if (this.selection) {
+                this.selection.excluded = null;
+                this.selection.included = null;
+                this.selection = null;
+            }
+        }
     }
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -10068,6 +11776,12 @@ void main(void) {
             this.hasColorMaps = hasColorMaps;
             this.element = addDiv(parentElement, `${cssPrefix}unitControls`);
             this.clear();
+        }
+        finalize() {
+            if (this.element)
+                this.element.innerHTML = '';
+            this.dataScope = null;
+            this.element = null;
         }
         clear() {
             this.state = {
@@ -10179,19 +11893,17 @@ void main(void) {
         ];
         const rows = [];
         for (let prop in props.item) {
-            switch (prop) {
-                case FieldNames.Active:
-                case FieldNames.Collapsed:
-                case FieldNames.Selected:
-                case GL_ORDINAL:
-                    continue;
-                default:
-                    rows.push({
-                        cells: [
-                            { content: prop }, { content: linkSelect(props.language, prop, props.item[prop], props.selectionHandler) }
-                        ]
-                    });
+            if (prop === GL_ORDINAL) {
+                continue;
             }
+            if (isInternalFieldName(prop)) {
+                continue;
+            }
+            rows.push({
+                cells: [
+                    { content: prop }, { content: linkSelect(props.language, prop, props.item[prop], props.selectionHandler) }
+                ]
+            });
         }
         return (createElement("div", null,
             props.hasColorMaps && colorMapping,
@@ -10267,15 +11979,16 @@ void main(void) {
         let lowOperator;
         let highValue;
         let highOperator;
-        const rowText = legend.rows[clickedIndex].value;
+        const rowText = legend.rows[clickedIndex].label;
         switch (colorBinType) {
-            case 'continuous':
+            case 'continuous': {
                 lowValue = rowText;
                 if (clickedIndex < keys.length - 1) {
                     highValue = legend.rows[clickedIndex + 1].value;
                 }
                 break;
-            default:
+            }
+            default: {
                 if (rowText.indexOf('null') > 0) {
                     const ex = {
                         expressions: [selectNullOrEmpty(column)]
@@ -10300,6 +12013,7 @@ void main(void) {
                         }
                     }
                 }
+            }
         }
         if (lowValue)
             lowValue = notNice(lowValue);
@@ -10329,6 +12043,7 @@ void main(void) {
         return axes.map(axis => {
             const newAxis = deepMerge(axis);
             newAxis.domain.color = axisColor;
+            newAxis.title.color = axisTextColor;
             newAxis.ticks.forEach(t => { t.color = axisColor; });
             newAxis.tickText.forEach(t => { t.color = axisTextColor; });
             return newAxis;
@@ -10336,7 +12051,7 @@ void main(void) {
     }
     function cloneTextData(textData, color) {
         return textData.map(t => {
-            return Object.assign({}, t, { color });
+            return Object.assign(Object.assign({}, t), { color });
         });
     }
     function colorEquals(a, b) {
@@ -10366,6 +12081,99 @@ void main(void) {
         }
         return { axes, textData };
     }
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    class Tooltip {
+        constructor(props) {
+            const renderProps = {
+                cssPrefix: props.cssPrefix,
+                rows: getRows(props.item, props.options)
+            };
+            this.element = renderTooltip(renderProps);
+            if (this.element) {
+                this.element.style.position = 'absolute';
+                this.child = this.element.firstChild;
+                document.body.appendChild(this.element);
+                //measure and move as necessary
+                let m = outerSize(this.child);
+                while (m.height > document.documentElement.clientHeight) {
+                    let tr = this.child.querySelector('tr:last-child');
+                    if (tr) {
+                        tr.parentElement.removeChild(tr);
+                    }
+                    else {
+                        break;
+                    }
+                    m = outerSize(this.child);
+                }
+                if (props.position.clientX + m.width >= document.documentElement.clientWidth) {
+                    this.child.style.right = '0';
+                }
+                let moveTop = true;
+                if (props.position.clientY + m.height >= document.documentElement.clientHeight) {
+                    if (props.position.clientY - m.height > 0) {
+                        this.child.style.bottom = '0';
+                    }
+                    else {
+                        moveTop = false;
+                    }
+                }
+                if (moveTop) {
+                    this.element.style.top = `${props.position.clientY}px`;
+                }
+                this.element.style.left = `${props.position.clientX}px`;
+            }
+        }
+        finalize() {
+            if (this.element) {
+                document.body.removeChild(this.element);
+            }
+            this.element = null;
+        }
+    }
+    function getRows(item, options) {
+        const rows = [];
+        for (let columnName in item) {
+            if (columnName === GL_ORDINAL) {
+                continue;
+            }
+            if (isInternalFieldName(columnName)) {
+                continue;
+            }
+            if (options && options.exclude) {
+                if (options.exclude(columnName)) {
+                    continue;
+                }
+            }
+            let value = item[columnName];
+            let content;
+            if (options && options.displayValue) {
+                content = options.displayValue(value);
+            }
+            else {
+                switch (value) {
+                    case null:
+                        content = createElement("i", null, "null");
+                        break;
+                    case undefined:
+                        content = createElement("i", null, "undefined");
+                        break;
+                    default:
+                        content = value.toString();
+                }
+            }
+            rows.push({
+                cells: [
+                    { content: columnName + ':' },
+                    { content }
+                ]
+            });
+        }
+        return rows;
+    }
+    const renderTooltip = (props) => {
+        return props.rows.length === 0 ? null : (createElement("div", { className: `${props.cssPrefix}tooltip` }, Table({ rows: props.rows })));
+    };
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
     let didRegisterColorSchemes = false;
@@ -10434,10 +12242,11 @@ void main(void) {
         }
         onDataChanged(dataLayout, filter) {
             switch (dataLayout) {
-                case DataLayoutChange.same:
+                case DataLayoutChange.same: {
                     this.renderSameLayout();
                     break;
-                case DataLayoutChange.refine:
+                }
+                case DataLayoutChange.refine: {
                     //save cube colors
                     const oldColorContext = this.colorContexts[this.currentColorContext];
                     let colorMap;
@@ -10465,7 +12274,8 @@ void main(void) {
                         this.options.onDataFilter(this.insight.filter, this._dataScope.currentData());
                     }
                     break;
-                case DataLayoutChange.reset:
+                }
+                case DataLayoutChange.reset: {
                     const colorContext = {
                         colorMap: null,
                         legend: null,
@@ -10482,18 +12292,20 @@ void main(void) {
                         this.options.onDataFilter(null, null);
                     }
                     break;
+                }
             }
             if (this.options.onSelectionChanged) {
                 const sel = this.getSelection();
-                this.options.onSelectionChanged((sel && sel.search) || null);
+                this.options.onSelectionChanged((sel && sel.search) || null, 0, (sel && sel.selectedData) || null);
             }
         }
         renderNewLayout(c, view) {
             const currData = this._dataScope.currentData();
-            const specResult = cloneVegaSpecWithData(this.insight, this._specColumns, this.options, currData);
+            const context = { specColumns: this._specColumns, insight: this.insight, specViewOptions: this.options };
+            const specResult = cloneVegaSpecWithData(context, currData);
             if (!specResult.errors) {
                 const uiValues = extractSignalValuesFromView(this.vegaViewGl, this.vegaSpec);
-                this._signalValues = Object.assign({}, this._signalValues, uiValues, this.insight.signalValues);
+                this._signalValues = Object.assign(Object.assign(Object.assign({}, this._signalValues), uiValues), this.insight.signalValues);
                 applySignalValues(this._signalValues, specResult.vegaSpec);
                 this.vegaSpec = specResult.vegaSpec;
                 this.options.onVegaSpec && this.options.onVegaSpec(this.vegaSpec);
@@ -10546,7 +12358,7 @@ void main(void) {
             let recoloredAxes;
             if (newViewerOptions) {
                 if (newViewerOptions.colors) {
-                    recoloredAxes = recolorAxes(this.presenter.stage, this.options.colors, newViewerOptions.colors);
+                    recoloredAxes = recolorAxes(this.presenter.stage, this._lastColorOptions, newViewerOptions.colors);
                     axes = recoloredAxes.axes || axes;
                     textData = recoloredAxes.textData || textData;
                 }
@@ -10651,6 +12463,10 @@ void main(void) {
             };
         }
         _render(insight, data, options) {
+            if (this._tooltip) {
+                this._tooltip.finalize();
+                this._tooltip = null;
+            }
             if (this._dataScope.setData(data, options.columns)) {
                 //data is different, reset the signal value cache
                 this._signalValues = {};
@@ -10658,6 +12474,7 @@ void main(void) {
             this._specColumns = getSpecColumns(insight, this._dataScope.getColumns(options.columnTypes));
             const ordinalMap = assignOrdinals(this._specColumns, data, options.ordinalMap);
             this.insight = clone(insight);
+            this._lastColorOptions = clone(this.options.colors);
             this._shouldSaveColorContext = () => !options.initialColorContext;
             const colorContext = options.initialColorContext || {
                 colorMap: null,
@@ -10710,7 +12527,7 @@ void main(void) {
                     this.select(search);
                 }
             };
-            const polygonLayer = axisSelectionLayer(this.specCapabilities, this._specColumns, stage, onClick, this.options.colors.axisSelectHighlight, this.options.selectionPolygonZ);
+            const polygonLayer = axisSelectionLayer(this.presenter, this.specCapabilities, this._specColumns, stage, onClick, this.options.colors.axisSelectHighlight, this.options.selectionPolygonZ);
             const order = 1; //after textlayer but before others
             deckProps.layers.splice(order, 0, polygonLayer);
             finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
@@ -10728,7 +12545,7 @@ void main(void) {
                     this._details.populate(this._dataScope.selection, indexWithinSelection.index);
                     if (this.options.onSelectionChanged) {
                         const sel = this.getSelection();
-                        this.options.onSelectionChanged(sel.search, indexWithinSelection.index);
+                        this.options.onSelectionChanged(sel.search, indexWithinSelection.index, sel.selectedData);
                     }
                     return;
                 }
@@ -10744,9 +12561,40 @@ void main(void) {
             };
             this.select(search);
         }
+        onCubeHover(e, cube) {
+            if (this._tooltip) {
+                this._tooltip.finalize();
+                this._tooltip = null;
+            }
+            if (!cube) {
+                return;
+            }
+            const currentData = this._dataScope.currentData();
+            const index = getDataIndexOfCube(cube, currentData);
+            if (index >= 0) {
+                this._tooltip = new Tooltip({
+                    options: this.options.tooltipOptions,
+                    item: currentData[index],
+                    position: e,
+                    cssPrefix: this.presenter.style.cssPrefix
+                });
+            }
+        }
+        onTextHover(e, t) {
+            //return true if highlight color is different
+            if (!t || !this.options.getTextColor || !this.options.getTextHighlightColor)
+                return false;
+            return !colorIsEqual(this.options.getTextColor(t), this.options.getTextHighlightColor(t));
+        }
         createConfig(c) {
+            const { getTextColor, getTextHighlightColor, onTextClick } = this.options;
             const defaultPresenterConfig$$1 = {
+                getTextColor,
+                getTextHighlightColor,
+                onTextClick,
                 onCubeClick: this.onCubeClick.bind(this),
+                onCubeHover: this.onCubeHover.bind(this),
+                onTextHover: this.onTextHover.bind(this),
                 preStage: this.preStage.bind(this),
                 onPresent: this.options.onPresent,
                 onLayerClick: (info, pickedInfos, e) => {
@@ -10755,7 +12603,7 @@ void main(void) {
                     }
                 },
                 onLegendClick: (e, legend, clickedIndex) => {
-                    const legendRow = legend.rows[clickedIndex] && legend.rows[clickedIndex];
+                    const legendRow = clickedIndex !== null && legend.rows[clickedIndex];
                     if (legendRow) {
                         if (this.options.onLegendRowClick) {
                             this.options.onLegendRowClick(e, legendRow);
@@ -10764,8 +12612,15 @@ void main(void) {
                             this.select(legendRow.search);
                         }
                     }
+                    else if (this.options.onLegendHeaderClick) {
+                        //header clicked
+                        this.options.onLegendHeaderClick(e);
+                    }
                 }
             };
+            if (this.options.onBeforeCreateLayers) {
+                defaultPresenterConfig$$1.preLayer = stage => this.options.onBeforeCreateLayers(stage, this.specCapabilities);
+            }
             const config = {
                 presenter: this.presenter,
                 presenterConfig: Object.assign(defaultPresenterConfig$$1, c)
@@ -10829,6 +12684,8 @@ void main(void) {
          * Gets the current selection.
          */
         getSelection() {
+            if (!this._dataScope)
+                return null;
             const selectionState = {
                 search: (this._dataScope.selection && this._dataScope.selection.search) || null,
                 selectedData: (this._dataScope.selection && this._dataScope.selection.included) || null,
@@ -10852,7 +12709,7 @@ void main(void) {
          */
         deActivate() {
             return new Promise((resolve, reject) => {
-                if (this._dataScope.active) {
+                if (this._dataScope && this._dataScope.active) {
                     this._animator.deactivate().then(() => {
                         this._details.render();
                         resolve();
@@ -10877,11 +12734,39 @@ void main(void) {
         getSignalValues() {
             return extractSignalValuesFromView(this.vegaViewGl, this.vegaSpec);
         }
+        finalize() {
+            if (this._dataScope)
+                this._dataScope.finalize();
+            if (this._details)
+                this._details.finalize();
+            if (this._tooltip)
+                this._tooltip.finalize();
+            if (this.vegaViewGl)
+                this.vegaViewGl.finalize();
+            if (this.presenter)
+                this.presenter.finalize();
+            if (this.element)
+                this.element.innerHTML = '';
+            this.colorContexts = null;
+            this.element = null;
+            this.options = null;
+            this.presenter = null;
+            this.vegaSpec = null;
+            this.vegaViewGl = null;
+            this._animator = null;
+            this._dataScope = null;
+            this._details = null;
+            this._tooltip = null;
+        }
     }
     /**
      * Default Viewer options.
      */
     Viewer.defaultViewerOptions = defaultViewerOptions;
+
+    // Copyright (c) Microsoft Corporation. All rights reserved.
+    // Licensed under the MIT license.
+    const version = '1.6.7';
 
     // Copyright (c) Microsoft Corporation. All rights reserved.
 
@@ -10893,6 +12778,7 @@ void main(void) {
     exports.util = util$1;
     exports.VegaDeckGl = index$2;
     exports.Viewer = Viewer;
+    exports.version = version;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

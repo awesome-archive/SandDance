@@ -3,7 +3,7 @@
 import * as deck from '@deck.gl/core';
 import * as layers from '@deck.gl/layers';
 import * as luma from 'luma.gl';
-import * as vega from 'vega-lib';
+import * as vega from 'vega';
 import * as SandDance from '@msrvida/sanddance';
 
 interface Datum {
@@ -40,8 +40,8 @@ const insight: SandDance.types.Insight = {
     },
     scheme: 'blues',
     size: { height: 500, width: 500 },
-    chart: "scatterplot",
-    view: "3d"
+    chart: 'scatterplot',
+    view: '3d'
 };
 
 viewer.render(insight, data);

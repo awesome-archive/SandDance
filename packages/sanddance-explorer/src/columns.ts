@@ -1,12 +1,23 @@
-import { SandDance } from "@msrvida/sanddance-react";
-import { strings } from "./language";
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+import { preferredColumnForTreemapSize } from '@msrvida/chart-recommender';
+import { SandDance } from '@msrvida/sanddance-react';
+import { strings } from './language';
+import { Transforms } from 'vega-typings/types';
 
-export function ensureColumnsExist(insightColumns: SandDance.types.InsightColumns, actualColumns: SandDance.types.Column[]) {
+export function ensureColumnsExist(insightColumns: SandDance.types.InsightColumns, actualColumns: SandDance.types.Column[], transform: Transforms[]) {
     //ensure columns exist
     for (let role in insightColumns) {
         let columnName = insightColumns[role];
         let column = actualColumns.filter(c => c.name === columnName)[0];
-        if (!column) {
+        let transformColumn = transform ? transform.filter(t => {
+            switch (t.type) {
+                case 'formula': {
+                    return t.as === columnName;
+                }
+            }
+        })[0] : null;
+        if (!(column || transformColumn)) {
             delete insightColumns[role];
         }
     }
@@ -14,7 +25,7 @@ export function ensureColumnsExist(insightColumns: SandDance.types.InsightColumn
 
 export function ensureColumnsPopulated(chart: SandDance.types.Chart, insightColumns: SandDance.types.InsightColumns, actualColumns: SandDance.types.Column[]) {
     //ensure columns are populated
-    const firstColumn = actualColumns[0];
+    const firstColumn = actualColumns.filter(c => !SandDance.util.isInternalFieldName(c.name))[0];
     const firstColumnName = firstColumn && firstColumn.name;
     const ensureColumn = (role: SandDance.types.InsightColumnRoles) => {
         if (!insightColumns[role]) {
@@ -23,7 +34,11 @@ export function ensureColumnsPopulated(chart: SandDance.types.Chart, insightColu
     };
     switch (chart) {
         case 'barchart':
+        case 'barchartV':
             ensureColumn('x');
+            break;
+        case 'barchartH':
+            ensureColumn('y');
             break;
         case 'density':
         case 'scatterplot':
@@ -33,12 +48,9 @@ export function ensureColumnsPopulated(chart: SandDance.types.Chart, insightColu
             break;
         case 'treemap':
             if (!insightColumns.size) {
-                for (let i = 0; i < actualColumns.length; i++) {
-                    let c = actualColumns[i];
-                    if (c.quantitative) {
-                        insightColumns.size = c.name;
-                        break;
-                    }
+                insightColumns.size = preferredColumnForTreemapSize(actualColumns, true);
+                if (!insightColumns.size) {
+                    insightColumns.size = preferredColumnForTreemapSize(actualColumns, false);
                 }
             }
             if (!insightColumns.size) {

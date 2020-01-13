@@ -5,12 +5,13 @@ import * as layers from '@deck.gl/layers';
 import * as luma from 'luma.gl';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as vega from 'vega-lib';
+import * as SandDanceExplorer from '@msrvida/sanddance-explorer';
+import * as vega from 'vega';
 import {
-  DataFileType,
-  Explorer,
-  Prefs,
-  SandDance
+    ColorSettings,
+    DataFileType,
+    Explorer,
+    Prefs
 } from '@msrvida/sanddance-explorer';
 import { DataSource, InsightMap } from './types';
 import { fabric } from './fabricComponents';
@@ -19,40 +20,45 @@ import { use } from './base';
 
 use(fabric, vega, deck, layers, luma);
 
-const dataSets = Array.from(
-  document.querySelectorAll<HTMLAnchorElement>("a.sanddance-app-static-content")
-).map<DataSource>(n => {
-  return {
-    dataSourceType: 'sample',
-    id: n.id,
-    displayName: n.dataset["displayName"],
-    dataUrl: n.href,
-    type: n.dataset["type"] as DataFileType
-  };
+const staticContent = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('a.sanddance-app-static-content')
+);
+
+const dataSets = staticContent.filter(f => f.id).map<DataSource>(n => {
+    const forData = staticContent.filter(f => f.dataset['for'] === n.id)[0];
+    return {
+        dataSourceType: 'sample',
+        id: n.id,
+        displayName: n.dataset['displayName'],
+        dataUrl: n.href,
+        type: n.dataset['type'] as DataFileType,
+        snapshotsUrl: forData ? forData.href : null
+    };
 });
 
 export let explorer: Explorer;
-export { SandDance };
+
+export { SandDanceExplorer };
 
 declare var insights: InsightMap;
 declare var darkTheme: boolean;
 declare function setTheme(darkTheme: boolean): void;
-declare var prefs: { [datasetId: string]: Prefs };
-declare var themeColors: { [theme: string]: SandDance.types.ColorSettings };
+declare var options: { [datasetId: string]: Prefs };
+declare var themeColors: { [theme: string]: ColorSettings };
 
 const undef = typeof undefined;
 
 ReactDOM.render(
-  <SandDanceApp
-    setTheme={typeof setTheme !== undef && setTheme}
-    darkTheme={typeof darkTheme !== undef && darkTheme}
-    insights={typeof insights !== undef && insights}
-    initialPrefs={typeof prefs !== undef && prefs}
-    themeColors={typeof themeColors !== undef && themeColors}
-    dataSources={dataSets}
-    mounted={app => {
-      explorer = app.explorer;
-    }}
-  />,
-  document.getElementById("app")
+    <SandDanceApp
+        setTheme={typeof setTheme !== undef && setTheme}
+        darkTheme={typeof darkTheme !== undef && darkTheme}
+        insights={typeof insights !== undef && insights}
+        initialOptions={typeof options !== undef && options}
+        themeColors={typeof themeColors !== undef && themeColors}
+        dataSources={dataSets}
+        mounted={app => {
+            explorer = app.explorer;
+        }}
+    />,
+    document.getElementById('app')
 );

@@ -1,0 +1,24 @@
+{
+  "name": "@msrvida/sanddance-embed",
+  "version": "2.0.0",
+  "description": "SandDance Explorer with embedded data.",
+  "browser": "dist/umd/sanddance-embed.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "eslint": "eslint -c ../../.eslintrc.json --fix ./src/**/*.ts*",
+    "build-css": "node-sass ./src/css -o ./dist/css",
+    "build-typescript": "tsc -p .",
+    "build": "npm run build-css && npm run build-typescript"
+  },
+  "dependencies": {
+    "@msrvida/sanddance-explorer": "^2"
+  },
+  "devDependencies": {
+    "@types/react-dom": "16.0.6",
+    "@msrvida/office-ui-fabric-react-cdn-typings": "*"
+  },
+  "author": "",
+  "license": "MIT"
+}

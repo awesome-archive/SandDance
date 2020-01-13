@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import PolygonLayer, { PolygonLayerDatum } from '@deck.gl/layers/polygon-layer/polygon-layer';
 import {
     AxisSelectionType,
@@ -22,7 +22,7 @@ export interface AxisSelectionHandler {
     (event: TouchEvent | MouseEvent | PointerEvent, search: SearchExpressionGroup): void;
 }
 
-export function axisSelectionLayer(specCapabilities: SpecCapabilities, columns: SpecColumns, stage: VegaDeckGl.types.Stage, clickHandler: AxisSelectionHandler, highlightColor: number[], polygonZ: number): PolygonLayer {
+export function axisSelectionLayer(presenter: VegaDeckGl.Presenter, specCapabilities: SpecCapabilities, columns: SpecColumns, stage: VegaDeckGl.types.Stage, clickHandler: AxisSelectionHandler, highlightColor: number[], polygonZ: number): PolygonLayer {
     const polygons: SelectPolygon[] = [];
     const xRole = specCapabilities.roles.filter(r => r.role === 'x')[0];
     if (xRole && xRole.axisSelection) {
@@ -30,7 +30,7 @@ export function axisSelectionLayer(specCapabilities: SpecCapabilities, columns: 
             polygons.push.apply(polygons, axisSelectionPolygons(axis, false, xRole.axisSelection, columns.x));
         });
     }
-    const yRole=specCapabilities.roles.filter(r => r.role === 'y')[0];
+    const yRole = specCapabilities.roles.filter(r => r.role === 'y')[0];
     if (yRole && yRole.axisSelection) {
         stage.axes.y.filter(axis => axis.tickText.length).forEach(axis => {
             polygons.push.apply(polygons, axisSelectionPolygons(axis, true, yRole.axisSelection, columns.y));
@@ -53,6 +53,13 @@ export function axisSelectionLayer(specCapabilities: SpecCapabilities, columns: 
         extruded: false,
         highlightColor,
         id: 'selections',
+        onHover: (o, e) => {
+            if (o.index === -1) {
+                presenter.deckgl.interactiveState.onAxisSelection = false;
+            } else {
+                presenter.deckgl.interactiveState.onAxisSelection = true;
+            }
+        },
         onClick,
         getElevation: () => 0,
         getFillColor: () => [0, 0, 0, 0],
@@ -89,14 +96,14 @@ function axisSelectionPolygons(axis: VegaDeckGl.types.Axis, vertical: boolean, a
             divisions = ticks.slice(1, -1).map(tick => tick.sourcePosition[dim]);
         }
 
-        function add(p2: number, i: number) {
+        const add = (p2: number, i: number) => {
             var coords = [[p1, q1], [p2, q1], [p2, q2], [p1, q2]];
             polygons.push({
                 search: getSearch(axis, column, i),
                 polygon: vertical ? coords.map(xy => xy.reverse()) : coords
             });
             p1 = p2;
-        }
+        };
 
         let p1 = domain.sourcePosition[dim];
         const q1 = domain.sourcePosition[vertical ? 0 : 1];

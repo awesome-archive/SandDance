@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Color } from '@deck.gl/core/utils/color';
 import { SpecColorSettings } from './specs/types';
 import { TextLayerDatum } from '@deck.gl/layers/text-layer/text-layer';
@@ -9,8 +9,9 @@ function cloneAxis(axes: VegaDeckGl.types.Axis[], axisColor: Color, axisTextColo
     return axes.map(axis => {
         const newAxis = VegaDeckGl.util.deepMerge(axis);
         newAxis.domain.color = axisColor;
-        newAxis.ticks.forEach(t => { t.color = axisColor });
-        newAxis.tickText.forEach(t => { t.color = axisTextColor });
+        newAxis.title.color = axisTextColor;
+        newAxis.ticks.forEach(t => { t.color = axisColor; });
+        newAxis.tickText.forEach(t => { t.color = axisTextColor; });
         return newAxis;
     });
 }

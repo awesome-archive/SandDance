@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from '../vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Column, ColumnStats, ColumnTypeMap } from './types';
 
 function isQuantitative(column: Column) {
@@ -37,6 +37,9 @@ export function inferAll(columns: Column[], data: object[]) {
             if (typeof column.quantitative !== 'boolean') {
                 column.quantitative = isQuantitative(column);
             }
+            if (column.type === 'string') {
+                checkIsColorData(data, column);
+            }
             if (!column.stats) {
                 column.stats = getStats(data, column);
             }
@@ -44,14 +47,23 @@ export function inferAll(columns: Column[], data: object[]) {
     });
 }
 
-function getStats(data: object[], column: Column) {
+function checkIsColorData(data: object[], column: Column) {
+    for (let i = 0; i < data.length; i++) {
+        if (!VegaDeckGl.util.isColor(data[i][column.name])) {
+            return;
+        }
+    }
+    column.isColorData = true;
+}
+
+export function getStats(data: object[], column: Column) {
     const distinctMap = {};
     const stats: ColumnStats = {
         distinctValueCount: null,
         max: null,
         mean: null,
         min: null
-    }
+    };
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
         let row = data[i];
@@ -67,8 +79,33 @@ function getStats(data: object[], column: Column) {
         if (!isNaN(num)) {
             sum += num;
         }
+        if (column.type === 'string' && !stats.hasColorData && VegaDeckGl.util.isColor(value)) {
+            stats.hasColorData = true;
+        }
     }
-    stats.mean = data.length > 0 && (sum / data.length);
+    if (column.quantitative) {
+        stats.mean = data.length > 0 && (sum / data.length);
+        stats.hasNegative = detectNegative(column, data);
+        if (column.type === 'integer') {
+            stats.isSequential = detectSequentialColumn(column, data);
+        }
+    }
     stats.distinctValueCount = Object.keys(distinctMap).length;
     return stats;
+}
+
+function detectNegative(column: Column, data: object[]) {
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][column.name] < 0) return true;
+    }
+    return false;
+}
+
+function detectSequentialColumn(column: Column, data: object[]): boolean {
+    if (data.length < 2) return false;
+    let colname = column.name;
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][colname] !== data[i - 1][colname] + 1) return false;
+    }
+    return true;
 }

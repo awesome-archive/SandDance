@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { ColorBin, Column } from './specs/types';
 import { Language, LegendRowWithSearch } from './types';
 import {
@@ -43,27 +43,27 @@ function selectQuantitative(colorBinType: ColorBin, column: Column, legend: Vega
     let lowOperator: SearchExpressionOperators;
     let highValue: string;
     let highOperator: SearchExpressionOperators;
-    const rowText = legend.rows[clickedIndex].value;
+    const rowText = legend.rows[clickedIndex].label;
     switch (colorBinType) {
-        case 'continuous':
+        case 'continuous': {
             lowValue = rowText;
             if (clickedIndex < keys.length - 1) {
                 highValue = legend.rows[clickedIndex + 1].value;
             }
             break;
-
-        default:
+        }
+        default: {
             if (rowText.indexOf('null') > 0) {
                 const ex: SearchExpressionGroup = {
                     expressions: [selectNullOrEmpty(column)]
-                }
+                };
                 return ex;
             }
             const dash = rowText.indexOf('–');  //this is not the common dash character!
             if (dash > 0) {
-                //bug in Vega for quantize?
-                //lowOperator = '>';
-                //highOperator = '<=';
+            //bug in Vega for quantize?
+            //lowOperator = '>';
+            //highOperator = '<=';
                 lowValue = rowText.substr(0, dash);
                 highValue = rowText.substr(dash + 1);
             } else {
@@ -75,6 +75,7 @@ function selectQuantitative(colorBinType: ColorBin, column: Column, legend: Vega
                     }
                 }
             }
+        }
     }
     if (lowValue) lowValue = notNice(lowValue);
     if (highValue) highValue = notNice(highValue);
@@ -85,9 +86,9 @@ export function finalizeLegend(colorBinType: ColorBin, colorColumn: Column, lege
     const rowTexts: string[] = [];
     for (let i in legend.rows) {
         let row = legend.rows[i] as LegendRowWithSearch;
-        row.search = legendRange(colorBinType, colorColumn, legend, +i)
+        row.search = legendRange(colorBinType, colorColumn, legend, +i);
         if (row.value === Other) {
-            row.label = language.legendOther
+            row.label = language.legendOther;
         } else if (rowTexts.indexOf(row.value) >= 0) {
             delete legend.rows[i];
         } else {

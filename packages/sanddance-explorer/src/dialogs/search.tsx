@@ -5,7 +5,8 @@ import {
     AutoCompleteDistinctValues,
     getValidOperators,
     InputSearchExpression,
-    SearchTerm
+    SearchTerm,
+    getText
 } from '../controls/searchTerm';
 import { base } from '../base';
 import { Button } from '../controls/button';
@@ -27,10 +28,13 @@ export interface IInitializer {
 }
 
 export interface Props {
+    collapseLabels: boolean;
     data: object[];
     initializer: IInitializer;
     onSelect: { (search: SandDance.types.Search): void };
     autoCompleteDistinctValues: AutoCompleteDistinctValues;
+    disableExpressionOR: boolean;
+    disableGroupOR: boolean;
     disabled: boolean;
     themePalette: Partial<FabricTypes.IPalette>;
 }
@@ -52,7 +56,7 @@ function validateExpression(ex: InputSearchExpression) {
         ex.errorMessage = null;
         return;
     }
-    const s = (typeof ex.value === 'string') ? ex.value : ex.value.toString();
+    const s = getText(ex);
     if (s.length === 0) {
         ex.errorMessage = strings.labelRequired;
     } else {
@@ -65,13 +69,13 @@ function clearExpressionValidation(ex: InputSearchExpression) {
         ex.errorMessage = null;
         return;
     }
-    const s = (typeof ex.value === 'string') ? ex.value : ex.value.toString()
+    const s = getText(ex);
     if (s.length !== 0) {
         ex.errorMessage = null;
     }
 }
 
-function getGroupClauses(currClause: SandDance.types.SearchExpressionClause, index: number) {
+function getGroupClauses(currClause: SandDance.types.SearchExpressionClause, index: number, disableGroupOR: boolean) {
     let keys: [SandDance.types.SearchExpressionClause, string][];
     if (index === 0) {
         keys = [
@@ -79,9 +83,11 @@ function getGroupClauses(currClause: SandDance.types.SearchExpressionClause, ind
         ];
     } else {
         keys = [
-            ['&&', strings.searchAND],
-            ['||', strings.searchOR]
+            ['&&', strings.searchAND]
         ];
+        if (!disableGroupOR) {
+            keys.push(['||', strings.searchOR]);
+        }
     }
     return keys.map((key: [SandDance.types.SearchExpressionClause, string], i: number) => {
         const [clause, text] = key;
@@ -237,11 +243,12 @@ export class Search extends React.Component<Props, State> {
                             key={group.key}
                         >
                             <Dropdown
+                                collapseLabel={this.props.collapseLabels}
                                 className="search-group-clause"
-                                //label={strings.labelSearchClause}
-                                disabled={groupIndex === 0}
+                                label={strings.labelSearchClause}
+                                disabled={groupIndex === 0 || this.props.disableGroupOR}
                                 dropdownWidth={120}
-                                options={getGroupClauses(group.clause, groupIndex)}
+                                options={getGroupClauses(group.clause, groupIndex, this.props.disableGroupOR)}
                                 onChange={(e, o) => this.updateGroup({ clause: (o.data as SandDance.types.SearchExpressionClause) }, groupIndex)}
                             />
                             <div>
@@ -251,12 +258,14 @@ export class Search extends React.Component<Props, State> {
                                         key={ex.key}
                                     >
                                         <SearchTerm
+                                            collapseLabels={this.props.collapseLabels}
                                             onUpdateExpression={(ex, i) => this.updateExpression(ex, groupIndex, i)}
                                             autoCompleteDistinctValues={this.props.autoCompleteDistinctValues}
                                             index={i}
                                             columns={this.state.sortedColumns}
                                             data={this.props.data}
                                             searchExpression={ex}
+                                            disableOR={this.props.disableExpressionOR}
                                             column={getColumnWithName(ex.name, this.state.sortedColumns)}
                                         />
                                         {group.expressions.length > 1 && (

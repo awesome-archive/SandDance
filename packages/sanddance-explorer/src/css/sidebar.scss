@@ -9,18 +9,28 @@
 ) {
     .sanddance-sidebar {
         background-color: $bg-color;
-        bottom: 0;
         display: grid;
-        grid-template-areas:    "stats stats"
-                                "tabs bar";
-        grid-template-columns: $sidetab-width auto;
-        grid-template-rows: 0fr auto;
         overflow: hidden;
-        position: absolute;
-        top: 0;
+        position: relative;
         transition: width 350ms cubic-bezier(.4, 0, .2, 1);     //TODO param
         width: $toolbar-width;
-        z-index: 1; //appear over the canvas even though it is behind it in the dom.
+        &:not(.pinned) {
+            bottom: 0;
+            position: absolute;
+            top: 0;
+        }
+        .sidebar-content {
+            background-color: inherit;
+            display: grid;
+            grid-template-areas:    "stats stats"
+                                    "tabs bar";
+            grid-template-columns: $sidetab-width auto;
+            grid-template-rows: 0fr auto;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            z-index: 1; //appear over the canvas even though it is behind it in the dom.
+        }
         .vbuttons {
             background-color: rgba(0, 0, 0, 0.1);
             display: grid;
@@ -92,6 +102,14 @@
                     background: rgba($dark-bg-color, 0.5);
                 }
             }
+        }
+    }
+    .sanddance-chart-type {
+        .ms-ChoiceFieldGroup-flexContainer {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            grid-auto-flow: column;
+            grid-template-rows: repeat(4, auto);
         }
     }
 }

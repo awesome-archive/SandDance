@@ -1,8 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 import * as React from 'react';
+import * as SandDanceReact from '@msrvida/sanddance-react';
 import { base } from '../base';
-import { DataFile } from '../interfaces';
+import { capabilities } from '../canvas';
+import { DataFile, SettingsGroup } from '../interfaces';
 import { Dialog } from '../controls/dialog';
 import { Dropdown } from '../controls/dropdown';
 import { Explorer } from '../explorer';
@@ -17,16 +19,20 @@ import {
     SequentialScale,
     Signal as VegaSignal,
     Spec,
+    Transforms,
     UrlData,
     ValuesData
 } from 'vega-typings/types';
-import { SandDance } from '@msrvida/sanddance-react';
 import { Signal } from '../controls/signal';
 import { strings } from '../language';
+import { version } from '../version';
+
+import SandDance = SandDanceReact.SandDance;
 
 type ScalesWithRange = QuantileScale | QuantizeScale | OrdinalScale | LinearScale | SequentialScale;
 
 export interface Props {
+    additionalSettings: SettingsGroup[];
     explorer: Explorer;
     dataFile: DataFile;
     scheme: string;
@@ -37,6 +43,7 @@ export interface Props {
 }
 
 export interface State {
+    showSystemDialog: boolean;
     showVegaDialog: boolean;
     dataRefType: DataRefType;
     spec: Spec;
@@ -67,33 +74,48 @@ function cloneData(vegaSpec: Spec) {
     delete valuesData.values;
     const data = SandDance.VegaDeckGl.util.clone(vegaSpec.data);
     valuesData.values = values;
-    return data;
+    return { data, values };
 }
 
 function cloneScales(vegaSpec: Spec) {
     return SandDance.VegaDeckGl.util.clone(vegaSpec.scales);
 }
 
-function serializeSpec(vegaSpec: Spec, datafile: DataFile, dataRefType: DataRefType, scheme: string) {
+function serializeSpec(vegaSpec: Spec, datafile: DataFile, dataRefType: DataRefType, transform: Transforms[], scheme: string) {
     const scales = cloneScales(vegaSpec);
     const colorScale = scales.filter(scale => scale.name === SandDance.constants.ScaleNames.Color)[0];
     if (scheme.indexOf('dual_') >= 0) {
         (colorScale as ScalesWithRange).range = SandDance.colorSchemes.filter(cs => cs.scheme === scheme)[0].colors;
     }
+    const clone = cloneData(vegaSpec);
+    const data0 = clone.data[0];
     if (dataRefType === DataRefType.inline) {
-        return { ...vegaSpec, scales };
-    }
-    const data = cloneData(vegaSpec);
-    const data0 = data[0];
-    if (dataRefType === DataRefType.none) {
+        const valuesData = data0 as ValuesData;
+        valuesData.format = { parse: 'auto', type: 'json' };
+        valuesData.values = clone.values;
+    } else if (dataRefType === DataRefType.none) {
         const valuesData = data0 as ValuesData;
         valuesData.values = [];
+        if (transform) {
+            if (valuesData.transform) {
+                valuesData.transform.push.apply(valuesData.transform, transform);
+            } else {
+                valuesData.transform = transform;
+            }
+        }
     } else if (dataRefType === DataRefType.url) {
         const urlData = data0 as UrlData;
         urlData.url = datafile.dataUrl;
         urlData.format = { parse: 'auto', type: datafile.type };
+        if (transform) {
+            if (urlData.transform) {
+                urlData.transform.push.apply(urlData.transform, transform);
+            } else {
+                urlData.transform = transform;
+            }
+        }
     }
-    return { ...vegaSpec, data, scales };
+    return { ...vegaSpec, data: clone.data, scales };
 }
 
 function defaultDataRefType(datafile: DataFile) {
@@ -105,6 +127,7 @@ function defaultDataRefType(datafile: DataFile) {
 
 function initState(props: Props): State {
     return {
+        showSystemDialog: false,
         showVegaDialog: false,
         dataRefType: defaultDataRefType(props.dataFile),
         spec: null
@@ -185,9 +208,7 @@ export class Settings extends React.Component<Props, State> {
                         }
                     }
                 })}
-                <Group
-                    label={strings.labelChartCanvas}
-                >
+                <Group label={strings.labelChartCanvas}>
                     <base.fabric.Toggle
                         label={strings.labelShowAxes}
                         defaultChecked={!props.hideAxes}
@@ -199,20 +220,27 @@ export class Settings extends React.Component<Props, State> {
                         onChange={(e, checked?) => props.onToggleLegend(!checked)}
                     />
                 </Group>
-                <Group
-                    label={strings.labelTools}
-                >
+                <Group label={strings.labelTools}>
                     <base.fabric.DefaultButton
                         text={strings.buttonShowVegaSpec}
                         onClick={() => this.setState({
                             showVegaDialog: true,
-                            spec: serializeSpec(props.explorer.viewer.vegaSpec, props.dataFile, this.state.dataRefType, this.props.scheme)
+                            spec: serializeSpec(props.explorer.viewer.vegaSpec, props.dataFile, this.state.dataRefType, props.explorer.viewer.getInsight().transform, this.props.scheme)
                         })}
                     />
                 </Group>
-                <Group
-                    label={strings.labelTransitionDurations}
-                >
+                <Group label={strings.labelSnapshots}>
+                    <base.fabric.Slider
+                        label={strings.labelSnapshotSettingThumbnailWidth}
+                        onChange={value => {
+                            this.props.explorer.snapshotThumbWidth = value;
+                        }}
+                        min={100}
+                        max={800}
+                        defaultValue={this.props.explorer.snapshotThumbWidth}
+                    />
+                </Group>
+                <Group label={strings.labelTransitionDurations}>
                     <base.fabric.Slider
                         label={strings.labelTransitionColor}
                         onChange={value => {
@@ -250,6 +278,17 @@ export class Settings extends React.Component<Props, State> {
                         defaultValue={this.props.explorer.viewerOptions.transitionDurations.view}
                     />
                 </Group>
+                {props.additionalSettings && props.additionalSettings.map((g, i) => (
+                    <Group key={i} label={g.groupLabel}>
+                        {g.children}
+                    </Group>
+                ))}
+                <Group label={strings.labelSystem}>
+                    <base.fabric.DefaultButton
+                        text={strings.labelSystemInfo}
+                        onClick={() => this.setState({ showSystemDialog: true })}
+                    />
+                </Group>
                 <Dialog
                     hidden={!state.showVegaDialog}
                     onDismiss={() => this.setState(initState(this.props))}
@@ -262,13 +301,13 @@ export class Settings extends React.Component<Props, State> {
                                 iconProps={{ iconName: 'Copy' }}
                                 text={strings.buttonCopyToClipboard}
                                 onClick={() => {
-                                    var pre = document.getElementById("sanddance-vega-spec") as HTMLPreElement;
+                                    var pre = document.getElementById('sanddance-vega-spec') as HTMLPreElement;
                                     var range = document.createRange();
                                     range.selectNode(pre);
                                     const selection = window.getSelection();
                                     selection.removeAllRanges();
                                     selection.addRange(range);
-                                    document.execCommand("copy");
+                                    document.execCommand('copy');
                                 }}
                             />
                         ),
@@ -289,7 +328,7 @@ export class Settings extends React.Component<Props, State> {
                         options={options}
                         onChange={(e, o) => this.setState({
                             dataRefType: o.data,
-                            spec: serializeSpec(props.explorer.viewer.vegaSpec, props.dataFile, o.data, this.props.scheme)
+                            spec: serializeSpec(props.explorer.viewer.vegaSpec, props.dataFile, o.data, props.explorer.viewer.getInsight().transform, this.props.scheme)
                         })}
                     />
                     <pre id="sanddance-vega-spec">
@@ -298,6 +337,30 @@ export class Settings extends React.Component<Props, State> {
                     <div>
                         {strings.labelVegaSpecNotes}
                     </div>
+                </Dialog>
+                <Dialog
+                    hidden={!state.showSystemDialog}
+                    onDismiss={() => this.setState(initState(this.props))}
+                    title={strings.labelSystemInfo}
+                >
+                    <ul>
+                        {this.props.children}
+                        <li>
+                            SandDanceExplorer version: {version}
+                        </li>
+                        <li>
+                            SandDanceReact version: {SandDanceReact.version}
+                        </li>
+                        <li>
+                            SandDance version: {SandDance.version}
+                        </li>
+                        <li>
+                            WebGL enabled: {capabilities.webgl ? strings.labelYes : strings.labelNo}
+                        </li>
+                        <li>
+                            WebGL2 enabled: {capabilities.webgl2 ? strings.labelYes : strings.labelNo}
+                        </li>
+                    </ul>
                 </Dialog>
             </div>
         );

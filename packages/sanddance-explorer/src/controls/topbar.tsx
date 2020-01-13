@@ -6,6 +6,7 @@ import { CommandBarButtonStyles } from './CommandBarButton.styles';
 import { FabricTypes } from '@msrvida/office-ui-fabric-react-cdn-typings';
 import { Logo } from './logo';
 import { SandDance } from '@msrvida/sanddance-react';
+import { Snapshot } from '../interfaces';
 import { strings } from '../language';
 
 export interface Props {
@@ -13,15 +14,19 @@ export interface Props {
     logoClickTarget: string;
     buttons?: FabricTypes.ICommandBarItemProps[];
     doFilter: { (search: SandDance.types.Search): void };
-    doUnfilter: { (): void };
-    doDeselect: { (): void };
+    doUnfilter: () => void;
+    doDeselect: () => void;
     filter: SandDance.types.Search;
     loaded: boolean;
     selectionState: SandDance.types.SelectionState;
     selectionSearch: SandDance.types.Search;
     view: SandDance.VegaDeckGl.types.View;
-    onViewClick: { (): void };
-    onHomeClick: { (): void };
+    snapshots: Snapshot[];
+    onSnapshotClick: () => void;
+    onSnapshotNextClick: () => void;
+    onSnapshotPreviousClick: () => void;
+    onViewClick: () => void;
+    onHomeClick: () => void;
     themePalette: Partial<FabricTypes.IPalette>;
 }
 
@@ -42,7 +47,7 @@ export function Topbar(props: Props) {
             key: 'isolate',
             name: strings.buttonIsolate,
             iconProps: {
-                iconName: "Filter"
+                iconName: 'Filter'
             },
             disabled: disabled || !props.selectionSearch || zeroResults,
             onClick: () => props.doFilter(props.selectionSearch)
@@ -51,7 +56,7 @@ export function Topbar(props: Props) {
             key: 'exclude',
             name: strings.buttonExclude,
             iconProps: {
-                iconName: "ClearFilter"
+                iconName: 'ClearFilter'
             },
             disabled: disabled || !props.selectionSearch || zeroResults,
             onClick: () => props.doFilter(SandDance.searchExpression.invert(props.selectionSearch))
@@ -60,7 +65,7 @@ export function Topbar(props: Props) {
             key: 'reset',
             name: strings.buttonReset,
             iconProps: {
-                iconName: "RemoveFilter"
+                iconName: 'RemoveFilter'
             },
             disabled: disabled || !props.filter,
             onClick: props.doUnfilter
@@ -71,20 +76,49 @@ export function Topbar(props: Props) {
     }
     const farItems: FabricTypes.ICommandBarItemProps[] = [
         {
+            key: 'previous-snapshot',
+            iconProps: {
+                iconName: 'Previous'
+            },
+            title: strings.buttonPrevSnapshot,
+            onClick: props.onSnapshotPreviousClick,
+            disabled: props.snapshots.length < 2
+        },
+        {
+            key: 'snapshot',
+            iconProps: {
+                iconName: 'Camera'
+            },
+            title: strings.buttonCreateSnapshot,
+            onClick: props.onSnapshotClick,
+            disabled: !props.loaded
+        },
+        {
+            key: 'next-snapshot',
+            iconProps: {
+                iconName: 'Next'
+            },
+            title: strings.buttonNextSnapshot,
+            onClick: props.onSnapshotNextClick,
+            disabled: props.snapshots.length < 2
+        },
+        {
             key: 'view',
             iconProps: {
-                iconName: props.view === '2d' ? "Product" : "Page"
+                iconName: props.view === '2d' ? 'Product' : 'Page'
             },
             title: props.view === '2d' ? strings.labelViewType3d : strings.lavelViewType2d,
-            onClick: props.onViewClick
+            onClick: props.onViewClick,
+            disabled: !props.loaded
         },
         {
             key: 'home',
             iconProps: {
-                iconName: "PicturePosition"
+                iconName: 'PicturePosition'
             },
             title: strings.buttonCameraHome,
-            onClick: props.onHomeClick
+            onClick: props.onHomeClick,
+            disabled: !props.loaded
         }
     ];
 
@@ -92,7 +126,7 @@ export function Topbar(props: Props) {
         <div className="sanddance-explorer-topbar">
             <div className="logo">
                 <Logo />
-                <a href={props.logoClickUrl || "/SandDance/"} target={props.logoClickTarget || '_blank'}>{strings.appName}</a>
+                <a href={props.logoClickUrl || '/'} target={props.logoClickTarget || '_blank'}>{strings.appName}</a>
             </div>
             <div className="sanddance-explorer-commandbar">
                 <base.fabric.Customizer
@@ -110,8 +144,8 @@ export function Topbar(props: Props) {
                         farItems={farItems}
                         styles={{
                             root: {
-                                backgroundColor: "transparent",
-                                height: "unset",
+                                backgroundColor: 'transparent',
+                                height: 'unset',
                                 paddingLeft: 0,
                                 paddingRight: 0
                             }

@@ -2,7 +2,7 @@
 layout: page
 ---
 
-<h1 id="sanddance-preview">SandDance (Preview)</h1>
+<h1 id="sanddance">SandDance</h1>
 <p>Visually explore, understand, and present your data.</p>
 <p><img src="https://user-images.githubusercontent.com/11507384/54236654-52d42800-44d1-11e9-859e-6c5d297a46d2.gif" alt="sanddance-animation"></p>
 <p>By using easy-to-understand views, SandDance helps you find insights about your data, which in turn help you tell stories supported by data, build cases based on evidence, test hypotheses, dig deeper into surface explanations, support decisions for purchases, or relate data into a wider, real world context.</p>
@@ -11,15 +11,27 @@ Smooth animated transitions between views help you to maintain context as you in
 <blockquote>
 <p>This new version of SandDance has been rebuilt from scratch with the goal of being modular, extensible, and embeddable into your custom applications. We are now on GitHub so that we are open and driven by the community through contributions, feature requests, and discussion.</p>
 </blockquote>
+<p>SandDance was created by the <a href="https://aka.ms/vida">Microsoft Research VIDA Group</a> which explores novel technologies for visualization and immersive data analytics. </p>
+<h2 id="where-can-i-use-sanddance">Where can I use SandDance?</h2>
+<ul>
+<li><a href="/app/">Try it now on the web</a></li>
+<li><a href="https://appsource.microsoft.com/en-us/product/power-bi-visuals/WA200000430">Power BI</a> - <a href="https://github.com/microsoft/SandDance/blob/master/powerbi.md"><em>see additional info</em></a></li>
+<li><a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/sanddance-extension?view=sql-server-2017">Azure Data Studio</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=msrvida.vscode-sanddance">VSCode extension</a></li>
+<li><a href="https://observablehq.com/collection/@danmarshall/sanddance">Observable</a></li>
+<li>In your own JavaScript apps - see below</li>
+</ul>
 <h2 id="component-architecture">Component architecture</h2>
 <p>SandDance is an offering of several JavaScript components:</p>
 <ul>
-<li><a href="/SandDance/docs/sanddance/v1/">sanddance</a> - the core SandDance visualization canvas.</li>
-<li><a href="/SandDance/docs/sanddance-react/v1/">sanddance-react</a> - the core SandDance visualization canvas for use in React based applications.</li>
-<li><a href="/SandDance/docs/sanddance-explorer/v1/">sanddance-explorer</a> - the core SandDance visualization canvas with UI to enable data exploration, for use in React based applications.</li>
+<li><a href="/docs/sanddance/v2/">sanddance</a> - the core SandDance visualization canvas.</li>
+<li><a href="/docs/sanddance-react/v2/">sanddance-react</a> - the core SandDance visualization canvas for use in React based applications.</li>
+<li><a href="/docs/sanddance-explorer/v2/">sanddance-explorer</a> - the core SandDance visualization canvas with UI to enable data exploration, for use in React based applications.</li>
 </ul>
 <h2 id="changelog">Changelog</h2>
 <ul>
+<li>December 2019 - Major version bump to v2: Now using Vega@5.</li>
+<li>August 2019 - Initial release to AppSource (Power BI marketplace).</li>
 <li>April 2019 - Initial release to GitHub.</li>
 </ul>
 <h2 id="known-issues">Known issues</h2>
@@ -28,9 +40,11 @@ Smooth animated transitions between views help you to maintain context as you in
 </ul>
 <h2 id="roadmap">Roadmap</h2>
 <ul>
-<li>PowerBI custom visual based on this new architecture.</li>
-<li>Additional views, such as stacks.</li>
+<li><del>PowerBI custom visual based on this new architecture.</del> done!</li>
+<li><del>Additional views, such as stacks.</del> done!</li>
 <li>Code examples and tutorials.</li>
+<li>Faceting for all chart types.</li>
+<li>Better date handling.</li>
 </ul>
 <h2 id="dependencies">Dependencies</h2>
 <p>SandDance is created with open source libraries, using <a href="https://vega.github.io">Vega</a> for chart layout and <a href="https://deck.gl">Deck.gl</a> for WebGL rendering.</p>

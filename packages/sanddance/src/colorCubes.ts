@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { FieldNames } from './specs/constants';
 import { Color } from '@deck.gl/core/utils/color';
 import {
@@ -50,7 +50,7 @@ export function populateColorContext(colorContext: ColorContext, presenter: Vega
         colorContext.colorMap = colorMapFromCubes(cubes);
     }
     colorContext.legend = VegaDeckGl.util.clone(presenter.stage.legend);
-    colorContext.legendElement = presenter.getElement(VegaDeckGl.PresenterElement.legend).children[0] as HTMLElement
+    colorContext.legendElement = presenter.getElement(VegaDeckGl.PresenterElement.legend).children[0] as HTMLElement;
 }
 
 export function applyColorMapToCubes(maps: ColorMap[], cubes: VegaDeckGl.types.Cube[], unselectedColorMethod?: ColorMethod) {

@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc -p ."
+    "eslint": "eslint -c ../../.eslintrc.json --fix ./src/**/*.ts*",
+    "build": "tsc -p .",
+    "watch-typescript": "tsc -p . -w"
   },
   "dependencies": {
-    "@msrvida/sanddance": "*"
+    "@msrvida/sanddance": "^2"
   }
 }

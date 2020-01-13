@@ -118,7 +118,7 @@ function viewInSandance(fileUri: vscode.Uri, context: vscode.ExtensionContext): 
                 case 'getFileContent':
                     fs.readFile(uriFsPath, (err, data) => {
                         if (current && current.panel.visible) {
-                            //TODO string type of dataFile
+                        //TODO string type of dataFile
                             const dataFile = {
                                 type: path.extname(uriFsPath).substring(1),
                                 rawText: data.toString('utf8')
@@ -159,7 +159,7 @@ function queryViewInSandance(fileUri: vscode.Uri, context: vscode.ExtensionConte
                 case 'getFileContent':
                     fs.readFile(uriFsPath, (err, data) => {
                         if (current && current.panel.visible) {
-                            //TODO string type of dataFile
+                        //TODO string type of dataFile
                             const dataFile = {
                                 type: path.extname(uriFsPath).substring(1),
                                 rawText: data.toString('utf8')
@@ -192,7 +192,7 @@ export async function saveHdfsFileToTempLocation(commandContext: azdata.ObjectEx
 
 
 function saveTemp(data: string): vscode.Uri {
-    let localFile = tempWrite.sync(data, "file.json");
+    let localFile = tempWrite.sync(data, 'file.json');
     return vscode.Uri.file(localFile);
 }
 

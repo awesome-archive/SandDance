@@ -22,15 +22,15 @@ export interface InputSearchExpression extends SandDance.types.SearchExpression 
 export function getValidOperators(column: SandDance.types.Column): [SandDance.types.SearchExpressionOperators, string][] {
     const type = column && column.type;
     switch (type) {
-        case "boolean":
+        case 'boolean':
             return [
                 ['==', strings.searchEQ],
                 ['!=', strings.searchNEQ],
                 ['isnullorEmpty', strings.searchNULL]
-            ]
-        case "date":
-        case "integer":
-        case "number":
+            ];
+        case 'date':
+        case 'integer':
+        case 'number':
             return [
                 ['==', strings.searchEQ],
                 ['!=', strings.searchNEQ],
@@ -40,7 +40,7 @@ export function getValidOperators(column: SandDance.types.Column): [SandDance.ty
                 ['<=', strings.searchLTE],
                 ['isnullorEmpty', strings.searchNULL]
             ];
-        case "string":
+        case 'string':
         default:
             return [
                 ['==', strings.searchEQ],
@@ -57,20 +57,24 @@ export function getValidOperators(column: SandDance.types.Column): [SandDance.ty
 }
 
 export interface Props {
+    collapseLabels: boolean;
     index: number;
     columns: SandDance.types.Column[];
     data: object[];
-    searchExpression: InputSearchExpression
+    searchExpression: InputSearchExpression;
+    disableOR: boolean;
     autoCompleteDistinctValues: AutoCompleteDistinctValues;
     onUpdateExpression: { (ex: Partial<InputSearchExpression>, index: number): void };
     column: SandDance.types.Column;
 }
 
-function getExpressionClauses(currClause: SandDance.types.SearchExpressionClause, index: number) {
+function getExpressionClauses(currClause: SandDance.types.SearchExpressionClause, disableOR: boolean) {
     const keys: [SandDance.types.SearchExpressionClause, string][] = [
-        ['&&', strings.searchAND],
-        ['||', strings.searchOR]
+        ['&&', strings.searchAND]
     ];
+    if (!disableOR) {
+        keys.push(['||', strings.searchOR]);
+    }
     return keys.map((key: [SandDance.types.SearchExpressionClause, string], i: number) => {
         const [clause, text] = key;
         const selected = currClause == clause; //deliberate double equal 
@@ -129,9 +133,9 @@ function getValues(ex: InputSearchExpression, column: SandDance.types.Column, da
     return [];
 }
 
-function getText(ex: InputSearchExpression) {
+export function getText(ex: InputSearchExpression) {
     if (ex.operator === 'isnullorEmpty') return '';
-    return (typeof ex.value === 'string') ? ex.value : ex.value.toString();
+    return (typeof ex.value === 'string') ? ex.value : ex.value == null ? '' : ex.value.toString();
 }
 
 export function SearchTerm(props: Props) {
@@ -144,17 +148,19 @@ export function SearchTerm(props: Props) {
         <div>
             {props.index > 0 && (
                 <Dropdown
+                    collapseLabel={props.collapseLabels}
                     className="search-field"
-                    //label={strings.labelSearchClause}
+                    label={strings.labelSearchClause}
                     dropdownWidth={120}
-                    disabled={!ex.unlocked}
-                    options={getExpressionClauses(ex.clause, props.index)}
+                    disabled={!ex.unlocked || props.disableOR}
+                    options={getExpressionClauses(ex.clause, props.disableOR)}
                     onChange={(e, o) => props.onUpdateExpression({ clause: (o.data as SandDance.types.SearchExpressionClause) }, props.index)}
                 />
             )}
             <Dropdown
+                collapseLabel={props.collapseLabels}
                 className="search-field"
-                //label={strings.labelSearchColumn}
+                label={strings.labelSearchColumn}
                 options={[
                     {
                         key: '',
@@ -171,8 +177,9 @@ export function SearchTerm(props: Props) {
                 onChange={(e, o) => props.onUpdateExpression({ name: (o.data && (o.data as SandDance.types.Column).name) || null }, props.index)}
             />
             <Dropdown
+                collapseLabel={props.collapseLabels}
                 className="search-field"
-                //label={strings.labelSearchOperator}
+                label={strings.labelSearchOperator}
                 dropdownWidth={120}
                 options={getOperators(ex, props.column)}
                 onChange={(e, o) => props.onUpdateExpression({ operator: (o.data) as SandDance.types.SearchExpressionOperators }, props.index)}
@@ -180,7 +187,8 @@ export function SearchTerm(props: Props) {
             {possibleValues.length > 0 && (
                 <base.fabric.ComboBox
                     className="search-field"
-                    //label={strings.labelSearchValue}
+                    label={props.collapseLabels ? null : strings.labelSearchValue}
+                    placeholder={strings.labelSearchValuePlaceholder}
                     disabled={ex.operator === 'isnullorEmpty'}
                     dropdownWidth={dropdownWidth}
                     allowFreeform={true}
@@ -206,7 +214,8 @@ export function SearchTerm(props: Props) {
             {possibleValues.length === 0 && (
                 <base.fabric.TextField
                     className="search-field"
-                    //label={strings.labelSearchValue}
+                    label={props.collapseLabels ? null : strings.labelSearchValue}
+                    placeholder={strings.labelSearchValuePlaceholder}
                     disabled={ex.operator === 'isnullorEmpty'}
                     errorMessage={ex.errorMessage}
                     value={getText(ex)}

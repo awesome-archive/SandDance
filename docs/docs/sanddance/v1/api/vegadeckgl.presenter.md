@@ -24,7 +24,7 @@ public constructor(el: HTMLElement, style?: PresenterStyle);
 | Name  | Type                                      | Description                              |
 | ----- | ----------------------------------------- | ---------------------------------------- |
 | el    | HTMLElement                               | Parent HTMLElement to present within.    |
-| style | [PresenterStyle][InterfaceDeclaration-47] | Optional PresenterStyle styling options. |
+| style | [PresenterStyle][InterfaceDeclaration-49] | Optional PresenterStyle styling options. |
 
 ## Methods
 
@@ -56,7 +56,7 @@ public animationQueue(handler: () => void, timeout: number, options?: QueuedAnim
 | ------- | ------------------------------------------------- | --------------------------------------------------- |
 | handler | () => void                                        | Function to invoke when timeout is complete.        |
 | timeout | number                                            | Length of time to wait before invoking the handler. |
-| options | [QueuedAnimationOptions][InterfaceDeclaration-50] | Optional QueuedAnimationOptions object.             |
+| options | [QueuedAnimationOptions][InterfaceDeclaration-52] | Optional QueuedAnimationOptions object.             |
 
 **Return type**
 
@@ -96,10 +96,10 @@ public present(sceneOrStage: Scene3d | Stage, height: number, width: number, con
 
 | Name         | Type                                                                       | Description                                                      |
 | ------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| sceneOrStage | [Scene3d][InterfaceDeclaration-51] &#124; [Stage][InterfaceDeclaration-28] | Vega Scene object, or Stage object containing chart layout info. |
+| sceneOrStage | [Scene3d][InterfaceDeclaration-53] &#124; [Stage][InterfaceDeclaration-30] | Vega Scene object, or Stage object containing chart layout info. |
 | height       | number                                                                     | Height of the rendering area.                                    |
 | width        | number                                                                     | Width of the rendering area.                                     |
-| config       | [PresenterConfig][InterfaceDeclaration-52]                                 | Optional presentation configuration object.                      |
+| config       | [PresenterConfig][InterfaceDeclaration-54]                                 | Optional presentation configuration object.                      |
 
 **Return type**
 
@@ -120,8 +120,8 @@ public rePresent(stage: Partial<Stage>, modifyConfig?: PresenterConfig): void;
 
 | Name         | Type                                       | Description                                          |
 | ------------ | ------------------------------------------ | ---------------------------------------------------- |
-| stage        | Partial<[Stage][InterfaceDeclaration-28]>  | Partially populated Stage object containing changes. |
-| modifyConfig | [PresenterConfig][InterfaceDeclaration-52] | Optional presentation configuration object.          |
+| stage        | Partial<[Stage][InterfaceDeclaration-30]>  | Partially populated Stage object containing changes. |
+| modifyConfig | [PresenterConfig][InterfaceDeclaration-54] | Optional presentation configuration object.          |
 
 **Return type**
 
@@ -145,7 +145,7 @@ void
 
 ### getCubeData()
 
-Get cube data array from the cubes layer. 
+Get cube data array from the cubes layer.
 
 ```typescript
 public getCubeData(): Cube[];
@@ -153,7 +153,7 @@ public getCubeData(): Cube[];
 
 **Return type**
 
-[Cube][InterfaceDeclaration-29][]
+[Cube][InterfaceDeclaration-31][]
 
 ----------
 
@@ -163,6 +163,18 @@ Show guidelines of rendering height/width and center of OrbitView.
 
 ```typescript
 public showGuides(): void;
+```
+
+**Return type**
+
+void
+
+----------
+
+### finalize()
+
+```typescript
+public finalize(): void;
 ```
 
 **Return type**
@@ -223,7 +235,7 @@ public get stage: Stage;
 
 **Type**
 
-[Stage][InterfaceDeclaration-28]
+[Stage][InterfaceDeclaration-30]
 
 ----------
 
@@ -237,7 +249,7 @@ public style: PresenterStyle;
 
 **Type**
 
-[PresenterStyle][InterfaceDeclaration-47]
+[PresenterStyle][InterfaceDeclaration-49]
 
 ----------
 
@@ -253,31 +265,32 @@ public get view: View;
 
 [View][TypeAliasDeclaration-7]
 
-[ClassDeclaration-0]: vegadeckgl.presenter#presenter
-[Constructor-0]: vegadeckgl.presenter#constructorel-style
-[InterfaceDeclaration-47]: vegadeckgl.types#presenterstyle
-[MethodDeclaration-0]: vegadeckgl.presenter#animationcancel
-[MethodDeclaration-1]: vegadeckgl.presenter#animationqueuehandler-timeout-options
-[InterfaceDeclaration-50]: vegadeckgl.types#queuedanimationoptions
-[MethodDeclaration-2]: vegadeckgl.presenter#getelementtype
-[EnumDeclaration-0]: vegadeckgl#presenterelement
-[MethodDeclaration-3]: vegadeckgl.presenter#presentsceneorstage-height-width-config
-[InterfaceDeclaration-51]: vegadeckgl.types#scene3d
-[InterfaceDeclaration-28]: vegadeckgl.types#stage
-[InterfaceDeclaration-52]: vegadeckgl.types#presenterconfig
-[MethodDeclaration-4]: vegadeckgl.presenter#representstage-modifyconfig
-[InterfaceDeclaration-28]: vegadeckgl.types#stage
-[InterfaceDeclaration-52]: vegadeckgl.types#presenterconfig
-[MethodDeclaration-5]: vegadeckgl.presenter#homecamera
-[MethodDeclaration-6]: vegadeckgl.presenter#getcubedata
-[InterfaceDeclaration-29]: vegadeckgl.types#cube
-[MethodDeclaration-7]: vegadeckgl.presenter#showguides
-[PropertyDeclaration-0]: vegadeckgl.presenter#animationtimer
-[PropertyDeclaration-1]: vegadeckgl.presenter#deckgl
-[PropertyDeclaration-3]: vegadeckgl.presenter#logger
-[GetAccessor-0]: vegadeckgl.presenter#stage
-[InterfaceDeclaration-28]: vegadeckgl.types#stage
-[PropertyDeclaration-4]: vegadeckgl.presenter#style
-[InterfaceDeclaration-47]: vegadeckgl.types#presenterstyle
-[GetAccessor-1]: vegadeckgl.presenter#view
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
+[ClassDeclaration-0]: vegadeckgl.presenter.html#presenter
+[Constructor-0]: vegadeckgl.presenter.html#constructorel-style
+[InterfaceDeclaration-49]: vegadeckgl.types.html#presenterstyle
+[MethodDeclaration-0]: vegadeckgl.presenter.html#animationcancel
+[MethodDeclaration-1]: vegadeckgl.presenter.html#animationqueuehandler-timeout-options
+[InterfaceDeclaration-52]: vegadeckgl.types.html#queuedanimationoptions
+[MethodDeclaration-2]: vegadeckgl.presenter.html#getelementtype
+[EnumDeclaration-0]: vegadeckgl.html#presenterelement
+[MethodDeclaration-3]: vegadeckgl.presenter.html#presentsceneorstage-height-width-config
+[InterfaceDeclaration-53]: vegadeckgl.types.html#scene3d
+[InterfaceDeclaration-30]: vegadeckgl.types.html#stage
+[InterfaceDeclaration-54]: vegadeckgl.types.html#presenterconfig
+[MethodDeclaration-4]: vegadeckgl.presenter.html#representstage-modifyconfig
+[InterfaceDeclaration-30]: vegadeckgl.types.html#stage
+[InterfaceDeclaration-54]: vegadeckgl.types.html#presenterconfig
+[MethodDeclaration-5]: vegadeckgl.presenter.html#homecamera
+[MethodDeclaration-6]: vegadeckgl.presenter.html#getcubedata
+[InterfaceDeclaration-31]: vegadeckgl.types.html#cube
+[MethodDeclaration-7]: vegadeckgl.presenter.html#showguides
+[MethodDeclaration-8]: vegadeckgl.presenter.html#finalize
+[PropertyDeclaration-0]: vegadeckgl.presenter.html#animationtimer
+[PropertyDeclaration-1]: vegadeckgl.presenter.html#deckgl
+[PropertyDeclaration-3]: vegadeckgl.presenter.html#logger
+[GetAccessor-0]: vegadeckgl.presenter.html#stage
+[InterfaceDeclaration-30]: vegadeckgl.types.html#stage
+[PropertyDeclaration-4]: vegadeckgl.presenter.html#style
+[InterfaceDeclaration-49]: vegadeckgl.types.html#presenterstyle
+[GetAccessor-1]: vegadeckgl.presenter.html#view
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view

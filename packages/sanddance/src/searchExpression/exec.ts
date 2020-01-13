@@ -1,9 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from '../vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Column } from '../specs/types';
 import { ensureSearchExpressionGroupArray } from './group';
 import { Search, SearchExpression, SearchExpressionGroup } from './types';
+
+function valueToBoolean(value: any) {
+    if (typeof value === 'string') {
+        switch (value.toLowerCase()) {
+            case 'true':
+                return true;
+            case 'false':
+                return false;
+        }
+    }
+    return !!value;
+}
 
 function valueToString(value: any) {
     if (value == null) {
@@ -39,6 +51,7 @@ function isnullorEmpty(value: any) {
 interface SearchExpressionLowercase extends SearchExpression {
     column: Column;
     valueLow: string;
+    valueBool: boolean;
     stringOperation: boolean;
 }
 
@@ -50,8 +63,9 @@ export class Exec {
         this.groups.forEach(group => {
             group.expressions.forEach(ex => {
                 ex.column = this.getColumn(ex.name);
+                ex.valueBool = valueToBoolean(ex.value);
                 ex.valueLow = valueToString(ex.value).toLocaleLowerCase();
-                ex.stringOperation = isStringOperation(ex)
+                ex.stringOperation = isStringOperation(ex);
             });
         });
     }
@@ -67,15 +81,23 @@ export class Exec {
     private runExpressionOnColumn(datum: object, ex: SearchExpressionLowercase) {
         const actualDataValue = datum[ex.name];
         if (ex.operator === 'isnullorEmpty') {
-            return isnullorEmpty(actualDataValue)
+            return isnullorEmpty(actualDataValue);
         } else if (ex.operator === '!isnullorEmpty') {
-            return !isnullorEmpty(actualDataValue)
+            return !isnullorEmpty(actualDataValue);
         }
         let dataValue = actualDataValue;
         let expressionValue = ex.value;
-        if ((ex.column && ex.column.type === 'string') || ex.stringOperation) {
-            dataValue = valueToString(actualDataValue).toLocaleLowerCase();
-            expressionValue = ex.valueLow;
+        if (ex.column) {
+            if (ex.column.type === 'string' || ex.stringOperation) {
+                dataValue = valueToString(actualDataValue).toLocaleLowerCase();
+                expressionValue = ex.valueLow;
+            } else if (ex.column.type === 'boolean') {
+                dataValue = valueToBoolean(actualDataValue);
+                expressionValue = ex.valueBool;
+            } else if (ex.column.quantitative) {
+                dataValue = +actualDataValue;
+                expressionValue = +ex.value;
+            }
         }
         switch (ex.operator) {
             case '!=':
@@ -116,7 +138,7 @@ export class Exec {
                     }
                     return ex2;
                 })
-            }
+            };
             return this.runGroup(datum, group);
         } else {
             return this.runExpressionOnColumn(datum, ex);

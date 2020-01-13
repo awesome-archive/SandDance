@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 import * as searchExpression from './searchExpression';
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Animator, DataLayoutChange } from './animator';
 import {
     applyColorMapToCubes,
@@ -10,38 +10,45 @@ import {
     populateColorContext
 } from './colorCubes';
 import { applySignalValues, extractSignalValuesFromView } from './signals';
-import { assignOrdinals, getSpecColumns } from './ordinal';
+import { assignOrdinals, getDataIndexOfCube, getSpecColumns } from './ordinal';
 import { AxisSelectionHandler, axisSelectionLayer } from './axisSelection';
 import { cloneVegaSpecWithData } from './specs/clone';
 import {
     ColorContext,
     ColorMap,
     ColorMethod,
+    ColorSettings,
     LegendRowWithSearch,
     RenderOptions,
     RenderResult,
     SelectionState,
     ViewerOptions
 } from './types';
+import {
+    Column,
+    Insight,
+    SignalValues,
+    SpecCapabilities,
+    SpecColumns,
+    SpecContext
+} from './specs/types';
 import { DataScope } from './dataScope';
 import { DeckProps, PickInfo } from '@deck.gl/core/lib/deck';
-import { defaultView } from './vega-deck.gl/defaults';
 import { defaultViewerOptions, getPresenterStyle } from './defaults';
 import { Details } from './details';
 import { ensureHeaders } from './headers';
 import { finalizeLegend } from './legend';
-import {
-    Insight,
-    SignalValues,
-    SpecCapabilities,
-    SpecColumns
-} from './specs/types';
+import { makeDateRange } from './date';
 import { mount } from 'tsx-create-element';
 import { recolorAxes } from './axes';
 import { registerColorSchemes } from './colorSchemes';
 import { Search, SearchExpression, SearchExpressionGroup } from './searchExpression/types';
-import { Spec } from 'vega-typings';
-import { ViewGl_Class } from './vega-deck.gl/vega-classes/viewGl';
+import { Spec, Transforms } from 'vega-typings';
+import { TextLayerDatum } from '@deck.gl/layers/text-layer/text-layer';
+import { Tooltip } from './tooltip';
+import { ViewGl_Class } from '@msrvida/vega-deck.gl/dist/es6/vega-classes/viewGl';
+
+const { defaultView } = VegaDeckGl.defaults;
 
 let didRegisterColorSchemes = false;
 
@@ -100,7 +107,9 @@ export class Viewer {
     private _dataScope: DataScope;
     private _animator: Animator;
     private _details: Details;
+    private _tooltip: Tooltip;
     private _shouldSaveColorContext: () => boolean;
+    private _lastColorOptions: ColorSettings;
 
     /**
      * Instantiate a new Viewer.
@@ -144,45 +153,54 @@ export class Viewer {
     }
 
     private onAnimateDataChange(dataChange: DataLayoutChange, waitingLabel: string, handlerLabel: string) {
-        if (dataChange === DataLayoutChange.refine) {
-            const oldColorContext = this.colorContexts[this.currentColorContext];
-            this.renderNewLayout({
-                preStage: (stage, deckProps) => {
-                    finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
-                    applyColorMapToCubes([oldColorContext.colorMap], VegaDeckGl.util.getCubes(deckProps));
-                    if (this.options.onStage) {
-                        this.options.onStage(stage, deckProps);
-                    }
-                }
-            });
-            //apply old legend
-            this.applyLegendColorContext(oldColorContext);
-        } else {
-            this.renderNewLayout({
-                preStage: (stage, deckProps) => {
-                    finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
-                    if (this.options.onStage) {
-                        this.options.onStage(stage, deckProps);
-                    }
-                }
-            });
-        }
         return new Promise<void>((resolve, reject) => {
-            this.presenter.animationQueue(resolve, this.options.transitionDurations.position, { waitingLabel, handlerLabel, animationCanceled: reject });
+            let innerPromise: Promise<any>;
+            if (dataChange === DataLayoutChange.refine) {
+                const oldColorContext = this.colorContexts[this.currentColorContext];
+                innerPromise = new Promise<void>(innerResolve => {
+                    this.renderNewLayout({
+                        preStage: (stage, deckProps) => {
+                            finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
+                            this.overrideAxisLabels(stage);
+                            applyColorMapToCubes([oldColorContext.colorMap], VegaDeckGl.util.getCubes(deckProps));
+                            if (this.options.onStage) {
+                                this.options.onStage(stage, deckProps);
+                            }
+                        }
+                    }).then(() => {
+                        //apply old legend
+                        this.applyLegendColorContext(oldColorContext);
+                        innerResolve();
+                    });
+                });
+            } else {
+                innerPromise = this.renderNewLayout({
+                    preStage: (stage, deckProps) => {
+                        finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
+                        this.overrideAxisLabels(stage);
+                        if (this.options.onStage) {
+                            this.options.onStage(stage, deckProps);
+                        }
+                    }
+                });
+            }
+            innerPromise.then(() => {
+                this.presenter.animationQueue(resolve, this.options.transitionDurations.position, { waitingLabel, handlerLabel, animationCanceled: reject });
+            });
         });
     }
 
-    private onDataChanged(dataLayout: DataLayoutChange, filter?: Search) {
+    private async onDataChanged(dataLayout: DataLayoutChange, filter?: Search) {
         switch (dataLayout) {
-            case DataLayoutChange.same:
+            case DataLayoutChange.same: {
                 this.renderSameLayout();
                 break;
-
-            case DataLayoutChange.refine:
+            }
+            case DataLayoutChange.refine: {
                 //save cube colors
                 const oldColorContext = this.colorContexts[this.currentColorContext];
                 let colorMap: ColorMap;
-                this.renderNewLayout({
+                await this.renderNewLayout({
                     preStage: (stage: VegaDeckGl.types.Stage, deckProps: DeckProps) => {
                         //save off the spec colors
                         colorMap = colorMapFromCubes(stage.cubeData);
@@ -202,22 +220,25 @@ export class Viewer {
                     }
                 });
 
-                this.insight.filter = searchExpression.narrow(this.insight.filter, filter);
+                //narrow the filter only if it is different
+                if (!searchExpression.compare(this.insight.filter, filter)) {
+                    this.insight.filter = searchExpression.narrow(this.insight.filter, filter);
+                }
                 if (this.options.onDataFilter) {
                     this.options.onDataFilter(this.insight.filter, this._dataScope.currentData());
                 }
                 break;
-
-            case DataLayoutChange.reset:
+            }
+            case DataLayoutChange.reset: {
                 const colorContext: ColorContext = {
                     colorMap: null,
                     legend: null,
                     legendElement: null
                 };
                 this.changeColorContexts([colorContext]);
-                this.renderNewLayout({
+                await this.renderNewLayout({
                     onPresent: () => {
-                        populateColorContext(colorContext, this.presenter)
+                        populateColorContext(colorContext, this.presenter);
                     }
                 });
 
@@ -226,16 +247,34 @@ export class Viewer {
                     this.options.onDataFilter(null, null);
                 }
                 break;
+            }
         }
         if (this.options.onSelectionChanged) {
             const sel = this.getSelection();
-            this.options.onSelectionChanged((sel && sel.search) || null);
+            this.options.onSelectionChanged((sel && sel.search) || null, 0, (sel && sel.selectedData) || null);
         }
     }
 
-    private renderNewLayout(c?: VegaDeckGl.types.PresenterConfig, view?: VegaDeckGl.types.View) {
+    private getSpecColumnsWithFilteredStats() {
+        if (!this._dataScope.hasFilteredData()) {
+            return this._specColumns;
+        }
+        const roles = ['color', 'facet', 'group', 'size', 'sort', 'x', 'y', 'z'];
+        const specColumns = { ...this._specColumns };
+        roles.forEach(r => {
+            if (specColumns[r]) {
+                const column = { ...specColumns[r] } as Column;
+                column.stats = this.getColumnStats(column);
+                specColumns[r] = column;
+            }
+        });
+        return specColumns;
+    }
+
+    private async renderNewLayout(c?: VegaDeckGl.types.PresenterConfig, view?: VegaDeckGl.types.View) {
         const currData = this._dataScope.currentData();
-        const specResult = cloneVegaSpecWithData(this.insight, this._specColumns, this.options, currData);
+        const context: SpecContext = { specColumns: this.getSpecColumnsWithFilteredStats(), insight: this.insight, specViewOptions: this.options };
+        const specResult = cloneVegaSpecWithData(context, currData);
         if (!specResult.errors) {
             const uiValues = extractSignalValuesFromView(this.vegaViewGl, this.vegaSpec);
             this._signalValues = { ...this._signalValues, ...uiValues, ...this.insight.signalValues };
@@ -255,8 +294,8 @@ export class Viewer {
                 const runtime = VegaDeckGl.base.vega.parse(this.vegaSpec);
                 this.vegaViewGl = new VegaDeckGl.ViewGl(runtime, config)
                     .renderer('deck.gl')
-                    .initialize(this.element)
-                    .run() as ViewGl_Class;
+                    .initialize(this.element) as ViewGl_Class;
+                await this.vegaViewGl.runAsync();
 
                 //capture new color color contexts via signals
                 this.configForSignalCapture(config.presenterConfig);
@@ -295,7 +334,7 @@ export class Viewer {
 
         if (newViewerOptions) {
             if (newViewerOptions.colors) {
-                recoloredAxes = recolorAxes(this.presenter.stage, this.options.colors, newViewerOptions.colors);
+                recoloredAxes = recolorAxes(this.presenter.stage, this._lastColorOptions, newViewerOptions.colors);
                 axes = recoloredAxes.axes || axes;
                 textData = recoloredAxes.textData || textData;
             }
@@ -330,6 +369,24 @@ export class Viewer {
         }
     }
 
+    private transformData(values: object[], transform: Transforms[]) {
+        try {
+            const runtime = VegaDeckGl.base.vega.parse({
+                $schema: 'https://vega.github.io/schema/vega/v4.json',
+                data: [{
+                    name: 'source',
+                    values,
+                    transform
+                }]
+            });
+            new VegaDeckGl.ViewGl(runtime).run();
+        }
+        catch (e) {
+            // continue regardless of error
+        }
+        return values;
+    }
+
     /**
      * Render data into a visualization.
      * @param insight Object to create a visualization specification.
@@ -337,33 +394,29 @@ export class Viewer {
      * @param view Optional View to specify camera type.
      * @param ordinalMap Optional map of ordinals to assign to the data such that the same cubes can be re-used for new data.
      */
-    render(insight: Insight, data: object[], options: RenderOptions = {}): Promise<RenderResult> {
-        return new Promise<RenderResult>((resolve, reject) => {
-            let result: RenderResult;
-            const layout = () => {
-                result = this._render(insight, data, options);
-            };
-            //see if refine expression has changed
-            if (!searchExpression.compare(insight.filter, this.insight.filter)) {
-                if (insight.filter) {
-                    //refining
-                    layout();
-                    this.presenter.animationQueue(() => {
-                        this.filter(insight.filter);
-                    }, this.options.transitionDurations.position, { waitingLabel: 'layout before refine', handlerLabel: 'refine after layout' });
-                } else {
-                    //not refining
-                    this._dataScope.filteredData = null;
-                    layout();
-                    this.presenter.animationQueue(() => {
-                        this.reset();
-                    }, 0, { waitingLabel: 'layout before reset', handlerLabel: 'reset after layout' });
-                }
+    async render(insight: Insight, data: object[], options: RenderOptions = {}) {
+        let result: RenderResult;
+        //see if refine expression has changed
+        if (!searchExpression.compare(insight.filter, this.insight.filter)) {
+            const allowAsyncRenderTime = 100;
+            if (insight.filter) {
+                //refining
+                result = await this._render(insight, data, options);
+                this.presenter.animationQueue(() => {
+                    this.filter(insight.filter);
+                }, allowAsyncRenderTime, { waitingLabel: 'layout before refine', handlerLabel: 'refine after layout' });
             } else {
-                layout();
+                //not refining
+                this._dataScope.setFilteredData(null);
+                result = await this._render(insight, data, options);
+                this.presenter.animationQueue(() => {
+                    this.reset();
+                }, allowAsyncRenderTime, { waitingLabel: 'layout before reset', handlerLabel: 'reset after layout' });
             }
-            resolve(result);
-        });
+        } else {
+            result = await this._render(insight, data, options);
+        }
+        return result;
     }
 
     private shouldViewstateTransition(newInsight: Insight, oldInsight: Insight) {
@@ -399,21 +452,28 @@ export class Viewer {
         };
     }
 
-    private _render(insight: Insight, data: object[], options: RenderOptions) {
+    private async _render(insight: Insight, data: object[], options: RenderOptions) {
+        if (this._tooltip) {
+            this._tooltip.finalize();
+            this._tooltip = null;
+        }
         if (this._dataScope.setData(data, options.columns)) {
             //data is different, reset the signal value cache
             this._signalValues = {};
+            //apply transform to the data
+            this.transformData(data, insight.transform);
         }
         this._specColumns = getSpecColumns(insight, this._dataScope.getColumns(options.columnTypes));
         const ordinalMap = assignOrdinals(this._specColumns, data, options.ordinalMap);
         this.insight = VegaDeckGl.util.clone(insight);
+        this._lastColorOptions = VegaDeckGl.util.clone(this.options.colors);
         this._shouldSaveColorContext = () => !options.initialColorContext;
         const colorContext = options.initialColorContext || {
             colorMap: null,
             legend: null,
             legendElement: null
         };
-        const specResult = this.renderNewLayout(
+        const specResult = await this.renderNewLayout(
             {
                 preStage: (stage: VegaDeckGl.types.Stage, deckProps: DeckProps) => {
                     if (this._shouldSaveColorContext()) {
@@ -452,6 +512,21 @@ export class Viewer {
         return result;
     }
 
+    private overrideAxisLabels(stage: VegaDeckGl.types.Stage) {
+        // if (this._specColumns.x && this._specColumns.x.type === 'date') {
+        //     stage.axes.x.forEach(axis => makeDateRange(
+        //         axis.tickText,
+        //         this.getColumnStats(this._specColumns.x)
+        //     ));
+        // }
+        // if (this._specColumns.y && this._specColumns.y.type === 'date') {
+        //     stage.axes.y.forEach(axis => makeDateRange(
+        //         axis.tickText,
+        //         this.getColumnStats(this._specColumns.y)
+        //     ));
+        // }
+    }
+
     private preStage(stage: VegaDeckGl.types.Stage, deckProps: DeckProps) {
         const onClick: AxisSelectionHandler = (e, search: SearchExpressionGroup) => {
             if (this.options.onAxisClick) {
@@ -460,7 +535,8 @@ export class Viewer {
                 this.select(search);
             }
         };
-        const polygonLayer = axisSelectionLayer(this.specCapabilities, this._specColumns, stage, onClick, this.options.colors.axisSelectHighlight, this.options.selectionPolygonZ);
+        this.overrideAxisLabels(stage);
+        const polygonLayer = axisSelectionLayer(this.presenter, this.specCapabilities, this._specColumns, stage, onClick, this.options.colors.axisSelectHighlight, this.options.selectionPolygonZ);
         const order = 1;//after textlayer but before others
         deckProps.layers.splice(order, 0, polygonLayer);
         finalizeLegend(this.insight.colorBin, this._specColumns.color, stage.legend, this.options.language);
@@ -479,7 +555,7 @@ export class Viewer {
                 this._details.populate(this._dataScope.selection, indexWithinSelection.index);
                 if (this.options.onSelectionChanged) {
                     const sel = this.getSelection();
-                    this.options.onSelectionChanged(sel.search, indexWithinSelection.index);
+                    this.options.onSelectionChanged(sel.search, indexWithinSelection.index, sel.selectedData);
                 }
                 return;
             }
@@ -496,9 +572,41 @@ export class Viewer {
         this.select(search);
     }
 
+    private onCubeHover(e: MouseEvent | PointerEvent | TouchEvent, cube: VegaDeckGl.types.Cube) {
+        if (this._tooltip) {
+            this._tooltip.finalize();
+            this._tooltip = null;
+        }
+        if (!cube) {
+            return;
+        }
+        const currentData = this._dataScope.currentData();
+        const index = getDataIndexOfCube(cube, currentData);
+        if (index >= 0) {
+            this._tooltip = new Tooltip({
+                options: this.options.tooltipOptions,
+                item: currentData[index],
+                position: e as MouseEvent,
+                cssPrefix: this.presenter.style.cssPrefix
+            });
+        }
+    }
+
+    private onTextHover(e: MouseEvent | PointerEvent | TouchEvent, t: TextLayerDatum) {
+        //return true if highlight color is different
+        if (!t || !this.options.getTextColor || !this.options.getTextHighlightColor) return false;
+        return !VegaDeckGl.util.colorIsEqual(this.options.getTextColor(t), this.options.getTextHighlightColor(t));
+    }
+
     private createConfig(c?: VegaDeckGl.types.PresenterConfig): VegaDeckGl.types.ViewGlConfig {
+        const { getTextColor, getTextHighlightColor, onTextClick } = this.options;
         const defaultPresenterConfig: VegaDeckGl.types.PresenterConfig = {
+            getTextColor,
+            getTextHighlightColor,
+            onTextClick,
             onCubeClick: this.onCubeClick.bind(this),
+            onCubeHover: this.onCubeHover.bind(this),
+            onTextHover: this.onTextHover.bind(this),
             preStage: this.preStage.bind(this),
             onPresent: this.options.onPresent,
             onLayerClick: (info: PickInfo, pickedInfos: PickInfo[], e: MouseEvent) => {
@@ -507,16 +615,22 @@ export class Viewer {
                 }
             },
             onLegendClick: (e: MouseEvent, legend: VegaDeckGl.types.Legend, clickedIndex: number) => {
-                const legendRow = legend.rows[clickedIndex] && legend.rows[clickedIndex] as LegendRowWithSearch;
+                const legendRow = clickedIndex !== null && legend.rows[clickedIndex] as LegendRowWithSearch;
                 if (legendRow) {
                     if (this.options.onLegendRowClick) {
                         this.options.onLegendRowClick(e, legendRow);
                     } else {
                         this.select(legendRow.search);
                     }
+                } else if (this.options.onLegendHeaderClick) {
+                    //header clicked
+                    this.options.onLegendHeaderClick(e);
                 }
             }
         };
+        if (this.options.onBeforeCreateLayers) {
+            defaultPresenterConfig.preLayer = stage => this.options.onBeforeCreateLayers(stage, this.specCapabilities);
+        }
         const config: VegaDeckGl.types.ViewGlConfig = {
             presenter: this.presenter,
             presenterConfig: Object.assign(defaultPresenterConfig, c)
@@ -585,11 +699,12 @@ export class Viewer {
      * Gets the current selection.
      */
     getSelection() {
+        if (!this._dataScope) return null;
         const selectionState: SelectionState = {
             search: (this._dataScope.selection && this._dataScope.selection.search) || null,
             selectedData: (this._dataScope.selection && this._dataScope.selection.included) || null,
             active: this._dataScope.active
-        }
+        };
         return selectionState;
     }
 
@@ -610,7 +725,7 @@ export class Viewer {
      */
     deActivate() {
         return new Promise<void>((resolve, reject) => {
-            if (this._dataScope.active) {
+            if (this._dataScope && this._dataScope.active) {
                 this._animator.deactivate().then(() => {
                     this._details.render();
                     resolve();
@@ -631,6 +746,14 @@ export class Viewer {
     }
 
     /**
+     * Gets column stats from current data (filtered or all).
+     * @param column Column to get stats for.
+     */
+    getColumnStats(column: Column) {
+        return this._dataScope.hasFilteredData() ? this._dataScope.getFilteredColumnStats(column.name) : column.stats;
+    }
+
+    /**
      * Gets current signal values.
      */
     getSignalValues() {
@@ -640,6 +763,7 @@ export class Viewer {
     finalize() {
         if (this._dataScope) this._dataScope.finalize();
         if (this._details) this._details.finalize();
+        if (this._tooltip) this._tooltip.finalize();
         if (this.vegaViewGl) this.vegaViewGl.finalize();
         if (this.presenter) this.presenter.finalize();
         if (this.element) this.element.innerHTML = '';
@@ -652,5 +776,6 @@ export class Viewer {
         this._animator = null;
         this._dataScope = null;
         this._details = null;
+        this._tooltip = null;
     }
 }

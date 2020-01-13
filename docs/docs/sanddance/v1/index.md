@@ -8,7 +8,7 @@ Visually explore, understand, and present your data.
 
 ![sanddance-animation](https://user-images.githubusercontent.com/11507384/54236654-52d42800-44d1-11e9-859e-6c5d297a46d2.gif)
 
-[Demo](/SandDance/app) - [API Reference](/SandDance/docs/sanddance/v1/api)
+[Demo](/app) - [API Reference](/docs/sanddance/v1/api)
 
 ## Installation
 
@@ -36,8 +36,8 @@ Add these to the `dependencies` section of your `package.json`, then run `npm in
 ```json
 "@deck.gl/core": "6.4",
 "@deck.gl/layers": "6.4",
+"@msrvida/sanddance": "^1",
 "luma.gl": "6.4",
-"sanddance": "*",
 "vega-lib": "^4.3.0"
 ```
 
@@ -54,4 +54,4 @@ SandDance.use(vega, deck, layers, luma);
 ```
 
 ## For more information
-Please visit the [SandDance website](/SandDance/).
+Please visit the [SandDance website](/).

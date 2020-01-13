@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "eslint": "eslint -c ../../.eslintrc.json --fix ./src/**/*.ts*",
     "build": "tsc -p .",
     "deploy": "parcel build ./src/sanddance.ts --no-cache --no-minify --no-source-maps --public-url . --out-dir ../../docs/tests/es6/js"
   },
@@ -10,7 +11,7 @@
     "@deck.gl/core": "6.4",
     "@deck.gl/layers": "6.4",
     "luma.gl": "6.4",
-    "@msrvida/sanddance": "*",
-    "vega-lib": "4.3.0"
+    "@msrvida/sanddance": "^2",
+    "vega": "^5.8"
   }
 }

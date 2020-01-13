@@ -6,6 +6,25 @@ layout: api
 
 ## Functions
 
+### isInternalFieldName
+
+```typescript
+function isInternalFieldName(columnName: string, includeVegaDeckGLFields: boolean = false): boolean;
+```
+
+**Parameters**
+
+| Name                    | Type    | Default value |
+| ----------------------- | ------- | ------------- |
+| columnName              | string  |               |
+| includeVegaDeckGLFields | boolean | false         |
+
+**Return type**
+
+boolean
+
+----------
+
 ### getColumnsFromData
 
 Derive column metadata from the data array.
@@ -76,22 +95,23 @@ function getPresenterStyle(options: ViewerOptions): PresenterStyle;
 
 | Name    | Type                                     |
 | ------- | ---------------------------------------- |
-| options | [ViewerOptions][InterfaceDeclaration-23] |
+| options | [ViewerOptions][InterfaceDeclaration-24] |
 
 **Return type**
 
-[PresenterStyle][InterfaceDeclaration-47]
+[PresenterStyle][InterfaceDeclaration-49]
 
-[NamespaceImport-3]: util#util
-[FunctionDeclaration-6]: util#getcolumnsfromdata
-[InterfaceDeclaration-5]: types#columntypemap
-[InterfaceDeclaration-3]: types#column
-[FunctionDeclaration-7]: util#inferall
-[InterfaceDeclaration-3]: types#column
-[FunctionDeclaration-8]: util#ensuresearchexpressiongrouparray
-[TypeAliasDeclaration-3]: types#search
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-2]: types#searchexpressiongroup
-[FunctionDeclaration-9]: util#getpresenterstyle
-[InterfaceDeclaration-23]: types#vieweroptions
-[InterfaceDeclaration-47]: vegadeckgl/types#presenterstyle
+[NamespaceImport-3]: util.html#util
+[FunctionDeclaration-6]: util.html#isinternalfieldname
+[FunctionDeclaration-7]: util.html#getcolumnsfromdata
+[InterfaceDeclaration-5]: types.html#columntypemap
+[InterfaceDeclaration-3]: types.html#column
+[FunctionDeclaration-8]: util.html#inferall
+[InterfaceDeclaration-3]: types.html#column
+[FunctionDeclaration-9]: util.html#ensuresearchexpressiongrouparray
+[TypeAliasDeclaration-3]: types.html#search
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-2]: types.html#searchexpressiongroup
+[FunctionDeclaration-10]: util.html#getpresenterstyle
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[InterfaceDeclaration-49]: vegadeckgl/types.html#presenterstyle

@@ -61,6 +61,7 @@ interface Column {
     name: string;
     type: TypeInference;
     quantitative?: boolean;
+    isColorData?: boolean;
     stats?: ColumnStats;
 }
 ```
@@ -72,6 +73,7 @@ interface Column {
 | name         | string                                | false    | Name of the column.                                          |
 | type         | TypeInference                         | false    | Type of data in the column.                                  |
 | quantitative | boolean                               | true     | Optional flag to specify if the column data is quantitative. |
+| isColorData  | boolean                               | true     | Optional flag to specify if the column data is CSS colors.   |
 | stats        | [ColumnStats][InterfaceDeclaration-4] | true     | Optional stats object with metadata of column data content.  |
 
 ----------
@@ -84,17 +86,25 @@ Metadata about a column.
 interface ColumnStats {
     distinctValueCount: number;
     max?: number;
+    mean?: number;
     min?: number;
+    isSequential?: boolean;
+    hasNegative?: boolean;
+    hasColorData?: boolean;
 }
 ```
 
 **Properties**
 
-| Name               | Type   | Optional | Description                                                 |
-| ------------------ | ------ | -------- | ----------------------------------------------------------- |
-| distinctValueCount | number | false    | Number of unique values in this column.                     |
-| max                | number | true     | Maximum value of data in this column, if column is numeric. |
-| min                | number | true     | Minimum value of data in this column, if column is numeric. |
+| Name               | Type    | Optional | Description                                                            |
+| ------------------ | ------- | -------- | ---------------------------------------------------------------------- |
+| distinctValueCount | number  | false    | Number of unique values in this column.                                |
+| max                | number  | true     | Maximum value of data in this column, if column is numeric.            |
+| mean               | number  | true     | Mean value of data in this column, if column is numeric.               |
+| min                | number  | true     | Minimum value of data in this column, if column is numeric.            |
+| isSequential       | boolean | true     | Optional flag to specify if the column data is sequential.             |
+| hasNegative        | boolean | true     | Optional flag to specify if the column data contains negative numbers. |
+| hasColorData       | boolean | true     | Optional flag to specify if the column data contains color data.       |
 
 ----------
 
@@ -174,24 +184,26 @@ interface Insight {
     signalValues?: SignalValues;
     hideAxes?: boolean;
     hideLegend?: boolean;
+    directColor?: boolean;
 }
 ```
 
 **Properties**
 
-| Name         | Type                                      | Optional | Description                                                                                                      |
-| ------------ | ----------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| chart        | [Chart][TypeAliasDeclaration-5]           | false    |                                                                                                                  |
-| size         | [Size][InterfaceDeclaration-9]            | false    |                                                                                                                  |
-| columns      | [InsightColumns][InterfaceDeclaration-10] | false    |                                                                                                                  |
-| view         | [View][TypeAliasDeclaration-7]            | true     |                                                                                                                  |
-| filter       | [Search][TypeAliasDeclaration-3]          | true     |                                                                                                                  |
-| facets       | [Facets][InterfaceDeclaration-7]          | true     |                                                                                                                  |
-| colorBin     | [ColorBin][TypeAliasDeclaration-6]        | true     | Type of color binning to use on color scale. Only applicable when the column in the color role is quantitative.  |
-| scheme       | string                                    | true     | Name of the color scheme. See https://vega.github.io/vega/docs/schemes/                                          |
-| signalValues | [SignalValues][InterfaceDeclaration-11]   | true     | Vega signal values for this insight.                                                                             |
-| hideAxes     | boolean                                   | true     | Optional flag to hide axes.                                                                                      |
-| hideLegend   | boolean                                   | true     | Optional flag to hide legend.                                                                                    |
+| Name         | Type                                      | Optional | Description                                                                                                     |
+| ------------ | ----------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| chart        | [Chart][TypeAliasDeclaration-5]           | false    |                                                                                                                 |
+| size         | [Size][InterfaceDeclaration-9]            | false    |                                                                                                                 |
+| columns      | [InsightColumns][InterfaceDeclaration-10] | false    |                                                                                                                 |
+| view         | [View][TypeAliasDeclaration-7]            | true     |                                                                                                                 |
+| filter       | [Search][TypeAliasDeclaration-3]          | true     |                                                                                                                 |
+| facets       | [Facets][InterfaceDeclaration-7]          | true     |                                                                                                                 |
+| colorBin     | [ColorBin][TypeAliasDeclaration-6]        | true     | Type of color binning to use on color scale. Only applicable when the column in the color role is quantitative. |
+| scheme       | string                                    | true     | Name of the color scheme. See https://vega.github.io/vega/docs/schemes/                                         |
+| signalValues | [SignalValues][InterfaceDeclaration-11]   | true     | Vega signal values for this insight.                                                                            |
+| hideAxes     | boolean                                   | true     | Optional flag to hide axes.                                                                                     |
+| hideLegend   | boolean                                   | true     | Optional flag to hide legend.                                                                                   |
+| directColor  | boolean                                   | true     | Optional flag to use CSS colors directly from data.                                                             |
 
 ----------
 
@@ -316,6 +328,7 @@ interface SpecLanguage {
     colorReverse: string;
     facetColumns: string;
     facetRows: string;
+    markOpacitySignal: string;
     textScaleSignal: string;
     xAxisTextAngleSignal: string;
     yAxisTextAngleSignal: string;
@@ -340,6 +353,7 @@ interface SpecLanguage {
 | colorReverse         | string | false    | Label for the color reverse checkbox.    |
 | facetColumns         | string | false    | Label for facet columns slider.          |
 | facetRows            | string | false    | Label for facet rows slider.             |
+| markOpacitySignal    | string | false    | Label for mark opacity slider.           |
 | textScaleSignal      | string | false    | Label for text scale slider.             |
 | xAxisTextAngleSignal | string | false    | Label for x axis text angle slider.      |
 | yAxisTextAngleSignal | string | false    | Label for y axis text angle slider.      |
@@ -444,6 +458,26 @@ interface SpecViewOptions {
 
 ----------
 
+### SpecContext
+
+```typescript
+interface SpecContext {
+    specColumns: SpecColumns;
+    insight: Insight;
+    specViewOptions: SpecViewOptions;
+}
+```
+
+**Properties**
+
+| Name            | Type                                       | Optional |
+| --------------- | ------------------------------------------ | -------- |
+| specColumns     | [SpecColumns][InterfaceDeclaration-16]     | false    |
+| insight         | [Insight][InterfaceDeclaration-8]          | false    |
+| specViewOptions | [SpecViewOptions][InterfaceDeclaration-17] | false    |
+
+----------
+
 ### OrdinalMap
 
 Map of ordinals per unique Id.
@@ -481,7 +515,7 @@ interface RenderResult {
 | Name       | Type                                  | Optional | Description                                 |
 | ---------- | ------------------------------------- | -------- | ------------------------------------------- |
 | specResult | SpecResult | false    | Specification result object.                |
-| ordinalMap | [OrdinalMap][InterfaceDeclaration-18] | false    | Map of cube ordinals assigned by unique id. |
+| ordinalMap | [OrdinalMap][InterfaceDeclaration-19] | false    | Map of cube ordinals assigned by unique id. |
 
 ----------
 
@@ -497,7 +531,7 @@ interface TransitionDurations extends TransitionDurations {
 
 **Extends**
 
-[TransitionDurations][InterfaceDeclaration-22]
+[TransitionDurations][InterfaceDeclaration-23]
 
 **Properties**
 
@@ -514,16 +548,23 @@ Customization options for the Viewer.
 ```typescript
 interface ViewerOptions extends SpecViewOptions {
     colors: ColorSettings;
+    fontFamily?: string;
     language: Language;
+    tooltipOptions?: TooltipOptions;
     lightSettings?: { [view extends View]: LightSettings };
     transitionDurations: TransitionDurations;
     onError?: (errors: string[]) => void;
     onColorContextChange?: () => void;
     onDataFilter?: (filter: Search, filteredData: object[]) => void;
-    onSelectionChanged?: (search?: Search, activeIndex?: number) => void;
+    onSelectionChanged?: (search: Search, activeIndex?: number, selectedData?: object[]) => void;
     onStage?: (stage: Stage, deckProps: DeckProps) => void;
     onPresent?: () => void;
+    onBeforeCreateLayers?: (stage: Stage, specCapabilities: SpecCapabilities) => void;
+    getTextColor?: (t: TextLayerDatum) => Color;
+    getTextHighlightColor?: (t: TextLayerDatum) => Color;
+    onTextClick?: (e: MouseEvent | PointerEvent | TouchEvent, o: TextLayerDatum) => void;
     onAxisClick?: (e: TouchEvent | MouseEvent | PointerEvent, serch: SearchExpressionGroup<SearchExpression>) => void;
+    onLegendHeaderClick?: (e: TouchEvent | MouseEvent | PointerEvent) => void;
     onLegendRowClick?: (e: TouchEvent | MouseEvent | PointerEvent, legendRow: LegendRowWithSearch) => void;
     onVegaSpec?: (vegaSpec: Spec) => void;
     selectionPolygonZ: number;
@@ -536,22 +577,29 @@ interface ViewerOptions extends SpecViewOptions {
 
 **Properties**
 
-| Name                 | Type                                                                                                          | Optional | Description                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------- |
-| colors               | [ColorSettings][InterfaceDeclaration-24]                                                                      | false    | Custom colors of various parts of the visualization.                        |
-| language             | [Language][InterfaceDeclaration-26]                                                                           | false    | Language settings for the visualization.                                    |
-| lightSettings        | { [view extends [View][TypeAliasDeclaration-7]]: LightSettings }                                              | true     | Optional map of light settings for the visualization, per camera view type. |
-| transitionDurations  | [TransitionDurations][InterfaceDeclaration-21]                                                                | false    | Lengths of time for a transition animation.                                 |
-| onError              | (errors: string[]) => void                                                                                    | true     | Optional error handler.                                                     |
-| onColorContextChange | () => void                                                                                                    | true     | Optional handler when color context changes.                                |
-| onDataFilter         | (filter: Search, filteredData: object[]) => void                                                              | true     | Optional handler to be invoked when data is filtered.                       |
-| onSelectionChanged   | (search?: Search, activeIndex?: number) => void                                                               | true     | Optional handler to be invoked when selection has changed.                  |
-| onStage              | (stage: Stage, deckProps: DeckProps) => void                                                                  | true     | Optional handler when data is on stage.                                     |
-| onPresent            | () => void                                                                                                    | true     | Optional handler when chart is presented.                                   |
-| onAxisClick          | (e: TouchEvent &#124; MouseEvent &#124; PointerEvent, serch: SearchExpressionGroup<SearchExpression>) => void | true     | Optional handler when axis is clicked.                                      |
-| onLegendRowClick     | (e: TouchEvent &#124; MouseEvent &#124; PointerEvent, legendRow: LegendRowWithSearch) => void                 | true     | Optional handler when legend row is clicked.                                |
-| onVegaSpec           | (vegaSpec: Spec) => void                                                                                      | true     | Optional handler when Vega spec is created, prior to it being rendered.     |
-| selectionPolygonZ    | number                                                                                                        | false    | Z value of selection polygons.                                              |
+| Name                  | Type                                                                                                          | Optional | Description                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------- |
+| colors                | [ColorSettings][InterfaceDeclaration-25]                                                                      | false    | Custom colors of various parts of the visualization.                        |
+| fontFamily            | string                                                                                                        | true     | Font family of text elements.                                               |
+| language              | [Language][InterfaceDeclaration-27]                                                                           | false    | Language settings for the visualization.                                    |
+| tooltipOptions        | [TooltipOptions][InterfaceDeclaration-29]                                                                     | true     | Tooltip options                                                             |
+| lightSettings         | { [view extends [View][TypeAliasDeclaration-7]]: LightSettings }                                              | true     | Optional map of light settings for the visualization, per camera view type. |
+| transitionDurations   | [TransitionDurations][InterfaceDeclaration-22]                                                                | false    | Lengths of time for a transition animation.                                 |
+| onError               | (errors: string[]) => void                                                                                    | true     | Optional error handler.                                                     |
+| onColorContextChange  | () => void                                                                                                    | true     | Optional handler when color context changes.                                |
+| onDataFilter          | (filter: Search, filteredData: object[]) => void                                                              | true     | Optional handler to be invoked when data is filtered.                       |
+| onSelectionChanged    | (search: Search, activeIndex?: number, selectedData?: object[]) => void                                       | true     | Optional handler to be invoked when selection has changed.                  |
+| onStage               | (stage: Stage, deckProps: DeckProps) => void                                                                  | true     | Optional handler when data is on stage.                                     |
+| onPresent             | () => void                                                                                                    | true     | Optional handler when chart is presented.                                   |
+| onBeforeCreateLayers  | (stage: Stage, specCapabilities: SpecCapabilities) => void                                                    | true     | Optional handler to modify the stage prior to deck.gl layer construction.   |
+| getTextColor          | (t: TextLayerDatum) => Color                                                                                  | true     | Optional handler to get the color of text elements.                         |
+| getTextHighlightColor | (t: TextLayerDatum) => Color                                                                                  | true     | Optional handler to get the highlight color of text elements.               |
+| onTextClick           | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, o: TextLayerDatum) => void                              | true     | Optional click handler for text elements.                                   |
+| onAxisClick           | (e: TouchEvent &#124; MouseEvent &#124; PointerEvent, serch: SearchExpressionGroup<SearchExpression>) => void | true     | Optional handler when axis is clicked.                                      |
+| onLegendHeaderClick   | (e: TouchEvent &#124; MouseEvent &#124; PointerEvent) => void                                                 | true     | Optional handler when legend header is clicked.                             |
+| onLegendRowClick      | (e: TouchEvent &#124; MouseEvent &#124; PointerEvent, legendRow: LegendRowWithSearch) => void                 | true     | Optional handler when legend row is clicked.                                |
+| onVegaSpec            | (vegaSpec: Spec) => void                                                                                      | true     | Optional handler when Vega spec is created, prior to it being rendered.     |
+| selectionPolygonZ     | number                                                                                                        | false    | Z value of selection polygons.                                              |
 
 ----------
 
@@ -573,8 +621,8 @@ interface RenderOptions {
 | -------------------------- | --------------------------------------- | -------- |
 | columns                    | [Column][InterfaceDeclaration-3][]      | true     |
 | columnTypes                | [ColumnTypeMap][InterfaceDeclaration-5] | true     |
-| ordinalMap                 | [OrdinalMap][InterfaceDeclaration-18]   | true     |
-| initialColorContext        | [ColorContext][InterfaceDeclaration-39] | true     |
+| ordinalMap                 | [OrdinalMap][InterfaceDeclaration-19]   | true     |
+| initialColorContext        | [ColorContext][InterfaceDeclaration-41] | true     |
 | discardColorContextUpdates | () => boolean                           | true     |
 
 ----------
@@ -605,7 +653,7 @@ interface ColorSettings extends SpecColorSettings {
 | hoveredCube           | Color                                  | true     | Color of the cube when mouse hovered.    |
 | selectedCube          | Color                                  | true     | Color of selected cubes.                 |
 | axisSelectHighlight   | Color                                  | true     | Color of axis hover hotspots.            |
-| unselectedColorMethod | [ColorMethod][InterfaceDeclaration-25] | true     | Method of coloring unselected cubes.     |
+| unselectedColorMethod | [ColorMethod][InterfaceDeclaration-26] | true     | Method of coloring unselected cubes.     |
 
 ----------
 
@@ -662,7 +710,7 @@ interface Language extends SpecLanguage {
 
 | Name           | Type                               | Optional | Description                                   |
 | -------------- | ---------------------------------- | -------- | --------------------------------------------- |
-| headers        | [Headers][InterfaceDeclaration-27] | false    | Labels in the sections of the chart panel.    |
+| headers        | [Headers][InterfaceDeclaration-28] | false    | Labels in the sections of the chart panel.    |
 | bing           | string                             | false    | Text to use for "search with Bing".           |
 | newColorMap    | string                             | false    | Button text to re-map color.                  |
 | oldColorMap    | string                             | false    | Button text to keep same color.               |
@@ -731,7 +779,7 @@ interface ColorMap {
 ```
 
 * *Parameter* `ordinal` - number
-* *Type* [ColorMappedItem][InterfaceDeclaration-41]
+* *Type* [ColorMappedItem][InterfaceDeclaration-43]
 
 
 ----------
@@ -752,9 +800,9 @@ interface ColorContext {
 
 | Name          | Type                                | Optional |
 | ------------- | ----------------------------------- | -------- |
-| colorMap      | [ColorMap][InterfaceDeclaration-40] | false    |
+| colorMap      | [ColorMap][InterfaceDeclaration-42] | false    |
 | legendElement | HTMLElement                         | false    |
-| legend        | [Legend][InterfaceDeclaration-30]   | false    |
+| legend        | [Legend][InterfaceDeclaration-32]   | false    |
 
 ----------
 
@@ -794,7 +842,7 @@ interface LegendRowWithSearch extends LegendRow {
 
 **Extends**
 
-[LegendRow][InterfaceDeclaration-31]
+[LegendRow][InterfaceDeclaration-33]
 
 **Properties**
 
@@ -821,6 +869,24 @@ interface SelectionState {
 | search       | [Search][TypeAliasDeclaration-3] | true     |
 | selectedData | object[]                         | true     |
 | active       | object                           | true     |
+
+----------
+
+### TooltipOptions
+
+```typescript
+interface TooltipOptions {
+    exclude?: (columnName: string) => boolean;
+    displayValue?: (value: any) => string;
+}
+```
+
+**Properties**
+
+| Name         | Type                            | Optional |
+| ------------ | ------------------------------- | -------- |
+| exclude      | (columnName: string) => boolean | true     |
+| displayValue | (value: any) => string          | true     |
 
 ## Types
 
@@ -891,12 +957,12 @@ type AxisSelectionType = "exact" | "range";
 Types of SandDance visualizations.
 
 ```typescript
-type Chart = "barchart" | "density" | "grid" | "scatterplot" | "stacks" | "treemap";
+type Chart = "barchart" | "barchartH" | "barchartV" | "density" | "grid" | "scatterplot" | "stacks" | "treemap";
 ```
 
 **Type**
 
-"barchart" | "density" | "grid" | "scatterplot" | "stacks" | "treemap"
+"barchart" | "barchartH" | "barchartV" | "density" | "grid" | "scatterplot" | "stacks" | "treemap"
 
 ----------
 
@@ -922,101 +988,107 @@ type InsightColumnRoles = "uid" | "x" | "y" | "z" | "group" | "size" | "color" |
 
 "uid" | "x" | "y" | "z" | "group" | "size" | "color" | "facet" | "sort"
 
-[NamespaceImport-2]: types#types
-[InterfaceDeclaration-1]: types#searchexpression
-[TypeAliasDeclaration-0]: types#searchexpressionclause
-[TypeAliasDeclaration-1]: types#searchexpressionoperators
-[InterfaceDeclaration-2]: types#searchexpressiongroup
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-1]: types#searchexpression
-[TypeAliasDeclaration-0]: types#searchexpressionclause
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-4]: types#columnstats
-[InterfaceDeclaration-4]: types#columnstats
-[InterfaceDeclaration-5]: types#columntypemap
-[InterfaceDeclaration-6]: types#facetmargins
-[InterfaceDeclaration-7]: types#facets
-[InterfaceDeclaration-8]: types#insight
-[TypeAliasDeclaration-5]: types#chart
-[InterfaceDeclaration-9]: types#size
-[InterfaceDeclaration-10]: types#insightcolumns
-[TypeAliasDeclaration-7]: vegadeckgl/types#view
-[TypeAliasDeclaration-3]: types#search
-[InterfaceDeclaration-7]: types#facets
-[TypeAliasDeclaration-6]: types#colorbin
-[InterfaceDeclaration-11]: types#signalvalues
-[InterfaceDeclaration-10]: types#insightcolumns
-[InterfaceDeclaration-12]: types#specrolecapabilities
-[TypeAliasDeclaration-8]: types#insightcolumnroles
-[TypeAliasDeclaration-4]: types#axisselectiontype
-[InterfaceDeclaration-13]: types#speccapabilities
-[InterfaceDeclaration-12]: types#specrolecapabilities
-[InterfaceDeclaration-14]: types#speccolorsettings
-[InterfaceDeclaration-15]: types#speclanguage
-[InterfaceDeclaration-11]: types#signalvalues
-[InterfaceDeclaration-9]: types#size
-[InterfaceDeclaration-16]: types#speccolumns
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-17]: types#specviewoptions
-[InterfaceDeclaration-14]: types#speccolorsettings
-[InterfaceDeclaration-15]: types#speclanguage
-[InterfaceDeclaration-6]: types#facetmargins
-[InterfaceDeclaration-18]: types#ordinalmap
-[InterfaceDeclaration-19]: types#renderresult
-[InterfaceDeclaration-18]: types#ordinalmap
-[InterfaceDeclaration-21]: types#transitiondurations
-[InterfaceDeclaration-22]: vegadeckgl/types#transitiondurations
-[InterfaceDeclaration-23]: types#vieweroptions
-[InterfaceDeclaration-17]: types#specviewoptions
-[InterfaceDeclaration-24]: types#colorsettings
-[InterfaceDeclaration-26]: types#language
-[TypeAliasDeclaration-7]: vegadeckgl/types#view
-[InterfaceDeclaration-21]: types#transitiondurations
-[InterfaceDeclaration-38]: types#renderoptions
-[InterfaceDeclaration-3]: types#column
-[InterfaceDeclaration-5]: types#columntypemap
-[InterfaceDeclaration-18]: types#ordinalmap
-[InterfaceDeclaration-39]: types#colorcontext
-[InterfaceDeclaration-24]: types#colorsettings
-[InterfaceDeclaration-14]: types#speccolorsettings
-[InterfaceDeclaration-25]: types#colormethod
-[InterfaceDeclaration-27]: types#headers
-[InterfaceDeclaration-26]: types#language
-[InterfaceDeclaration-15]: types#speclanguage
-[InterfaceDeclaration-27]: types#headers
-[InterfaceDeclaration-0]: types#colorscheme
-[InterfaceDeclaration-41]: types#colormappeditem
-[InterfaceDeclaration-40]: types#colormap
-[InterfaceDeclaration-41]: types#colormappeditem
-[InterfaceDeclaration-39]: types#colorcontext
-[InterfaceDeclaration-40]: types#colormap
-[InterfaceDeclaration-30]: vegadeckgl/types#legend
-[InterfaceDeclaration-25]: types#colormethod
-[InterfaceDeclaration-37]: types#legendrowwithsearch
-[InterfaceDeclaration-31]: vegadeckgl/types#legendrow
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-2]: types#searchexpressiongroup
-[InterfaceDeclaration-42]: types#selectionstate
-[TypeAliasDeclaration-3]: types#search
-[TypeAliasDeclaration-0]: types#searchexpressionclause
-[TypeAliasDeclaration-2]: types#searchexpressionstringsearchoperators
-[TypeAliasDeclaration-1]: types#searchexpressionoperators
-[TypeAliasDeclaration-2]: types#searchexpressionstringsearchoperators
-[TypeAliasDeclaration-3]: types#search
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-2]: types#searchexpressiongroup
-[InterfaceDeclaration-1]: types#searchexpression
-[InterfaceDeclaration-2]: types#searchexpressiongroup
-[TypeAliasDeclaration-4]: types#axisselectiontype
-[TypeAliasDeclaration-5]: types#chart
-[TypeAliasDeclaration-6]: types#colorbin
-[TypeAliasDeclaration-8]: types#insightcolumnroles
+[NamespaceImport-2]: types.html#types
+[InterfaceDeclaration-1]: types.html#searchexpression
+[TypeAliasDeclaration-0]: types.html#searchexpressionclause
+[TypeAliasDeclaration-1]: types.html#searchexpressionoperators
+[InterfaceDeclaration-2]: types.html#searchexpressiongroup
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-1]: types.html#searchexpression
+[TypeAliasDeclaration-0]: types.html#searchexpressionclause
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-4]: types.html#columnstats
+[InterfaceDeclaration-4]: types.html#columnstats
+[InterfaceDeclaration-5]: types.html#columntypemap
+[InterfaceDeclaration-6]: types.html#facetmargins
+[InterfaceDeclaration-7]: types.html#facets
+[InterfaceDeclaration-8]: types.html#insight
+[TypeAliasDeclaration-5]: types.html#chart
+[InterfaceDeclaration-9]: types.html#size
+[InterfaceDeclaration-10]: types.html#insightcolumns
+[TypeAliasDeclaration-7]: vegadeckgl/types.html#view
+[TypeAliasDeclaration-3]: types.html#search
+[InterfaceDeclaration-7]: types.html#facets
+[TypeAliasDeclaration-6]: types.html#colorbin
+[InterfaceDeclaration-11]: types.html#signalvalues
+[InterfaceDeclaration-10]: types.html#insightcolumns
+[InterfaceDeclaration-12]: types.html#specrolecapabilities
+[TypeAliasDeclaration-8]: types.html#insightcolumnroles
+[TypeAliasDeclaration-4]: types.html#axisselectiontype
+[InterfaceDeclaration-13]: types.html#speccapabilities
+[InterfaceDeclaration-12]: types.html#specrolecapabilities
+[InterfaceDeclaration-14]: types.html#speccolorsettings
+[InterfaceDeclaration-15]: types.html#speclanguage
+[InterfaceDeclaration-11]: types.html#signalvalues
+[InterfaceDeclaration-9]: types.html#size
+[InterfaceDeclaration-16]: types.html#speccolumns
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-17]: types.html#specviewoptions
+[InterfaceDeclaration-14]: types.html#speccolorsettings
+[InterfaceDeclaration-15]: types.html#speclanguage
+[InterfaceDeclaration-6]: types.html#facetmargins
+[InterfaceDeclaration-18]: types.html#speccontext
+[InterfaceDeclaration-16]: types.html#speccolumns
+[InterfaceDeclaration-8]: types.html#insight
+[InterfaceDeclaration-17]: types.html#specviewoptions
+[InterfaceDeclaration-19]: types.html#ordinalmap
+[InterfaceDeclaration-20]: types.html#renderresult
+[InterfaceDeclaration-19]: types.html#ordinalmap
+[InterfaceDeclaration-22]: types.html#transitiondurations
+[InterfaceDeclaration-23]: vegadeckgl/types.html#transitiondurations
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[InterfaceDeclaration-17]: types.html#specviewoptions
+[InterfaceDeclaration-25]: types.html#colorsettings
+[InterfaceDeclaration-27]: types.html#language
+[InterfaceDeclaration-29]: types.html#tooltipoptions
+[TypeAliasDeclaration-7]: vegadeckgl/types.html#view
+[InterfaceDeclaration-22]: types.html#transitiondurations
+[InterfaceDeclaration-40]: types.html#renderoptions
+[InterfaceDeclaration-3]: types.html#column
+[InterfaceDeclaration-5]: types.html#columntypemap
+[InterfaceDeclaration-19]: types.html#ordinalmap
+[InterfaceDeclaration-41]: types.html#colorcontext
+[InterfaceDeclaration-25]: types.html#colorsettings
+[InterfaceDeclaration-14]: types.html#speccolorsettings
+[InterfaceDeclaration-26]: types.html#colormethod
+[InterfaceDeclaration-28]: types.html#headers
+[InterfaceDeclaration-27]: types.html#language
+[InterfaceDeclaration-15]: types.html#speclanguage
+[InterfaceDeclaration-28]: types.html#headers
+[InterfaceDeclaration-0]: types.html#colorscheme
+[InterfaceDeclaration-43]: types.html#colormappeditem
+[InterfaceDeclaration-42]: types.html#colormap
+[InterfaceDeclaration-43]: types.html#colormappeditem
+[InterfaceDeclaration-41]: types.html#colorcontext
+[InterfaceDeclaration-42]: types.html#colormap
+[InterfaceDeclaration-32]: vegadeckgl/types.html#legend
+[InterfaceDeclaration-26]: types.html#colormethod
+[InterfaceDeclaration-39]: types.html#legendrowwithsearch
+[InterfaceDeclaration-33]: vegadeckgl/types.html#legendrow
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-2]: types.html#searchexpressiongroup
+[InterfaceDeclaration-44]: types.html#selectionstate
+[TypeAliasDeclaration-3]: types.html#search
+[InterfaceDeclaration-29]: types.html#tooltipoptions
+[TypeAliasDeclaration-0]: types.html#searchexpressionclause
+[TypeAliasDeclaration-2]: types.html#searchexpressionstringsearchoperators
+[TypeAliasDeclaration-1]: types.html#searchexpressionoperators
+[TypeAliasDeclaration-2]: types.html#searchexpressionstringsearchoperators
+[TypeAliasDeclaration-3]: types.html#search
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-2]: types.html#searchexpressiongroup
+[InterfaceDeclaration-1]: types.html#searchexpression
+[InterfaceDeclaration-2]: types.html#searchexpressiongroup
+[TypeAliasDeclaration-4]: types.html#axisselectiontype
+[TypeAliasDeclaration-5]: types.html#chart
+[TypeAliasDeclaration-6]: types.html#colorbin
+[TypeAliasDeclaration-8]: types.html#insightcolumnroles

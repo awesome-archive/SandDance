@@ -1,38 +1,46 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import { fill } from '../fill';
-import { ScaleNames } from '../constants';
+import { FieldNames, ScaleNames } from '../constants';
+import { fill, opacity } from '../fill';
 import { Mark } from 'vega-typings';
-import { SpecColumns, SpecViewOptions } from '../types';
-import { zeroIfCollapsed } from '../selection';
+import { SpecContext } from '../types';
+import { testForCollapseSelection } from '../selection';
 
-export default function (data: string, columns: SpecColumns, specViewOptions: SpecViewOptions) {
+export default function (context: SpecContext, data: string) {
+    const { specColumns } = context;
     const marks: Mark[] = [
         {
-            "type": "rect",
-            "from": {
+            type: 'rect',
+            from: {
                 data
             },
-            "encode": {
-                "update": {
-                    "x": { "field": "x0" },
-                    "y": { "field": "y0" },
-                    "x2": { "field": "x1" },
-                    "y2": { "field": "y1" },
-                    "fill": fill(columns.color, specViewOptions)
+            encode: {
+                update: {
+                    x: { field: FieldNames.TreemapStackX0 },
+                    y: { field: FieldNames.TreemapStackY0 },
+                    x2: { field: FieldNames.TreemapStackX1 },
+                    y2: { field: FieldNames.TreemapStackY1 },
+                    fill: fill(context),
+                    opacity: opacity(context)
                 }
             }
         }
     ];
-    if (columns.z) {
+    if (specColumns.z) {
         const update = marks[0].encode.update;
         update.z = {
-            "value": 0
+            value: 0
         };
-        update.depth = zeroIfCollapsed({
-            "scale": ScaleNames.Z,
-            "field": columns.z.name
-        });
+        update.depth = [
+            {
+                test: testForCollapseSelection(),
+                value: 0
+            },
+            {
+                scale: ScaleNames.Z,
+                field: specColumns.z.name
+            }
+        ];
     }
     return marks;
 }

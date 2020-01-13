@@ -1,36 +1,37 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 import { allTruthy } from '../../array';
-import { colorBinCountSignal, textSignals, colorReverseSignal } from '../signals';
+import { colorBinCountSignal, colorReverseSignal, textSignals } from '../signals';
 import { facetSignals } from '../facet';
-import { Insight, SpecViewOptions } from '../types';
 import { ScaleNames, SignalNames } from '../constants';
 import { Signal } from 'vega-typings';
+import { SpecContext } from '../types';
 
-export default function (insight: Insight, specViewOptions: SpecViewOptions) {
+export default function (context: SpecContext) {
+    const { insight, specViewOptions } = context;
     const signals = allTruthy<Signal>(
-        textSignals(specViewOptions),
+        textSignals(context),
         [
             {
-                "name": SignalNames.YDomain,
-                "update": `domain('${ScaleNames.Y}')`
+                name: SignalNames.YDomain,
+                update: `domain('${ScaleNames.Y}')`
             },
             {
-                "name": SignalNames.PointSize,
-                "value": 5,
-                "bind": {
-                    "name": specViewOptions.language.scatterPointSize,
-                    "debounce": 50,
-                    "input": "range",
-                    "min": 1,
-                    "max": 25,
-                    "step": 1
+                name: SignalNames.PointSize,
+                value: 5,
+                bind: {
+                    name: specViewOptions.language.scatterPointSize,
+                    debounce: 50,
+                    input: 'range',
+                    min: 1,
+                    max: 25,
+                    step: 1
                 }
             },
-            colorBinCountSignal(specViewOptions),
-            colorReverseSignal(specViewOptions)
+            colorBinCountSignal(context),
+            colorReverseSignal(context)
         ],
-        insight.columns.facet && facetSignals(insight.facets, specViewOptions)
+        insight.columns.facet && facetSignals(context)
     );
     return signals;
 }

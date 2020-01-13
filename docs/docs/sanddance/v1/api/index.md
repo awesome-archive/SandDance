@@ -18,10 +18,10 @@ function use(vega: VegaBase, deck: DeckBase, layers: DeckLayerBase, luma: LumaBa
 
 | Name   | Type                                     | Description          |
 | ------ | ---------------------------------------- | -------------------- |
-| vega   | [VegaBase][InterfaceDeclaration-43]      | Vega library.        |
-| deck   | [DeckBase][InterfaceDeclaration-44]      | deck/core library.   |
-| layers | [DeckLayerBase][InterfaceDeclaration-45] | deck/layers library. |
-| luma   | [LumaBase][InterfaceDeclaration-46]      | luma.gl library.     |
+| vega   | [VegaBase][InterfaceDeclaration-45]      | Vega library.        |
+| deck   | [DeckBase][InterfaceDeclaration-46]      | deck/core library.   |
+| layers | [DeckLayerBase][InterfaceDeclaration-47] | deck/layers library. |
+| luma   | [LumaBase][InterfaceDeclaration-48]      | luma.gl library.     |
 
 **Return type**
 
@@ -73,17 +73,30 @@ const colorSchemes: ColorScheme[];
 
 [ColorScheme][InterfaceDeclaration-0][]
 
-[SourceFile-0]: index#indexts
-[FunctionDeclaration-5]: index#use
-[InterfaceDeclaration-43]: vegadeckgl/types#vegabase
-[InterfaceDeclaration-44]: vegadeckgl/types#deckbase
-[InterfaceDeclaration-45]: vegadeckgl/types#decklayerbase
-[InterfaceDeclaration-46]: vegadeckgl/types#lumabase
-[ClassDeclaration-5]: viewer#viewer
-[NamespaceImport-0]: constants#constants
-[NamespaceImport-1]: searchexpression#searchexpression
-[NamespaceImport-2]: types#types
-[NamespaceImport-3]: util#util
-[NamespaceImport-4]: vegadeckgl#vegadeckgl
-[VariableDeclaration-0]: index#colorschemes
-[InterfaceDeclaration-0]: types#colorscheme
+----------
+
+### version
+
+```typescript
+const version: string;
+```
+
+**Type**
+
+string
+
+[SourceFile-0]: index.html#indexts
+[FunctionDeclaration-5]: index.html#use
+[InterfaceDeclaration-45]: vegadeckgl/types.html#vegabase
+[InterfaceDeclaration-46]: vegadeckgl/types.html#deckbase
+[InterfaceDeclaration-47]: vegadeckgl/types.html#decklayerbase
+[InterfaceDeclaration-48]: vegadeckgl/types.html#lumabase
+[ClassDeclaration-5]: viewer.html#viewer
+[NamespaceImport-0]: constants.html#constants
+[NamespaceImport-1]: searchexpression.html#searchexpression
+[NamespaceImport-2]: types.html#types
+[NamespaceImport-3]: util.html#util
+[NamespaceImport-4]: vegadeckgl.html#vegadeckgl
+[VariableDeclaration-0]: index.html#colorschemes
+[InterfaceDeclaration-0]: types.html#colorscheme
+[VariableDeclaration-19]: index.html#version

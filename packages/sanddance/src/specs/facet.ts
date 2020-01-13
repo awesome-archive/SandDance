@@ -12,24 +12,27 @@ import {
     Column,
     Facets,
     Size,
+    SpecContext,
     SpecViewOptions
 } from './types';
 import { DataNames, FieldNames, SignalNames } from './constants';
-import { util } from '../vega-deck.gl';
+import { util } from '@msrvida/vega-deck.gl';
 
-const FacetColumnsSequence = "FacetColumnsSequence";
-const FacetRowsSequence = "FacetRowsSequence";
-const SequenceNumber = "SequenceNumber";
-const CellTitle = "CellTitle";
-const CellFiller = "CellFiller";
+const FacetColumnsSequence = 'FacetColumnsSequence';
+const FacetRowsSequence = 'FacetRowsSequence';
+const SequenceNumber = 'SequenceNumber';
+const CellTitle = 'CellTitle';
+const CellFiller = 'CellFiller';
 
 export const facetTitleSeparator = ' - ';
 
-export function facetSignals(facets: Facets, specViewOptions: SpecViewOptions) {
+export function facetSignals(context: SpecContext) {
+    const { insight } = context;
+    const { facets } = insight;
     const signals: Signal[] = [
         {
-            "name": SignalNames.FacetColumns,
-            "value": facets.columns,
+            name: SignalNames.FacetColumns,
+            value: facets.columns,
             // "bind": {
             //     "name": viewerOptions.language.facetColumns,
             //     "debounce": 50,
@@ -40,8 +43,8 @@ export function facetSignals(facets: Facets, specViewOptions: SpecViewOptions) {
             // }
         },
         {
-            "name": SignalNames.FacetRows,
-            "value": facets.rows,
+            name: SignalNames.FacetRows,
+            value: facets.rows,
             // "bind": {
             //     "name": viewerOptions.language.facetRows,
             //     "debounce": 50,
@@ -65,30 +68,33 @@ export function checkForFacetErrors(facets: Facets, errors: string[]) {
             errors.push('Not enough facets to facet.');
         }
         if (!facets.columns || facets.columns < 1) {
-            errors.push('Facet column columns must be greater than 1.')
+            errors.push('Facet column columns must be greater than 1.');
         }
         if (!facets.rows || facets.rows < 1) {
-            errors.push('Facet column rows must be greater than 1.')
+            errors.push('Facet column rows must be greater than 1.');
         }
     }
 }
 
-export function facetSize(facets: Facets, size: Size, specViewOptions: SpecViewOptions): Size {
+export function facetSize(context: SpecContext): Size {
+    const { insight, specViewOptions } = context;
+    const { facets, size } = insight;
     return {
         height: (size.height - (facets.rows + 1) * (specViewOptions.tickSize + specViewOptions.facetMargins.column)) / facets.columns,
         width: (size.width - (facets.columns + 1) * (specViewOptions.tickSize + specViewOptions.facetMargins.row)) / facets.rows,
     };
 }
 
-export function layout(specViewOptions: SpecViewOptions): LayoutParams {
+export function layout(context: SpecContext): LayoutParams {
+    const { specViewOptions } = context;
     const layout: LayoutParams = {
-        "columns": {
-            "signal": SignalNames.FacetColumns
+        columns: {
+            signal: SignalNames.FacetColumns
         },
-        "bounds": "full",
-        "padding": {
-            "column": specViewOptions.facetMargins.column,
-            "row": specViewOptions.facetMargins.row
+        bounds: 'full',
+        padding: {
+            column: specViewOptions.facetMargins.column,
+            row: specViewOptions.facetMargins.row
         }
     };
     return layout;
@@ -117,16 +123,16 @@ function emptyBinsDataSource(name: string, facetColumn: Column, facets: Facets) 
 }
 
 export function facetSourceData(facetColumn: Column, facets: Facets, name: string) {
-    let data: Data[]
+    let data: Data[];
     if (facetColumn && facetColumn.quantitative) {
         data = [
             {
-                "name": DataNames.Pre
+                name: DataNames.Pre
             },
             emptyBinsDataSource(DataNames.EmptyBin, facetColumn, facets),
             {
                 name,
-                "source": [DataNames.Pre, DataNames.EmptyBin]
+                source: [DataNames.Pre, DataNames.EmptyBin]
             }
         ];
     } else {
@@ -138,49 +144,49 @@ export function facetSourceData(facetColumn: Column, facets: Facets, name: strin
 export function facetGroupData(source: string) {
     const data: Data[] = [
         {
-            "name": DataNames.FacetCellTitles,
+            name: DataNames.FacetCellTitles,
             source,
-            "transform": [
+            transform: [
                 {
-                    "type": "aggregate",
-                    "groupby": [CellTitle]
+                    type: 'aggregate',
+                    groupby: [CellTitle]
                 }
             ]
         },
         {
-            "name": CellFiller,
-            "transform": [
+            name: CellFiller,
+            transform: [
                 {
-                    "type": "sequence",
-                    "start": 0,
-                    "step": 1,
-                    "stop": { "signal": `${SignalNames.FacetColumns} * ${SignalNames.FacetRows} - length(data('${DataNames.FacetCellTitles}'))` }
+                    type: 'sequence',
+                    start: 0,
+                    step: 1,
+                    stop: { signal: `${SignalNames.FacetColumns} * ${SignalNames.FacetRows} - length(data('${DataNames.FacetCellTitles}'))` }
                 }
             ]
         },
         {
-            "name": FacetColumnsSequence,
-            "transform": [
+            name: FacetColumnsSequence,
+            transform: [
                 {
-                    "type": "sequence",
-                    "start": 0,
-                    "stop": {
-                        "signal": SignalNames.FacetColumns
+                    type: 'sequence',
+                    start: 0,
+                    stop: {
+                        signal: SignalNames.FacetColumns
                     },
-                    "as": SequenceNumber
+                    as: SequenceNumber
                 }
             ]
         },
         {
-            "name": FacetRowsSequence,
-            "transform": [
+            name: FacetRowsSequence,
+            transform: [
                 {
-                    "type": "sequence",
-                    "start": 0,
-                    "stop": {
-                        "signal": SignalNames.FacetRows
+                    type: 'sequence',
+                    start: 0,
+                    stop: {
+                        signal: SignalNames.FacetRows
                     },
-                    "as": SequenceNumber
+                    as: SequenceNumber
                 }
             ]
         }
@@ -195,31 +201,34 @@ export function facetTransforms(facetColumn: Column, facets: Facets) {
         const step = facetBinStep(facetColumn, gridCapacity);
         transforms = [
             {
-                "type": "bin",
-                "field": facetColumn.name,
+                type: 'bin',
+                field: facetColumn.name,
                 step,
                 nice: false,
-                "extent": [facetColumn.stats.min, facetColumn.stats.max],
-                "as": ["facetBin0", "facetBin1"]
+                extent: [facetColumn.stats.min, facetColumn.stats.max],
+                as: [
+                    FieldNames.FacetBin0,
+                    FieldNames.FacetBin1
+                ]
             },
             {
-                "type": "collect",
-                "sort": {
-                    "field": "facetBin0"
+                type: 'collect',
+                sort: {
+                    field: FieldNames.FacetBin0
                 }
             },
             {
-                "type": "formula",
-                "expr": `format(datum.facetBin0, '~r') + '${facetTitleSeparator}' + format(datum.facetBin1, '~r')`,
-                "as": CellTitle
+                type: 'formula',
+                expr: `format(datum.${FieldNames.FacetBin0}, '~r') + '${facetTitleSeparator}' + format(datum.${FieldNames.FacetBin1}, '~r')`,
+                as: CellTitle
             }
         ];
     } else {
         transforms = [
             {
-                "type": "formula",
-                "expr": `datum[${JSON.stringify(facetColumn.name)}]`,
-                "as": CellTitle
+                type: 'formula',
+                expr: `datum[${JSON.stringify(facetColumn.name)}]`,
+                as: CellTitle
             }
         ];
     }
@@ -229,44 +238,44 @@ export function facetTransforms(facetColumn: Column, facets: Facets) {
 export function facetMarks(specViewOptions: SpecViewOptions, sourceDataName: string, childMarks: Mark[], childAxes: Axis[], childData?: Data[]) {
     //TODO: create a style
     const cellFillerLineColor = util.colorToString(specViewOptions.colors.cellFillerLine);
-    const style = "cell";
+    const style = 'cell';
 
     const mark: Mark = {
         style,
-        "type": "group",
-        "from": {
-            "facet": {
-                "name": DataNames.FacetGroupCell,
-                "data": sourceDataName,
-                "groupby": [CellTitle]
+        type: 'group',
+        from: {
+            facet: {
+                name: DataNames.FacetGroupCell,
+                data: sourceDataName,
+                groupby: [CellTitle]
             }
         },
-        "title": {
-            "frame": "group",
-            "offset": specViewOptions.facetMargins.title,
-            "text": {
-                "signal": `parent['${CellTitle}']`
+        title: {
+            frame: 'group',
+            offset: specViewOptions.facetMargins.title,
+            text: {
+                signal: `parent['${CellTitle}']`
             },
-            "limit": {
-                "signal": "width"
+            limit: {
+                signal: 'width'
             },
-            "color": util.colorToString(specViewOptions.colors.axisText),
-            "fontSize": {
-                "signal": SignalNames.TextSize
+            color: util.colorToString(specViewOptions.colors.axisText),
+            fontSize: {
+                signal: SignalNames.TextSize
             }
         },
-        "encode": {
-            "update": {
-                "width": {
-                    "signal": "width"
+        encode: {
+            update: {
+                width: {
+                    signal: 'width'
                 },
-                "height": {
-                    "signal": "height"
+                height: {
+                    signal: 'height'
                 }
             }
         },
-        "data": childData,
-        "marks": childMarks.map(mark => {
+        data: childData,
+        marks: childMarks.map(mark => {
             if (mark.from && mark.from.data && mark.from.data === sourceDataName) {
                 mark.from.data = DataNames.FacetGroupCell;
             }
@@ -287,21 +296,21 @@ export function facetMarks(specViewOptions: SpecViewOptions, sourceDataName: str
     }
 
     const filler: Mark = {
-        "style": "cell",
-        "type": "group",
-        "from": { "data": CellFiller },
-        "title": {
-            "frame": "group",
-            "offset": specViewOptions.facetMargins.title,
-            "text": "",
-            "fontSize": {
-                "signal": SignalNames.TextSize
+        style: 'cell',
+        type: 'group',
+        from: { data: CellFiller },
+        title: {
+            frame: 'group',
+            offset: specViewOptions.facetMargins.title,
+            text: '',
+            fontSize: {
+                signal: SignalNames.TextSize
             }
         },
-        "encode": {
-            "update": {
-                "width": { "signal": "width" },
-                "height": { "signal": "height" }
+        encode: {
+            update: {
+                width: { signal: 'width' },
+                height: { signal: 'height' }
             }
         }
     };
@@ -322,13 +331,13 @@ export function facetMarks(specViewOptions: SpecViewOptions, sourceDataName: str
     }
 
     const rowHeader: Mark = {
-        "type": "group",
-        "role": "row-header",
-        "from": {
-            "facet": {
-                "name": "row-headers",
-                "data": FacetRowsSequence,
-                "groupby": [
+        type: 'group',
+        role: 'row-header',
+        from: {
+            facet: {
+                name: 'row-headers',
+                data: FacetRowsSequence,
+                groupby: [
                     SequenceNumber
                 ]
             }
@@ -341,13 +350,13 @@ export function facetMarks(specViewOptions: SpecViewOptions, sourceDataName: str
     }
 
     const columnFooter: Mark = {
-        "type": "group",
-        "role": "column-footer",
-        "from": {
-            "facet": {
-                "name": "column-footers",
-                "data": FacetColumnsSequence,
-                "groupby": [
+        type: 'group',
+        role: 'column-footer',
+        from: {
+            facet: {
+                name: 'column-footers',
+                data: FacetColumnsSequence,
+                groupby: [
                     SequenceNumber
                 ]
             }

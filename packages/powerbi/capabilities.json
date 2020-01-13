@@ -7,6 +7,17 @@
         }
     ],
     "objects": {
+        "general": {
+            "displayName": "General",
+            "displayNameKey": "formattingGeneral",
+            "properties": {
+                "filter": {
+                    "type": {
+                        "filter": true
+                    }
+                }
+            }
+        },
         "sandDanceMainSettings": {
             "displayName": "SandDance",
             "properties": {
@@ -19,9 +30,13 @@
             }
         },
         "sandDanceConfig": {
-            "displayName": "SandDance config area",
             "properties": {
                 "insightJSON": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "tooltipExclusionsJSON": {
                     "type": {
                         "text": true
                     }
@@ -37,7 +52,7 @@
                         "in": "values"
                     },
                     "dataReductionAlgorithm": {
-                        "sample": {
+                        "window": {
                             "count": 30000
                         }
                     }

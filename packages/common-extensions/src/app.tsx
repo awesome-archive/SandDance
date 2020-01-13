@@ -1,15 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-declare var vega: SandDanceExplorer.SandDance.VegaDeckGl.types.VegaBase;
-declare var deck: SandDanceExplorer.SandDance.VegaDeckGl.types.DeckBase & SandDanceExplorer.SandDance.VegaDeckGl.types.DeckLayerBase;
-declare var luma: SandDanceExplorer.SandDance.VegaDeckGl.types.LumaBase;
+import SandDance = SandDanceExplorer.SandDance;
+import VegaDeckGl = SandDance.VegaDeckGl;
+
+declare var vega: VegaDeckGl.types.VegaBase;
+declare var deck: VegaDeckGl.types.DeckBase & VegaDeckGl.types.DeckLayerBase;
+declare var luma: VegaDeckGl.types.LumaBase;
 declare var Fabric: _Fabric.FabricComponents;
 
 SandDanceExplorer.use(Fabric, vega, deck, deck, luma);
 
 function getTextcolor() {
     const cssColor = getComputedStyle(document.body).color;
-    return SandDanceExplorer.SandDance.VegaDeckGl.util.colorFromString(cssColor);
+    return VegaDeckGl.util.colorFromString(cssColor);
 }
 
 function getThemePalette(darkTheme: boolean) {
@@ -17,10 +20,11 @@ function getThemePalette(darkTheme: boolean) {
     return SandDanceExplorer.themePalettes[theme];
 }
 
-function getViewerOptions() {
+function getViewerOptions(darkTheme: boolean) {
     const color = getTextcolor();
-    const viewerOptions: Partial<SandDanceExplorer.SandDance.types.ViewerOptions> = {
+    const viewerOptions: Partial<SandDanceExplorer.ViewerOptions> = {
         colors: {
+            ...SandDanceExplorer.getColorSettingsFromThemePalette(getThemePalette(darkTheme)),
             axisLine: color,
             axisText: color,
             hoveredCube: color
@@ -47,7 +51,7 @@ interface Handlers {
 }
 
 class App extends React.Component<{}, State> {
-    private viewerOptions: Partial<SandDanceExplorer.SandDance.types.ViewerOptions>;
+    private viewerOptions: Partial<SandDance.types.ViewerOptions>;
     private handlers: Handlers;
     public explorer: SandDanceExplorer.Explorer;
 
@@ -56,7 +60,7 @@ class App extends React.Component<{}, State> {
         this.state = {
             darkTheme: null
         };
-        this.viewerOptions = getViewerOptions();
+        this.viewerOptions = getViewerOptions(this.state.darkTheme);
 
         this.handlers = {
             message: event => {
@@ -89,9 +93,9 @@ class App extends React.Component<{}, State> {
     }
 
     checkForDarkTheme() {
-        this.viewerOptions = getViewerOptions();
         let vscodeThemeClassName = getVscodeThemeClassName();
         const darkTheme = vscodeThemeClassName.indexOf('dark') >= 0;
+        this.viewerOptions = getViewerOptions(darkTheme);
         if (this.state.darkTheme !== darkTheme && this.explorer) {
             this.explorer.updateViewerOptions(this.viewerOptions);
             if (this.explorer.viewer) {
@@ -111,7 +115,7 @@ class App extends React.Component<{}, State> {
 
         vscode.postMessage({
             command: 'getFileContent'
-        })
+        });
 
         this.checkForDarkTheme();
 

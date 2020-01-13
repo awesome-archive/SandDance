@@ -92,6 +92,27 @@ Color
 
 ----------
 
+### colorIsEqual
+
+Compares 2 colors to see if they are equal.
+
+```typescript
+function colorIsEqual(a: Color, b: Color): boolean;
+```
+
+**Parameters**
+
+| Name | Type  | Description      |
+| ---- | ----- | ---------------- |
+| a    | Color | Color to compare |
+| b    | Color | Color to compare |
+
+**Return type**
+
+boolean
+
+----------
+
 ### colorToString
 
 Convert a Deck.gl color to a CSS rgba() string.
@@ -136,6 +157,24 @@ T
 
 ----------
 
+### isColor
+
+```typescript
+function isColor(cssColorSpecifier: string): boolean;
+```
+
+**Parameters**
+
+| Name              | Type   |
+| ----------------- | ------ |
+| cssColorSpecifier | string |
+
+**Return type**
+
+boolean
+
+----------
+
 ### getCubeLayer
 
 ```typescript
@@ -168,15 +207,38 @@ function getCubes(deckProps: DeckProps): Cube[];
 
 **Return type**
 
-[Cube][InterfaceDeclaration-29][]
+[Cube][InterfaceDeclaration-31][]
 
-[NamespaceImport-8]: vegadeckgl.util#util
-[FunctionDeclaration-10]: vegadeckgl.util#adddiv
-[FunctionDeclaration-11]: vegadeckgl.util#addel
-[FunctionDeclaration-12]: vegadeckgl.util#clone
-[FunctionDeclaration-13]: vegadeckgl.util#colorfromstring
-[FunctionDeclaration-14]: vegadeckgl.util#colortostring
-[FunctionDeclaration-15]: vegadeckgl.util#deepmerge
-[FunctionDeclaration-16]: vegadeckgl.util#getcubelayer
-[FunctionDeclaration-17]: vegadeckgl.util#getcubes
-[InterfaceDeclaration-29]: vegadeckgl.types#cube
+----------
+
+### outerSize
+
+Measure the outer height and width of an HTMLElement, including margin, padding and border.
+
+```typescript
+function outerSize(el: HTMLElement): { };
+```
+
+**Parameters**
+
+| Name | Type        | Description              |
+| ---- | ----------- | ------------------------ |
+| el   | HTMLElement | HTML Element to measure. |
+
+**Return type**
+
+{ }
+
+[NamespaceImport-9]: vegadeckgl.util.html#util
+[FunctionDeclaration-12]: vegadeckgl.util.html#adddiv
+[FunctionDeclaration-13]: vegadeckgl.util.html#addel
+[FunctionDeclaration-14]: vegadeckgl.util.html#clone
+[FunctionDeclaration-15]: vegadeckgl.util.html#colorfromstring
+[FunctionDeclaration-16]: vegadeckgl.util.html#colorisequal
+[FunctionDeclaration-17]: vegadeckgl.util.html#colortostring
+[FunctionDeclaration-18]: vegadeckgl.util.html#deepmerge
+[FunctionDeclaration-19]: vegadeckgl.util.html#iscolor
+[FunctionDeclaration-20]: vegadeckgl.util.html#getcubelayer
+[FunctionDeclaration-21]: vegadeckgl.util.html#getcubes
+[InterfaceDeclaration-31]: vegadeckgl.types.html#cube
+[FunctionDeclaration-22]: vegadeckgl.util.html#outersize

@@ -8,39 +8,40 @@ import {
     ScaleNames,
     SignalNames
 } from '../constants';
-import { Insight, SpecColumns } from '../types';
 import { RangeScheme, Scale } from 'vega-typings';
+import { SpecContext } from '../types';
 
-export default function (columns: SpecColumns, insight: Insight) {
+export default function (context: SpecContext) {
+    const { specColumns, insight } = context;
     const scales: Scale[] = [];
-    if (columns.color) {
-        if (columns.color.quantitative) {
-            scales.push(binnableColorScale(insight.colorBin, DataNames.Main, columns.color.name, insight.scheme));
+    if (specColumns.color && !specColumns.color.isColorData && !insight.directColor) {
+        if (specColumns.color.quantitative) {
+            scales.push(binnableColorScale(insight.colorBin, DataNames.Main, specColumns.color.name, insight.scheme));
         } else {
             scales.push(
                 {
-                    "name": ScaleNames.Color,
-                    "type": "ordinal",
-                    "domain": {
-                        "data": DataNames.Legend,
-                        "field": FieldNames.Top,
-                        "sort": true
+                    name: ScaleNames.Color,
+                    type: 'ordinal',
+                    domain: {
+                        data: DataNames.Legend,
+                        field: FieldNames.Top,
+                        sort: true
                     },
-                    "range": {
-                        "scheme": insight.scheme || ColorScaleNone
+                    range: {
+                        scheme: insight.scheme || ColorScaleNone
                     },
-                    "reverse": { "signal": SignalNames.ColorReverse }
+                    reverse: { signal: SignalNames.ColorReverse }
                 }
             );
         }
     }
-    if (columns.z) {
-        const zRange: RangeScheme = [0, { "signal": SignalNames.ZHeight }];
+    if (specColumns.z) {
+        const zRange: RangeScheme = [0, { signal: SignalNames.ZHeight }];
         scales.push(
-            columns.z.quantitative ?
-                linearScale(ScaleNames.Z, DataNames.Main, columns.z.name, zRange, false, false)
+            specColumns.z.quantitative ?
+                linearScale(ScaleNames.Z, DataNames.Main, specColumns.z.name, zRange, false, false)
                 :
-                pointScale(ScaleNames.Z, DataNames.Main, zRange, columns.z.name)
+                pointScale(ScaleNames.Z, DataNames.Main, zRange, specColumns.z.name)
         );
     }
     return scales;

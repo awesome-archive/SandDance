@@ -4,6 +4,8 @@ import * as SandDanceExplorer from '@msrvida/sanddance-explorer';
 import { FabricComponents } from '@msrvida/office-ui-fabric-react-cdn-typings';
 import { SandDance } from '@msrvida/sanddance-explorer';
 
+import types = SandDance.VegaDeckGl.types;
+
 /**
  * References to dependency libraries.
  */
@@ -12,7 +14,7 @@ export interface Base {
 }
 
 export const base: Base = {
-  fabric: null
+    fabric: null
 };
 
 /**
@@ -20,12 +22,12 @@ export const base: Base = {
  * @param fabric Office UI Fabric React library.
  */
 export function use(
-  fabric: FabricComponents,
-  vega: SandDance.VegaDeckGl.types.VegaBase,
-  deck: SandDance.VegaDeckGl.types.DeckBase,
-  layers: SandDance.VegaDeckGl.types.DeckLayerBase,
-  luma: SandDance.VegaDeckGl.types.LumaBase
+    fabric: FabricComponents,
+    vega: types.VegaBase,
+    deck: types.DeckBase,
+    layers: types.DeckLayerBase,
+    luma: types.LumaBase
 ) {
-  SandDanceExplorer.use(fabric, vega, deck, layers, luma);
-  base.fabric = fabric;
+    SandDanceExplorer.use(fabric, vega, deck, layers, luma);
+    base.fabric = fabric;
 }

@@ -5,6 +5,7 @@
   "description": "Common code for vscode-extension based projects",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint -c ../../.eslintrc.json --fix ./src/**/*.ts*",
     "build-css": "node-sass ./src/css -o ./dist/",
     "build-ui": "tsc -p .",
     "build": "npm run build-css && npm run build-ui"
@@ -22,7 +23,6 @@
   "devDependencies": {
     "@msrvida/sanddance-explorer": "*",
     "@types/react": "16.4.7",
-    "@types/react-dom": "^16.8.4",
-    "typescript": "^3.2.4"
+    "@types/react-dom": "^16.8.4"
   }
 }

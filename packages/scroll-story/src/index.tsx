@@ -4,7 +4,7 @@ import * as deck from '@deck.gl/core';
 import * as layers from '@deck.gl/layers';
 import * as luma from 'luma.gl';
 import * as React from 'react';
-import * as vega from 'vega-lib';
+import * as vega from 'vega';
 import Content from './index.mdx';
 import { render } from 'react-dom';
 import { SandDance, SandDanceReact } from '@msrvida/sanddance-react';
@@ -19,63 +19,97 @@ function fetchResource(linkId: string) {
 const dataPromise = fetchResource('titanic-data').then(response => {
     return response.text();
 }).then(text => {
-    //vega converts the tsv to json.
-    return SandDance.VegaDeckGl.base.vega.read(text, { type: 'tsv', parse: "auto" });
+    //vega converts the csv to json.
+    return SandDance.VegaDeckGl.base.vega.read(text, { type: 'csv', parse: 'auto' });
 });
 
-const insightsPromise = fetchResource('titanic-insights').then(response => {
+const snapshotsPromise = fetchResource('titanic-snapshots').then(response => {
     return response.json();
 }).then(json => {
-    return json as SandDance.types.Insight[];
+    return json as Snapshot[];
 });
+
+export interface Snapshot {
+    title?: string;
+    description?: string;
+    insight: SandDance.types.Insight;
+    image?: string;
+    bgColor?: string;
+}
 
 interface Props {
 }
 
 interface State {
-    insights?: SandDance.types.Insight[];
+    snapshots?: Snapshot[];
     insightIndex: number;
     data?: object[];
     size: SandDance.types.Size;
 }
 
 export class Page extends React.Component<Props, State> {
+    public viewer: SandDance.Viewer;
 
     constructor(props: Props) {
         super(props);
         this.state = {
             insightIndex: 0,
             size: { height: 600, width: 600 }
-        }
+        };
     }
 
     componentDidMount() {
-        Promise.all([dataPromise, insightsPromise]).then(promiseResults => {
-            this.setState({ data: promiseResults[0], insights: promiseResults[1] });
+        Promise.all([dataPromise, snapshotsPromise]).then(([data, snapshots]: [object[], Snapshot[]]) => {
+            this.setState({ data, snapshots });
         });
     }
 
+    goTo(insightIndex: number) {
+        const changeInsight = () => {
+            this.setState({ insightIndex });
+        };
+        const currentFilter = this.viewer.getInsight().filter;
+        const newState = this.state.snapshots[insightIndex].insight;
+        if (currentFilter && newState.filter) {
+            if (SandDance.searchExpression.startsWith(newState.filter, currentFilter)) {
+                changeInsight();
+            } else {
+                this.viewer.reset()
+                    .then(() => new Promise((resolve, reject) => { setTimeout(resolve, this.viewer.options.transitionDurations.scope); }))
+                    .then(changeInsight);
+            }
+        } else {
+            changeInsight();
+        }
+
+    }
+
     render() {
-        if (!this.state.insights || !this.state.data) {
+        if (!this.state.snapshots || !this.state.data) {
             return (
                 <div>loading...</div>
             );
         }
-        const { insightIndex, insights } = this.state;
-        const partialInsight = insights[insightIndex];
+        const { insightIndex, snapshots } = this.state;
+        const partialInsight = snapshots[insightIndex].insight;
         const insight: SandDance.types.Insight = {
             ...partialInsight,
             size: this.state.size,
-            view: "2d"
+            view: '2d'
         };
         return (
             <div>
                 <SandDanceReact
+                    ref={reactViewer => {
+                        if (reactViewer) {
+                            this.viewer = reactViewer.viewer;
+                        }
+                    }}
                     insight={insight}
                     data={this.state.data}
                 />
                 <div className="content">
-                    <Content goTo={insightIndex => this.setState({ insightIndex })} />
+                    <Content goTo={insightIndex => this.goTo(insightIndex)} />
                 </div>
             </div>
         );

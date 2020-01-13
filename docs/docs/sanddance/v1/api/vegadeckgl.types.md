@@ -13,6 +13,7 @@ interface Axis {
     domain: StyledLine;
     ticks: StyledLine[];
     tickText: TickText[];
+    title?: TextLayerDatum;
 }
 ```
 
@@ -20,9 +21,10 @@ interface Axis {
 
 | Name     | Type                                    | Optional |
 | -------- | --------------------------------------- | -------- |
-| domain   | [StyledLine][InterfaceDeclaration-34]   | false    |
-| ticks    | [StyledLine][InterfaceDeclaration-34][] | false    |
+| domain   | [StyledLine][InterfaceDeclaration-36]   | false    |
+| ticks    | [StyledLine][InterfaceDeclaration-36][] | false    |
 | tickText | TickText[]   | false    |
+| title    | TextLayerDatum                          | true     |
 
 ----------
 
@@ -43,10 +45,10 @@ interface Base {
 
 | Name   | Type                                     | Optional |
 | ------ | ---------------------------------------- | -------- |
-| deck   | [DeckBase][InterfaceDeclaration-44]      | false    |
-| layers | [DeckLayerBase][InterfaceDeclaration-45] | false    |
-| luma   | [LumaBase][InterfaceDeclaration-46]      | false    |
-| vega   | [VegaBase][InterfaceDeclaration-43]      | false    |
+| deck   | [DeckBase][InterfaceDeclaration-46]      | false    |
+| layers | [DeckLayerBase][InterfaceDeclaration-47] | false    |
+| luma   | [LumaBase][InterfaceDeclaration-48]      | false    |
+| vega   | [VegaBase][InterfaceDeclaration-45]      | false    |
 
 ----------
 
@@ -89,7 +91,7 @@ interface CubeLayerDataProps {
 
 | Name         | Type                                                                                                  | Optional |
 | ------------ | ----------------------------------------------------------------------------------------------------- | -------- |
-| data         | [Cube][InterfaceDeclaration-29][]                                                                     | false    |
+| data         | [Cube][InterfaceDeclaration-31][]                                                                     | false    |
 | interpolator | LinearInterpolator_Class][ClassDeclaration-4]<[CubeLayerInterpolatedProps> | true     |
 
 ----------
@@ -124,6 +126,7 @@ deck.gl/core dependency.
 
 ```typescript
 interface DeckBase {
+    CompositeLayer: typeof ???;
     COORDINATE_SYSTEM: typeof ???;
     Deck: typeof ???;
     Layer: typeof ???;
@@ -137,6 +140,7 @@ interface DeckBase {
 
 | Name               | Type       | Optional |
 | ------------------ | ---------- | -------- |
+| CompositeLayer     | typeof ??? | false    |
 | COORDINATE_SYSTEM  | typeof ??? | false    |
 | Deck               | typeof ??? | false    |
 | Layer              | typeof ??? | false    |
@@ -152,6 +156,7 @@ deck.gl/layers dependency.
 
 ```typescript
 interface DeckLayerBase {
+    IconLayer: typeof ???;
     LineLayer: typeof ???;
     PolygonLayer: typeof ???;
     TextLayer: typeof ???;
@@ -162,6 +167,7 @@ interface DeckLayerBase {
 
 | Name         | Type       | Optional |
 | ------------ | ---------- | -------- |
+| IconLayer    | typeof ??? | false    |
 | LineLayer    | typeof ??? | false    |
 | PolygonLayer | typeof ??? | false    |
 | TextLayer    | typeof ??? | false    |
@@ -184,7 +190,7 @@ interface FacetRect {
 | Name       | Type                                    | Optional |
 | ---------- | --------------------------------------- | -------- |
 | facetTitle | TextLayerDatum                          | true     |
-| lines      | [StyledLine][InterfaceDeclaration-34][] | false    |
+| lines      | [StyledLine][InterfaceDeclaration-36][] | false    |
 
 ----------
 
@@ -202,7 +208,7 @@ interface Legend {
 | Name  | Type                                                       | Optional |
 | ----- | ---------------------------------------------------------- | -------- |
 | title | string                                                     | true     |
-| rows  | { [index: number]: [LegendRow][InterfaceDeclaration-31]; } | false    |
+| rows  | { [index: number]: [LegendRow][InterfaceDeclaration-33]; } | false    |
 
 ----------
 
@@ -222,7 +228,7 @@ interface LegendRow {
 | ------ | ------------------------------------------ | -------- |
 | label  | string                                     | true     |
 | value  | string                                     | true     |
-| symbol | [LegendRowSymbol][InterfaceDeclaration-32] | true     |
+| symbol | [LegendRowSymbol][InterfaceDeclaration-34] | true     |
 
 ----------
 
@@ -255,6 +261,7 @@ interface LumaBase {
     CubeGeometry: typeof ???;
     fp64: typeof ???;
     Model: typeof ???;
+    Texture2D: typeof ???;
 }
 ```
 
@@ -265,6 +272,7 @@ interface LumaBase {
 | CubeGeometry | typeof ??? | false    |
 | fp64         | typeof ??? | false    |
 | Model        | typeof ??? | false    |
+| Texture2D    | typeof ??? | false    |
 
 ----------
 
@@ -287,7 +295,7 @@ interface PreStage {
 
 | Name      | Type                             |
 | --------- | -------------------------------- |
-| stage     | [Stage][InterfaceDeclaration-28] |
+| stage     | [Stage][InterfaceDeclaration-30] |
 | deckProps | DeckProps                        |
 
 **Return type**
@@ -312,6 +320,11 @@ interface PresenterConfig {
     onLegendClick?: (e: MouseEvent | PointerEvent | TouchEvent, legend: Legend, clickedIndex: number) => void;
     onPresent?: () => void;
     shouldViewstateTransition?: () => boolean;
+    preLayer?: (stage: Stage) => void;
+    onTextClick?: (e: MouseEvent | PointerEvent | TouchEvent, t: TextLayerDatum) => void;
+    onTextHover?: (e: MouseEvent | PointerEvent | TouchEvent, t: TextLayerDatum) => boolean;
+    getTextColor?: (o: TextLayerDatum) => Color;
+    getTextHighlightColor?: (o: TextLayerDatum) => Color;
 }
 ```
 
@@ -319,8 +332,8 @@ interface PresenterConfig {
 
 | Name                      | Type                                                                                                | Optional |
 | ------------------------- | --------------------------------------------------------------------------------------------------- | -------- |
-| transitionDurations       | [TransitionDurations][InterfaceDeclaration-22]                                                      | true     |
-| preStage                  | [PreStage][InterfaceDeclaration-53]                                                                 | true     |
+| transitionDurations       | [TransitionDurations][InterfaceDeclaration-23]                                                      | true     |
+| preStage                  | [PreStage][InterfaceDeclaration-55]                                                                 | true     |
 | redraw                    | () => void                                                                                          | true     |
 | onCubeHover               | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, cube: Cube) => void                           | true     |
 | onCubeClick               | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, cube: Cube) => void                           | true     |
@@ -328,6 +341,11 @@ interface PresenterConfig {
 | onLegendClick             | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, legend: Legend, clickedIndex: number) => void | true     |
 | onPresent                 | () => void                                                                                          | true     |
 | shouldViewstateTransition | () => boolean                                                                                       | true     |
+| preLayer                  | (stage: Stage) => void                                                                              | true     |
+| onTextClick               | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, t: TextLayerDatum) => void                    | true     |
+| onTextHover               | (e: MouseEvent &#124; PointerEvent &#124; TouchEvent, t: TextLayerDatum) => boolean                 | true     |
+| getTextColor              | (o: TextLayerDatum) => Color                                                                        | true     |
+| getTextHighlightColor     | (o: TextLayerDatum) => Color                                                                        | true     |
 
 ----------
 
@@ -336,9 +354,10 @@ interface PresenterConfig {
 ```typescript
 interface PresenterStyle {
     cssPrefix?: string;
-    defaultCubeColor: Color;
+    defaultCubeColor?: Color;
     highlightColor?: Color;
     lightSettings?: { [view extends View]: LightSettings };
+    fontFamily?: string;
 }
 ```
 
@@ -347,9 +366,10 @@ interface PresenterStyle {
 | Name             | Type                                                             | Optional |
 | ---------------- | ---------------------------------------------------------------- | -------- |
 | cssPrefix        | string                                                           | true     |
-| defaultCubeColor | Color                                                            | false    |
+| defaultCubeColor | Color                                                            | true     |
 | highlightColor   | Color                                                            | true     |
 | lightSettings    | { [view extends [View][TypeAliasDeclaration-7]]: LightSettings } | true     |
+| fontFamily       | string                                                           | true     |
 
 ----------
 
@@ -419,13 +439,13 @@ interface Stage {
 | Name            | Type                                                                            | Optional |
 | --------------- | ------------------------------------------------------------------------------- | -------- |
 | backgroundColor | Color                                                                           | true     |
-| cubeData        | [Cube][InterfaceDeclaration-29][]                                               | false    |
-| legend          | [Legend][InterfaceDeclaration-30]                                               | true     |
-| axes            | { x: [Axis][InterfaceDeclaration-33][]; y: [Axis][InterfaceDeclaration-33][]; } | false    |
+| cubeData        | [Cube][InterfaceDeclaration-31][]                                               | false    |
+| legend          | [Legend][InterfaceDeclaration-32]                                               | true     |
+| axes            | { x: [Axis][InterfaceDeclaration-35][]; y: [Axis][InterfaceDeclaration-35][]; } | false    |
 | textData        | TextLayerDatum[]                                                                | false    |
 | view            | [View][TypeAliasDeclaration-7]                                                  | false    |
-| gridLines       | [StyledLine][InterfaceDeclaration-34][]                                         | true     |
-| facets          | [FacetRect][InterfaceDeclaration-36][]                                          | true     |
+| gridLines       | [StyledLine][InterfaceDeclaration-36][]                                         | true     |
+| facets          | [FacetRect][InterfaceDeclaration-38][]                                          | true     |
 
 ----------
 
@@ -528,7 +548,7 @@ interface ViewGlConfig {
 | Name            | Type                                       | Optional |
 | --------------- | ------------------------------------------ | -------- |
 | presenter       | [Presenter][ClassDeclaration-0]            | true     |
-| presenterConfig | [PresenterConfig][InterfaceDeclaration-52] | true     |
+| presenterConfig | [PresenterConfig][InterfaceDeclaration-54] | true     |
 | getView         | { (): [View][TypeAliasDeclaration-7]; }    | true     |
 
 ## Types
@@ -541,7 +561,7 @@ type CubeLayerProps = LayerProps & CubeLayerDefaultProps & CubeLayerDataProps;
 
 **Type**
 
-LayerProps & [CubeLayerDefaultProps][InterfaceDeclaration-61] & [CubeLayerDataProps][InterfaceDeclaration-58]
+LayerProps & [CubeLayerDefaultProps][InterfaceDeclaration-63] & [CubeLayerDataProps][InterfaceDeclaration-60]
 
 ----------
 
@@ -571,56 +591,56 @@ type View = "2d" | "3d";
 
 "2d" | "3d"
 
-[NamespaceImport-7]: vegadeckgl.types#types
-[InterfaceDeclaration-33]: vegadeckgl.types#axis
-[InterfaceDeclaration-34]: vegadeckgl.types#styledline
-[InterfaceDeclaration-34]: vegadeckgl.types#styledline
-[InterfaceDeclaration-48]: vegadeckgl.types#base
-[InterfaceDeclaration-44]: vegadeckgl.types#deckbase
-[InterfaceDeclaration-45]: vegadeckgl.types#decklayerbase
-[InterfaceDeclaration-46]: vegadeckgl.types#lumabase
-[InterfaceDeclaration-43]: vegadeckgl.types#vegabase
-[InterfaceDeclaration-29]: vegadeckgl.types#cube
-[InterfaceDeclaration-58]: vegadeckgl.types#cubelayerdataprops
-[InterfaceDeclaration-29]: vegadeckgl.types#cube
-[InterfaceDeclaration-61]: vegadeckgl.types#cubelayerdefaultprops
-[InterfaceDeclaration-44]: vegadeckgl.types#deckbase
-[InterfaceDeclaration-45]: vegadeckgl.types#decklayerbase
-[InterfaceDeclaration-36]: vegadeckgl.types#facetrect
-[InterfaceDeclaration-34]: vegadeckgl.types#styledline
-[InterfaceDeclaration-30]: vegadeckgl.types#legend
-[InterfaceDeclaration-31]: vegadeckgl.types#legendrow
-[InterfaceDeclaration-31]: vegadeckgl.types#legendrow
-[InterfaceDeclaration-32]: vegadeckgl.types#legendrowsymbol
-[InterfaceDeclaration-32]: vegadeckgl.types#legendrowsymbol
-[InterfaceDeclaration-46]: vegadeckgl.types#lumabase
-[InterfaceDeclaration-53]: vegadeckgl.types#prestage
-[InterfaceDeclaration-28]: vegadeckgl.types#stage
-[InterfaceDeclaration-52]: vegadeckgl.types#presenterconfig
-[InterfaceDeclaration-22]: vegadeckgl.types#transitiondurations
-[InterfaceDeclaration-53]: vegadeckgl.types#prestage
-[InterfaceDeclaration-47]: vegadeckgl.types#presenterstyle
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
-[InterfaceDeclaration-50]: vegadeckgl.types#queuedanimationoptions
-[InterfaceDeclaration-51]: vegadeckgl.types#scene3d
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
-[InterfaceDeclaration-28]: vegadeckgl.types#stage
-[InterfaceDeclaration-29]: vegadeckgl.types#cube
-[InterfaceDeclaration-30]: vegadeckgl.types#legend
-[InterfaceDeclaration-33]: vegadeckgl.types#axis
-[InterfaceDeclaration-33]: vegadeckgl.types#axis
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
-[InterfaceDeclaration-34]: vegadeckgl.types#styledline
-[InterfaceDeclaration-36]: vegadeckgl.types#facetrect
-[InterfaceDeclaration-34]: vegadeckgl.types#styledline
-[InterfaceDeclaration-22]: vegadeckgl.types#transitiondurations
-[InterfaceDeclaration-43]: vegadeckgl.types#vegabase
-[InterfaceDeclaration-54]: vegadeckgl.types#viewglconfig
-[ClassDeclaration-0]: vegadeckgl.presenter#presenter
-[InterfaceDeclaration-52]: vegadeckgl.types#presenterconfig
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
-[TypeAliasDeclaration-9]: vegadeckgl.types#cubelayerprops
-[InterfaceDeclaration-61]: vegadeckgl.types#cubelayerdefaultprops
-[InterfaceDeclaration-58]: vegadeckgl.types#cubelayerdataprops
-[TypeAliasDeclaration-10]: vegadeckgl.types#vec3
-[TypeAliasDeclaration-7]: vegadeckgl.types#view
+[NamespaceImport-8]: vegadeckgl.types.html#types
+[InterfaceDeclaration-35]: vegadeckgl.types.html#axis
+[InterfaceDeclaration-36]: vegadeckgl.types.html#styledline
+[InterfaceDeclaration-36]: vegadeckgl.types.html#styledline
+[InterfaceDeclaration-50]: vegadeckgl.types.html#base
+[InterfaceDeclaration-46]: vegadeckgl.types.html#deckbase
+[InterfaceDeclaration-47]: vegadeckgl.types.html#decklayerbase
+[InterfaceDeclaration-48]: vegadeckgl.types.html#lumabase
+[InterfaceDeclaration-45]: vegadeckgl.types.html#vegabase
+[InterfaceDeclaration-31]: vegadeckgl.types.html#cube
+[InterfaceDeclaration-60]: vegadeckgl.types.html#cubelayerdataprops
+[InterfaceDeclaration-31]: vegadeckgl.types.html#cube
+[InterfaceDeclaration-63]: vegadeckgl.types.html#cubelayerdefaultprops
+[InterfaceDeclaration-46]: vegadeckgl.types.html#deckbase
+[InterfaceDeclaration-47]: vegadeckgl.types.html#decklayerbase
+[InterfaceDeclaration-38]: vegadeckgl.types.html#facetrect
+[InterfaceDeclaration-36]: vegadeckgl.types.html#styledline
+[InterfaceDeclaration-32]: vegadeckgl.types.html#legend
+[InterfaceDeclaration-33]: vegadeckgl.types.html#legendrow
+[InterfaceDeclaration-33]: vegadeckgl.types.html#legendrow
+[InterfaceDeclaration-34]: vegadeckgl.types.html#legendrowsymbol
+[InterfaceDeclaration-34]: vegadeckgl.types.html#legendrowsymbol
+[InterfaceDeclaration-48]: vegadeckgl.types.html#lumabase
+[InterfaceDeclaration-55]: vegadeckgl.types.html#prestage
+[InterfaceDeclaration-30]: vegadeckgl.types.html#stage
+[InterfaceDeclaration-54]: vegadeckgl.types.html#presenterconfig
+[InterfaceDeclaration-23]: vegadeckgl.types.html#transitiondurations
+[InterfaceDeclaration-55]: vegadeckgl.types.html#prestage
+[InterfaceDeclaration-49]: vegadeckgl.types.html#presenterstyle
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view
+[InterfaceDeclaration-52]: vegadeckgl.types.html#queuedanimationoptions
+[InterfaceDeclaration-53]: vegadeckgl.types.html#scene3d
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view
+[InterfaceDeclaration-30]: vegadeckgl.types.html#stage
+[InterfaceDeclaration-31]: vegadeckgl.types.html#cube
+[InterfaceDeclaration-32]: vegadeckgl.types.html#legend
+[InterfaceDeclaration-35]: vegadeckgl.types.html#axis
+[InterfaceDeclaration-35]: vegadeckgl.types.html#axis
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view
+[InterfaceDeclaration-36]: vegadeckgl.types.html#styledline
+[InterfaceDeclaration-38]: vegadeckgl.types.html#facetrect
+[InterfaceDeclaration-36]: vegadeckgl.types.html#styledline
+[InterfaceDeclaration-23]: vegadeckgl.types.html#transitiondurations
+[InterfaceDeclaration-45]: vegadeckgl.types.html#vegabase
+[InterfaceDeclaration-56]: vegadeckgl.types.html#viewglconfig
+[ClassDeclaration-0]: vegadeckgl.presenter.html#presenter
+[InterfaceDeclaration-54]: vegadeckgl.types.html#presenterconfig
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view
+[TypeAliasDeclaration-9]: vegadeckgl.types.html#cubelayerprops
+[InterfaceDeclaration-63]: vegadeckgl.types.html#cubelayerdefaultprops
+[InterfaceDeclaration-60]: vegadeckgl.types.html#cubelayerdataprops
+[TypeAliasDeclaration-10]: vegadeckgl.types.html#vec3
+[TypeAliasDeclaration-7]: vegadeckgl.types.html#view

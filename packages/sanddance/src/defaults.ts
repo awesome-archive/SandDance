@@ -1,9 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
-import { defaultPresenterConfig, defaultPresenterStyle } from './vega-deck.gl/defaults';
-import { desaturate } from './vega-deck.gl/color';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { ViewerOptions } from './types';
+
+const { defaultPresenterConfig, defaultPresenterStyle } = VegaDeckGl.defaults;
+const { desaturate } = VegaDeckGl.util;
 
 export const defaultViewerOptions: ViewerOptions = {
     colors: {
@@ -51,10 +52,11 @@ export const defaultViewerOptions: ViewerOptions = {
         treeMapMethod: 'Method',
         facetColumns: 'Facet columns',
         facetRows: 'Facet rows',
-        textScaleSignal: "Text scale",
-        xAxisTextAngleSignal: "X axis text angle",
-        yAxisTextAngleSignal: "Y axis text angle",
-        zScaleProportion: "Z scale proportion to Y",
+        markOpacitySignal: 'Mark opacity',
+        textScaleSignal: 'Text scale',
+        xAxisTextAngleSignal: 'X axis text angle',
+        yAxisTextAngleSignal: 'Y axis text angle',
+        zScaleProportion: 'Z scale proportion to Y',
         selectionCount: count => `${count} items selected`
     },
     maxLegends: 19, //20 would be "other"
@@ -77,6 +79,7 @@ export const defaultViewerOptions: ViewerOptions = {
 export function getPresenterStyle(options: ViewerOptions) {
     var style: VegaDeckGl.types.PresenterStyle = {
         cssPrefix,
+        fontFamily: options.fontFamily,
         defaultCubeColor: options.colors.defaultCube
     };
     if (options.colors.hoveredCube) {

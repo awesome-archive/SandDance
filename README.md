@@ -1,4 +1,4 @@
-# SandDance (Preview)
+# SandDance
 
 Visually explore, understand, and present your data.
 
@@ -11,6 +11,16 @@ Smooth animated transitions between views help you to maintain context as you in
 
 > This new version of SandDance has been rebuilt from scratch with the goal of being modular, extensible, and embeddable into your custom applications. We are now on GitHub so that we are open and driven by the community through contributions, feature requests, and discussion.
 
+SandDance was created by the [Microsoft Research VIDA Group](https://aka.ms/vida) which explores novel technologies for visualization and immersive data analytics. 
+
+## Where can I use SandDance?
+* [Try it now on the web](https://microsoft.github.io/SandDance/app/)
+* [Power BI](https://appsource.microsoft.com/en-us/product/power-bi-visuals/WA200000430) - [*see additional info*](https://github.com/microsoft/SandDance/blob/master/powerbi.md)
+* [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/sanddance-extension?view=sql-server-2017)
+* [VSCode extension](https://marketplace.visualstudio.com/items?itemName=msrvida.vscode-sanddance)
+* [Observable](https://observablehq.com/collection/@danmarshall/sanddance)
+* In your own JavaScript apps - see below
+
 ## Component architecture
 
 SandDance is an offering of several JavaScript components:
@@ -21,6 +31,8 @@ SandDance is an offering of several JavaScript components:
 
 ## Changelog
 
+* December 2019 - Major version bump to v2: Now using Vega@5.
+* August 2019 - Initial release to AppSource (Power BI marketplace).
 * April 2019 - Initial release to GitHub.
 
 ## Known issues
@@ -29,9 +41,11 @@ SandDance is an offering of several JavaScript components:
 
 ## Roadmap
 
-* PowerBI custom visual based on this new architecture.
-* Additional views, such as stacks.
+* ~~PowerBI custom visual based on this new architecture.~~ done!
+* ~~Additional views, such as stacks.~~ done!
 * Code examples and tutorials.
+* Faceting for all chart types.
+* Better date handling.
 
 ## Dependencies
 

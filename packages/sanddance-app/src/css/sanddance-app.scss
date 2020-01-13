@@ -6,7 +6,15 @@
 
 .sanddance-app {
     display: grid;
+    grid-template-rows: 100% 0;
     height: 100%;
+}
+
+.sanddance-export {
+    .ms-Button {
+        margin-bottom: 1em;
+        margin-top: 0.5em;
+    }
 }
 
 .sanddance-datasource-picker {

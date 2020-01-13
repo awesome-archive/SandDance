@@ -6,16 +6,13 @@ import { DataScope, Props as DataScopeProps } from './dataScope';
 import { FabricTypes } from '@msrvida/office-ui-fabric-react-cdn-typings';
 import { IconButton } from './iconButton';
 import { Scrollable } from './scrollable';
+import { SideTabId } from '../interfaces';
 import { strings } from '../language';
 import { util } from '@msrvida/sanddance-react';
 
-export enum SideTabId {
-    ChartType, Data, Search, Color, Snapshots, Settings, Pin, Collapse
-}
-
 export interface Props {
     calculating: boolean;
-    children: JSX.Element | JSX.Element[];
+    children: React.ReactNode;
     hideSidebarControls: boolean;
     onSideTabClick: (sideTabId: SideTabId) => void;
     selectedSideTab: SideTabId;
@@ -30,80 +27,82 @@ export function Sidebar(props: Props) {
     const sidebuttons: SidebuttonProps[] = [
         {
             sideTabId: SideTabId.ChartType,
-            iconName: "BIDashboard",
+            iconName: 'BIDashboard',
             title: strings.labelChart
         },
         {
             sideTabId: SideTabId.Color,
-            iconName: "Color",
+            iconName: 'Color',
             title: strings.labelColor
         },
         {
             sideTabId: SideTabId.Data,
-            iconName: "Table",
+            iconName: 'Table',
             title: strings.labelDataBrowser
         },
         {
             sideTabId: SideTabId.Search,
-            iconName: "Search",
+            iconName: 'Search',
             title: strings.labelSearch
         },
         {
             sideTabId: SideTabId.Snapshots,
-            iconName: "Camera",
+            iconName: 'Camera',
             title: strings.labelSnapshots
         },
         {
             sideTabId: SideTabId.Settings,
-            iconName: "Settings",
+            iconName: 'Settings',
             title: strings.labelChartSettings
         }
     ];
     return (
-        <div className={util.classList("sanddance-sidebar", "calculator", props.pinned && "pinned", props.closed && "closed")}>
-            <DataScope
-                {...props.dataScopeProps}
-            />
-            <div className="vbuttons">
-                <div className="sidebar-dialogs">
-                    {sidebuttons.map((sidebutton, i) => (
-                        <Sidebutton
-                            key={i}
-                            {...props}
-                            {...sidebutton}
-                            themePalette={props.themePalette}
-                        />
-                    ))}
+        <div className={util.classList('sanddance-sidebar', 'calculator', props.pinned && 'pinned', props.closed && 'closed')}>
+            <div className="sidebar-content">
+                <DataScope
+                    {...props.dataScopeProps}
+                />
+                <div className="vbuttons" role='tablist'>
+                    <div className="sidebar-dialogs">
+                        {sidebuttons.map((sidebutton, i) => (
+                            <Sidebutton
+                                key={i}
+                                {...props}
+                                {...sidebutton}
+                                themePalette={props.themePalette}
+                            />
+                        ))}
+                    </div>
+                    {!props.hideSidebarControls && (
+                        <div className="sidebar-controls">
+                            <Sidebutton
+                                {...props}
+                                sideTabId={SideTabId.Pin}
+                                iconName={props.pinned ? 'Pinned' : 'Pin'}
+                                title={props.pinned ? strings.buttonToolbarFloat : strings.buttonToolbarDock}
+                            />
+                            <Sidebutton
+                                {...props}
+                                sideTabId={SideTabId.Collapse}
+                                iconName={props.closed ? 'DoubleChevronRight12' : 'DoubleChevronLeft12'}
+                                title={props.closed ? strings.buttonToolbarShow : strings.buttonToolbarHide}
+                            />
+                        </div>
+                    )}
                 </div>
-                {!props.hideSidebarControls && (
-                    <div className="sidebar-controls">
-                        <Sidebutton
-                            {...props}
-                            sideTabId={SideTabId.Pin}
-                            iconName={props.pinned ? "Pinned" : "Pin"}
-                            title={props.pinned ? strings.buttonToolbarFloat : strings.buttonToolbarDock}
-                        />
-                        <Sidebutton
-                            {...props}
-                            sideTabId={SideTabId.Collapse}
-                            iconName={props.closed ? "DoubleChevronRight12" : "DoubleChevronLeft12"}
-                            title={props.closed ? strings.buttonToolbarShow : strings.buttonToolbarHide}
+                <Scrollable role='tabpanel'>
+                    <div className="sidetab">
+                        {props.children}
+                    </div>
+                </Scrollable>
+                {props.calculating && (
+                    <div className="calculating">
+                        <base.fabric.Spinner
+                            size={base.fabric.SpinnerSize.large}
                         />
                     </div>
                 )}
             </div>
-            <Scrollable>
-                <div className="sidetab">
-                    {props.children}
-                </div>
-            </Scrollable>
-            {props.calculating && (
-                <div className="calculating">
-                    <base.fabric.Spinner
-                        size={base.fabric.SpinnerSize.large}
-                    />
-                </div>
-            )}
         </div>
     );
 }
@@ -117,15 +116,16 @@ export interface SidebuttonProps {
 }
 
 export function Sidebutton(props: SidebuttonProps & Props) {
+    const selected = !props.closed && props.selectedSideTab === props.sideTabId;
     return (
-        <div className={util.classList("vbutton", !props.closed && props.selectedSideTab === props.sideTabId && "selected")}>
+        <div className={util.classList('vbutton', selected && 'selected')} role='tab' aria-selected={selected}>
             {props.badgeText && <div className="count">{props.badgeText}</div>}
             <IconButton
                 themePalette={props.themePalette}
                 className="vbutton"
                 iconName={props.iconName}
                 title={props.title}
-                onClick={() => { props.onSideTabClick(props.sideTabId) }}
+                onClick={() => { props.onSideTabClick(props.sideTabId); }}
             />
         </div>
     );

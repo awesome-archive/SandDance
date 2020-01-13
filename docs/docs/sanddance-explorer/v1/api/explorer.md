@@ -19,9 +19,21 @@ public constructor(props: Props);
 
 | Name  | Type                            |
 | ----- | ------------------------------- |
-| props | [Props][InterfaceDeclaration-6] |
+| props | [Props][InterfaceDeclaration-9] |
 
 ## Methods
+
+### finalize()
+
+```typescript
+public finalize(): void;
+```
+
+**Return type**
+
+void
+
+----------
 
 ### updateViewerOptions(viewerOptions)
 
@@ -78,19 +90,19 @@ void
 
 ----------
 
-### load(data, getPartialInsight, prefs)
+### load(data, getPartialInsight, optionsOrPrefs)
 
 ```typescript
-public load(data: DataFile | object[], getPartialInsight?: (columns: Column[]) => Partial<Insight>, prefs?: Prefs): Promise<void>;
+public load(data: DataFile | object[], getPartialInsight?: (columns: Column[]) => Partial<Insight>, optionsOrPrefs?: Prefs | Options): Promise<void>;
 ```
 
 **Parameters**
 
-| Name              | Type                                               |
-| ----------------- | -------------------------------------------------- |
-| data              | [DataFile][InterfaceDeclaration-1] &#124; object[] |
-| getPartialInsight | (columns: Column[]) => Partial<Insight>            |
-| prefs             | [Prefs][InterfaceDeclaration-3]                    |
+| Name              | Type                                                                     |
+| ----------------- | ------------------------------------------------------------------------ |
+| data              | [DataFile][InterfaceDeclaration-2] &#124; object[]                       |
+| getPartialInsight | (columns: Column[]) => Partial<Insight>                                  |
+| optionsOrPrefs    | [Prefs][InterfaceDeclaration-5] &#124; [Options][InterfaceDeclaration-8] |
 
 **Return type**
 
@@ -160,9 +172,9 @@ public changeInsight(newState: Partial<State>): void;
 
 **Parameters**
 
-| Name     | Type                                     |
-| -------- | ---------------------------------------- |
-| newState | Partial<[State][InterfaceDeclaration-7]> |
+| Name     | Type                                      |
+| -------- | ----------------------------------------- |
+| newState | Partial<[State][InterfaceDeclaration-10]> |
 
 **Return type**
 
@@ -309,30 +321,45 @@ public prefs: Prefs;
 
 **Type**
 
-[Prefs][InterfaceDeclaration-3]
+[Prefs][InterfaceDeclaration-5]
 
-[ClassDeclaration-0]: explorer#explorer
-[Constructor-0]: explorer#constructorprops
-[InterfaceDeclaration-6]: ../index#props
-[MethodDeclaration-0]: explorer#updatevieweroptionsvieweroptions
-[MethodDeclaration-1]: explorer#signalsignalname-signalvalue
-[MethodDeclaration-2]: explorer#setinsightpartialinsight
-[MethodDeclaration-3]: explorer#loaddata-getpartialinsight-prefs
-[InterfaceDeclaration-1]: ../index#datafile
-[InterfaceDeclaration-3]: ../index#prefs
-[MethodDeclaration-4]: explorer#changecharttypechart
-[MethodDeclaration-5]: explorer#calculatecalculating
-[MethodDeclaration-6]: explorer#changeviewview
-[MethodDeclaration-7]: explorer#changeinsightnewstate
-[InterfaceDeclaration-7]: ../index#state
-[MethodDeclaration-8]: explorer#changespeccapabilitiesspeccapabilities
-[MethodDeclaration-9]: explorer#changecolumnmappingrole-column-options
-[MethodDeclaration-10]: explorer#sidebarsidebarclosed-sidebarpinned
-[MethodDeclaration-11]: explorer#resize
-[MethodDeclaration-12]: explorer#componentdidmount
-[MethodDeclaration-13]: explorer#render
-[PropertyDeclaration-0]: explorer#viewer
-[PropertyDeclaration-1]: explorer#vieweroptions
-[PropertyDeclaration-2]: explorer#discardcolorcontextupdates
-[PropertyDeclaration-3]: explorer#prefs
-[InterfaceDeclaration-3]: ../index#prefs
+----------
+
+### div
+
+```typescript
+public div: HTMLElement;
+```
+
+**Type**
+
+HTMLElement
+
+[ClassDeclaration-0]: explorer.html#explorer
+[Constructor-0]: explorer.html#constructorprops
+[InterfaceDeclaration-9]: ../index.html#props
+[MethodDeclaration-0]: explorer.html#finalize
+[MethodDeclaration-1]: explorer.html#updatevieweroptionsvieweroptions
+[MethodDeclaration-2]: explorer.html#signalsignalname-signalvalue
+[MethodDeclaration-3]: explorer.html#setinsightpartialinsight
+[MethodDeclaration-4]: explorer.html#loaddata-getpartialinsight-optionsorprefs
+[InterfaceDeclaration-2]: ../index.html#datafile
+[InterfaceDeclaration-5]: ../index.html#prefs
+[InterfaceDeclaration-8]: ../index.html#options
+[MethodDeclaration-5]: explorer.html#changecharttypechart
+[MethodDeclaration-6]: explorer.html#calculatecalculating
+[MethodDeclaration-7]: explorer.html#changeviewview
+[MethodDeclaration-8]: explorer.html#changeinsightnewstate
+[InterfaceDeclaration-10]: ../index.html#state
+[MethodDeclaration-9]: explorer.html#changespeccapabilitiesspeccapabilities
+[MethodDeclaration-10]: explorer.html#changecolumnmappingrole-column-options
+[MethodDeclaration-11]: explorer.html#sidebarsidebarclosed-sidebarpinned
+[MethodDeclaration-12]: explorer.html#resize
+[MethodDeclaration-13]: explorer.html#componentdidmount
+[MethodDeclaration-14]: explorer.html#render
+[PropertyDeclaration-0]: explorer.html#viewer
+[PropertyDeclaration-1]: explorer.html#vieweroptions
+[PropertyDeclaration-2]: explorer.html#discardcolorcontextupdates
+[PropertyDeclaration-3]: explorer.html#prefs
+[InterfaceDeclaration-5]: ../index.html#prefs
+[PropertyDeclaration-4]: explorer.html#div

@@ -4,18 +4,15 @@
 .sanddance-explorer-topbar .logo {
   visibility: hidden;
 }
-  
+
 .sanddance-powerbi {
   display: grid;
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
+  height: 100%;
 }
 
 .sanddance-app {
   display: grid;
+  height: 100%;
   &.chromeless {
     .sanddance-explorer {
       grid-template-rows: auto;
@@ -45,8 +42,22 @@
       fill: #888;
       height: 50px;
     }
+    .sanddance-webgl-required {
+      margin-top: 50px;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+    }
   }
-
+  .sanddance-fetch {
+    background: rgba(0,0,0,0.1);
+    bottom: 0;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+  }
   &.loaded {
     .sanddance-explorer {
       visibility: visible;

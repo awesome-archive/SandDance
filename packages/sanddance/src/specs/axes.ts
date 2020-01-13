@@ -3,61 +3,72 @@
 import { Axis } from 'vega-typings';
 import { Column, SpecViewOptions } from './types';
 import { SignalNames } from './constants';
-import { util } from '../vega-deck.gl';
+import { util } from '@msrvida/vega-deck.gl';
 
-export function partialAxes(specViewOptions: SpecViewOptions, xColumnQuantitative: boolean, yColumnQuantitative: boolean) {
+export enum AxisType {
+    quantitative, categoric, date
+}
+
+export function columnToAxisType(c: Column): AxisType {
+    if (c.quantitative) {
+        return AxisType.quantitative;
+    }
+    return AxisType.categoric;
+}
+
+export function partialAxes(specViewOptions: SpecViewOptions, bottomType: AxisType, leftType: AxisType) {
     const lineColor = util.colorToString(specViewOptions.colors.axisLine);
     const axisColor = {
-        "domainColor": lineColor,
-        "tickColor": lineColor,
-        "labelColor": util.colorToString(specViewOptions.colors.axisText)
+        domainColor: lineColor,
+        tickColor: lineColor,
+        labelColor: util.colorToString(specViewOptions.colors.axisText)
     };
     const bottom: Partial<Axis> = {
-        "orient": "bottom",
-        "labelAlign": "left",
-        "labelAngle": {
-            "signal": SignalNames.TextAngleX
+        orient: 'bottom',
+        labelAlign: 'left',
+        labelAngle: {
+            signal: SignalNames.TextAngleX
         },
-        "labelFontSize": {
-            "signal": SignalNames.TextSize
+        labelFontSize: {
+            signal: SignalNames.TextSize
         },
-        "titleAngle": {
-            "signal": SignalNames.TextAngleX
+        titleAngle: {
+            signal: SignalNames.TextAngleX
         },
-        "titleAlign": "left",
-        "titleFontSize": {
-            "signal": SignalNames.TextTitleSize
+        titleAlign: 'left',
+        titleFontSize: {
+            signal: SignalNames.TextTitleSize
         },
-        "titleColor": util.colorToString(specViewOptions.colors.axisText),
-        "tickSize": specViewOptions.tickSize,
+        titleColor: util.colorToString(specViewOptions.colors.axisText),
+        tickSize: specViewOptions.tickSize,
         ...axisColor
     };
-    if (xColumnQuantitative) {
-        bottom.format = "~r";
+    if (bottomType === AxisType.quantitative) {
+        bottom.format = '~r';
     }
     const left: Partial<Axis> =
     {
-        "orient": "left",
-        "labelAlign": "right",
-        "labelAngle": {
-            "signal": SignalNames.TextAngleY
+        orient: 'left',
+        labelAlign: 'right',
+        labelAngle: {
+            signal: SignalNames.TextAngleY
         },
-        "labelFontSize": {
-            "signal": SignalNames.TextSize
+        labelFontSize: {
+            signal: SignalNames.TextSize
         },
-        "titleAngle": {
-            "signal": SignalNames.TextAngleY
+        titleAngle: {
+            signal: SignalNames.TextAngleY
         },
-        "titleAlign": "right",
-        "titleFontSize": {
-            "signal": SignalNames.TextTitleSize
+        titleAlign: 'right',
+        titleFontSize: {
+            signal: SignalNames.TextTitleSize
         },
-        "titleColor": util.colorToString(specViewOptions.colors.axisText),
-        "tickSize": specViewOptions.tickSize,
+        titleColor: util.colorToString(specViewOptions.colors.axisText),
+        tickSize: specViewOptions.tickSize,
         ...axisColor
     };
-    if (yColumnQuantitative) {
-        left.format = "~r";
+    if (leftType === AxisType.quantitative) {
+        left.format = '~r';
     }
     return { left, bottom };
 }

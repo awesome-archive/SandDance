@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
-import * as VegaDeckGl from './vega-deck.gl';
+import * as VegaDeckGl from '@msrvida/vega-deck.gl';
 import { Column, Insight, SpecColumns } from './specs/types';
 import { OrdinalMap } from './types';
 
@@ -18,7 +18,7 @@ export function assignOrdinals(columns: SpecColumns, data: object[], ordinalMap?
             d[VegaDeckGl.constants.GL_ORDINAL] = i;
             const uColValue = uCol ? d[uCol] : i;
             ordinalMap[uColValue] = i;
-        })
+        });
     }
 
     return ordinalMap;
@@ -39,4 +39,13 @@ export function getSpecColumns(insight: Insight, columns: Column[]): SpecColumns
         y: getColumnByName(insight.columns && insight.columns.y),
         z: getColumnByName(insight.columns && insight.columns.z)
     };
+}
+
+export function getDataIndexOfCube(cube: VegaDeckGl.types.Cube, data: object[]) {
+    const len = data.length;
+    for (let i = 0; i < len; i++) {
+        if (data[i][VegaDeckGl.constants.GL_ORDINAL] === cube.ordinal) {
+            return i;
+        }
+    }
 }

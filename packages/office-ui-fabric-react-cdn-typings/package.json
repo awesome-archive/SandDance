@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint -c ../../.eslintrc.json --fix ./*.d.ts",
     "test": "tsc index.d.ts --lib es6 --skipLibCheck true"
   },
   "keywords": [],
   "author": "",
   "dependencies": {
-    "office-ui-fabric-react": "^6.129.1"
+    "office-ui-fabric-react": "6.204.4"
   },
   "devDependencies": {
-    "@types/react": "16.4.7",
-    "typescript": "^3.2.4"
+    "@types/react": "16.4.7"
   },
   "license": "MIT"
 }

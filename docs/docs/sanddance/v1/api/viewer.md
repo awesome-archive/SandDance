@@ -24,7 +24,7 @@ public constructor(element: HTMLElement, options?: Partial<ViewerOptions>);
 | Name    | Type                                              | Description                           |
 | ------- | ------------------------------------------------- | ------------------------------------- |
 | element | HTMLElement                                       | Parent HTMLElement to present within. |
-| options | Partial<[ViewerOptions][InterfaceDeclaration-23]> | Optional viewer options object.       |
+| options | Partial<[ViewerOptions][InterfaceDeclaration-24]> | Optional viewer options object.       |
 
 ## Methods
 
@@ -40,7 +40,7 @@ public renderSameLayout(newViewerOptions?: Partial<ViewerOptions>): void;
 
 | Name             | Type                                              | Description         |
 | ---------------- | ------------------------------------------------- | ------------------- |
-| newViewerOptions | Partial<[ViewerOptions][InterfaceDeclaration-23]> | New options object. |
+| newViewerOptions | Partial<[ViewerOptions][InterfaceDeclaration-24]> | New options object. |
 
 **Return type**
 
@@ -62,11 +62,11 @@ public render(insight: Insight, data: object[], options: RenderOptions = {}): Pr
 | ------- | ---------------------------------------- | ------------- | ----------------------------------------------- |
 | insight | [Insight][InterfaceDeclaration-8]        |               | Object to create a visualization specification. |
 | data    | object[]                                 |               | Array of data objects.                          |
-| options | [RenderOptions][InterfaceDeclaration-38] | {}            |                                                 |
+| options | [RenderOptions][InterfaceDeclaration-40] | {}            |                                                 |
 
 **Return type**
 
-Promise<[RenderResult][InterfaceDeclaration-19]>
+Promise<[RenderResult][InterfaceDeclaration-20]>
 
 ----------
 
@@ -148,7 +148,7 @@ public getSelection(): SelectionState;
 
 **Return type**
 
-[SelectionState][InterfaceDeclaration-42]
+[SelectionState][InterfaceDeclaration-44]
 
 ----------
 
@@ -212,6 +212,18 @@ public getSignalValues(): SignalValues;
 
 [SignalValues][InterfaceDeclaration-11]
 
+----------
+
+### finalize()
+
+```typescript
+public finalize(): void;
+```
+
+**Return type**
+
+void
+
 ## Properties
 
 ### defaultViewerOptions
@@ -224,7 +236,7 @@ public static defaultViewerOptions: ViewerOptions;
 
 **Type**
 
-[ViewerOptions][InterfaceDeclaration-23]
+[ViewerOptions][InterfaceDeclaration-24]
 
 ----------
 
@@ -252,7 +264,7 @@ public options: ViewerOptions;
 
 **Type**
 
-[ViewerOptions][InterfaceDeclaration-23]
+[ViewerOptions][InterfaceDeclaration-24]
 
 ----------
 
@@ -322,7 +334,7 @@ public colorContexts: ColorContext[];
 
 **Type**
 
-[ColorContext][InterfaceDeclaration-39][]
+[ColorContext][InterfaceDeclaration-41][]
 
 ----------
 
@@ -338,41 +350,42 @@ public currentColorContext: number;
 
 number
 
-[ClassDeclaration-5]: viewer#viewer
-[Constructor-2]: viewer#constructorelement-options
-[InterfaceDeclaration-23]: types#vieweroptions
-[MethodDeclaration-9]: viewer#rendersamelayoutnewvieweroptions
-[InterfaceDeclaration-23]: types#vieweroptions
-[MethodDeclaration-10]: viewer#renderinsight-data-options
-[InterfaceDeclaration-8]: types#insight
-[InterfaceDeclaration-38]: types#renderoptions
-[InterfaceDeclaration-19]: types#renderresult
-[MethodDeclaration-11]: viewer#filtersearch
-[TypeAliasDeclaration-3]: types#search
-[MethodDeclaration-12]: viewer#reset
-[MethodDeclaration-13]: viewer#selectsearch
-[TypeAliasDeclaration-3]: types#search
-[MethodDeclaration-14]: viewer#deselect
-[MethodDeclaration-15]: viewer#getselection
-[InterfaceDeclaration-42]: types#selectionstate
-[MethodDeclaration-16]: viewer#activatedatum
-[MethodDeclaration-17]: viewer#deactivate
-[MethodDeclaration-18]: viewer#getinsight
-[InterfaceDeclaration-8]: types#insight
-[MethodDeclaration-19]: viewer#getsignalvalues
-[InterfaceDeclaration-11]: types#signalvalues
-[PropertyDeclaration-16]: viewer#defaultvieweroptions
-[InterfaceDeclaration-23]: types#vieweroptions
-[PropertyDeclaration-17]: viewer#speccapabilities
-[InterfaceDeclaration-13]: types#speccapabilities
-[PropertyDeclaration-18]: viewer#options
-[InterfaceDeclaration-23]: types#vieweroptions
-[PropertyDeclaration-19]: viewer#vegaspec
-[PropertyDeclaration-20]: viewer#vegaviewgl
-[PropertyDeclaration-21]: viewer#presenter
-[ClassDeclaration-0]: vegadeckgl/presenter#presenter
-[PropertyDeclaration-22]: viewer#insight
-[InterfaceDeclaration-8]: types#insight
-[PropertyDeclaration-23]: viewer#colorcontexts
-[InterfaceDeclaration-39]: types#colorcontext
-[PropertyDeclaration-24]: viewer#currentcolorcontext
+[ClassDeclaration-5]: viewer.html#viewer
+[Constructor-2]: viewer.html#constructorelement-options
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[MethodDeclaration-10]: viewer.html#rendersamelayoutnewvieweroptions
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[MethodDeclaration-11]: viewer.html#renderinsight-data-options
+[InterfaceDeclaration-8]: types.html#insight
+[InterfaceDeclaration-40]: types.html#renderoptions
+[InterfaceDeclaration-20]: types.html#renderresult
+[MethodDeclaration-12]: viewer.html#filtersearch
+[TypeAliasDeclaration-3]: types.html#search
+[MethodDeclaration-13]: viewer.html#reset
+[MethodDeclaration-14]: viewer.html#selectsearch
+[TypeAliasDeclaration-3]: types.html#search
+[MethodDeclaration-15]: viewer.html#deselect
+[MethodDeclaration-16]: viewer.html#getselection
+[InterfaceDeclaration-44]: types.html#selectionstate
+[MethodDeclaration-17]: viewer.html#activatedatum
+[MethodDeclaration-18]: viewer.html#deactivate
+[MethodDeclaration-19]: viewer.html#getinsight
+[InterfaceDeclaration-8]: types.html#insight
+[MethodDeclaration-20]: viewer.html#getsignalvalues
+[InterfaceDeclaration-11]: types.html#signalvalues
+[MethodDeclaration-21]: viewer.html#finalize
+[PropertyDeclaration-16]: viewer.html#defaultvieweroptions
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[PropertyDeclaration-17]: viewer.html#speccapabilities
+[InterfaceDeclaration-13]: types.html#speccapabilities
+[PropertyDeclaration-18]: viewer.html#options
+[InterfaceDeclaration-24]: types.html#vieweroptions
+[PropertyDeclaration-19]: viewer.html#vegaspec
+[PropertyDeclaration-20]: viewer.html#vegaviewgl
+[PropertyDeclaration-21]: viewer.html#presenter
+[ClassDeclaration-0]: vegadeckgl/presenter.html#presenter
+[PropertyDeclaration-22]: viewer.html#insight
+[InterfaceDeclaration-8]: types.html#insight
+[PropertyDeclaration-23]: viewer.html#colorcontexts
+[InterfaceDeclaration-41]: types.html#colorcontext
+[PropertyDeclaration-24]: viewer.html#currentcolorcontext
